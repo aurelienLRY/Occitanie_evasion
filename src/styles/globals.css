@@ -1,0 +1,61 @@
+@import "tailwindcss";
+@import "../components/ui/ToogleTheme/styles.css" layer(base);
+@import "./leaflet.mapComponent.css" layer(base);
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: light-dark(#2A4093, #2A4093); /* Bleu*/
+  --color-secondary: light-dark(#cb4d16, #DD581D); /* Orange */
+  --color-accent: light-dark(#268951, #268951); /* Vert */
+  --color-dark: light-dark(#0e1a27, #0e1a27);
+  /* Variantes de couleurs */
+  --color-primary-light: light-dark(#6474ff, #4656e7);
+  --color-primary-dark: light-dark(#4252dd, #2434c5);
+
+  /* Couleurs de fond et texte */
+  --color-background: light-dark(#ffffff, #0e1a27);
+  --color-text: light-dark(#0e1a27, #ffffff);
+}
+
+/* Ajouter des thèmes  */
+/* ajouter un data-theme="exemple" sur le html */
+[data-theme="vert"] {
+  --color-primary: light-dark(
+    #c2f750,
+    #c2f750
+  ); /* Vert lime comme couleur principale */
+  --color-secondary: light-dark(
+    #5363ee,
+    #3545d6
+  ); /* Bleu royal comme couleur secondaire */
+}
+
+
+
+
+h1 , h2 , h3 , h4 , h5 , h6 {
+  font-family: "Slackside One", sans-serif;
+  font-weight: 400;
+}
+
+.font-title {
+font-family: "Slackside One", sans-serif;
+  font-weight: 400;
+}
+
+.font-permanent-marker {
+  font-family: "Permanent Marker", sans-serif;
+  font-weight: 400;
+}
+
+.font-paragraphe{
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+}
+
+html {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+}
+

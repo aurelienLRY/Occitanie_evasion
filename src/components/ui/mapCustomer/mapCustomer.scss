@@ -1,0 +1,74 @@
+@use "../../styles/abstracts/variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.map-customer {
+  //aspect-ratio: 1/2;
+  box-sizing: border-box;
+  border-radius: 0.8em 0em 0em 0.8em;
+  min-width: 350px;
+  min-height: 600px;
+  height: 120%;
+  width: 100%;
+  //max-width: 650px;
+  //max-height: 700px;
+
+  @include m.shadow;
+.leaflet-popup-content{
+    box-sizing: border-box;
+    padding: 0 !important;
+    margin: 0 !important;
+    //aspect-ratio: 2/1;
+
+    width: 350px !important;
+    min-height: fit-content;
+    height: auto;
+    border-radius: 1em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+    .tooltip-header {
+      img {
+        border-radius: 1em 1em 0em 0em;
+        aspect-ratio: 3/1;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+
+    .tooltip-body {
+      width: 100%;
+      height: min-content;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      white-space: pre-wrap; /* Permet au texte de passer à la ligne */
+      word-wrap: break-word; /* Assure la césure des mots si nécessaire */
+      overflow-wrap: break-word; /* Assure la césure des mots pour éviter le débordement */
+      max-height: 200px;
+ 
+      .title {
+        font-size: medium;
+        padding: 0.5em;
+      }
+      .content {
+        font-size: small;     
+        overflow-y: auto;
+      padding: 0.5em;
+      }
+    }
+    .tooltip-footer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 0.5em;
+      padding: 0.5em;
+    }
+  }
+}
