@@ -2,16 +2,8 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchService } from '@/lib/fetch.service';
-import API_ROUTES from '@/config/Api';
-import { IActivity, ISpot, ISession } from '@/types';
-import { IBooking } from '@/types/reservation.type';
-
-// Types pour les réponses API
-export interface ApiResponse<T> {
-  data: T;
-  status: number;
-  message?: string;
-}
+import API_ROUTES from '@/config/Api-Routing';
+import { IActivity, ISpot, ISession, IBooking, ApiResponse } from '@/types';
 
 // Configuration par défaut pour les queries
 const defaultQueryConfig = {

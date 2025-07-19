@@ -4,31 +4,55 @@ import { useState, useEffect, useMemo } from 'react';
 import { useForm, useFieldArray, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { reservationSchema } from '@/lib/validation/reservation-schema';
-import { useActivities, useSpots, useBooking } from '@/hooks/useQuery';
-import { ActivityFormData, SpotFormData, transformActivityToFormData, transformSpotToFormData, calculateEndTime } from '@/lib/utils/reservation-utils';
-import { IBooking } from '@/types/reservation.type';
-import { 
-  SelectInput, 
-  DateInput, 
-  TimeInput, 
-  Input, 
-  NumberInput, 
-  Textarea 
+import { useActivities, useSpots, useBooking, useIsMobile } from '@/hooks';
+import { transformActivityToFormData, transformSpotToFormData, calculateEndTime, formatDurationString } from '@/lib/utils/reservation-utils';
+import { IBooking, ActivityFormData, SpotFormData } from '@/types';
+import {
+  SelectInput,
+  DateInput,
+  TimeInput,
+  Input,
+  NumberInput,
+  Textarea,
+  InputPhone,
+
 } from '@/components/input';
-import { 
-  Calendar, 
-  User, 
-  Users, 
-  Plus, 
+
+import { Button } from '@/components/ui/button';
+import { ProgressBar } from '@/components/ui/progress';
+import { Avatar } from '@/components/ui/avatar';
+import { ReservationSummary } from '@/components/ui/summary';
+import { ActivityInfoModal, SpotInfoModal } from '@/components/ui/modal';
+import {
+  Calendar,
+  User,
+  Users,
+  Plus,
   Trash2,
-  Activity as ActivityIcon
+  Activity as ActivityIcon,
+  CheckCircle,
+  AlertCircle,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Send,
+  Info
 } from 'lucide-react';
+import { toast } from 'sonner';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ReservationForm = () => {
+  const [currentStep, setCurrentStep] = useState(1);
   const [selectedActivity, setSelectedActivity] = useState<ActivityFormData | null>(null);
   const [selectedSpot, setSelectedSpot] = useState<SpotFormData | null>(null);
   const [availableSpots, setAvailableSpots] = useState<SpotFormData[]>([]);
-  
+
+  // États pour les modales
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [isSpotModalOpen, setIsSpotModalOpen] = useState(false);
+
+  const TOTAL_STEPS = 4;
+
   // Récupération des données
   const { data: activities, isLoading: activitiesLoading } = useActivities();
   const { data: allSpots, isLoading: spotsLoading } = useSpots();
@@ -40,9 +64,11 @@ const ReservationForm = () => {
       participants: [{ height: 0, weight: 0 }],
       sessionType: 'full-day',
       date: '',
-      startTime: '09:00'
+      startTime: '10:00'
     }
   });
+
+
 
   const { fields, append, remove } = useFieldArray({
     control: methods.control,
@@ -56,19 +82,19 @@ const ReservationForm = () => {
   const watchedStartTime = methods.watch('startTime');
 
   // Transformer les données de l'API avec useMemo pour éviter les recalculs
-  const transformedActivities = useMemo(() => 
-    activities?.map(transformActivityToFormData) || [], 
+  const transformedActivities = useMemo(() =>
+    activities?.map(transformActivityToFormData) || [],
     [activities]
   );
-  const transformedSpots = useMemo(() => 
-    allSpots?.map(transformSpotToFormData) || [], 
+  const transformedSpots = useMemo(() =>
+    allSpots?.map(transformSpotToFormData) || [],
     [allSpots]
   );
 
   // Filtrer les spots disponibles selon l'activité sélectionnée
   const availableSpotsForActivity = useMemo(() => {
     if (watchedActivityId && transformedSpots.length > 0) {
-      return transformedSpots.filter(spot => 
+      return transformedSpots.filter(spot =>
         spot.activities.includes(watchedActivityId)
       );
     }
@@ -80,24 +106,21 @@ const ReservationForm = () => {
     if (watchedActivityId && transformedActivities.length > 0) {
       const activity = transformedActivities.find(a => a.id === watchedActivityId);
       setSelectedActivity(activity || null);
-      
+
       // Ajuster le type de session selon l'activité
       if (activity) {
         const currentSessionType = methods.getValues('sessionType');
-        
+
         if (!activity.halfDayAvailable && currentSessionType === 'half-day') {
-          // Si l'activité ne propose que des journées complètes, forcer le type
           methods.setValue('sessionType', 'full-day');
         } else if (!activity.fullDayAvailable && currentSessionType === 'full-day') {
-          // Si l'activité ne propose que des demi-journées, forcer le type
           methods.setValue('sessionType', 'half-day');
         } else if (activity.halfDayAvailable && activity.fullDayAvailable && !currentSessionType) {
-          // Si l'activité propose les deux et qu'aucun type n'est sélectionné, mettre demi-journée par défaut
           methods.setValue('sessionType', 'half-day');
         }
       }
     }
-  }, [watchedActivityId, transformedActivities]);
+  }, [watchedActivityId, transformedActivities, methods]);
 
   // 2. Surveiller le spot sélectionné
   useEffect(() => {
@@ -112,15 +135,14 @@ const ReservationForm = () => {
   // 3. Mettre à jour les spots disponibles et réinitialiser si nécessaire
   useEffect(() => {
     setAvailableSpots(availableSpotsForActivity);
-    
-    // Réinitialiser le spot sélectionné si il n'est plus disponible
+
     if (availableSpotsForActivity.length > 0) {
       const currentSpotId = methods.getValues('spotId');
       if (!availableSpotsForActivity.find(s => s.id === currentSpotId)) {
         methods.setValue('spotId', '');
       }
     }
-  }, [availableSpotsForActivity]);
+  }, [availableSpotsForActivity, methods]);
 
   // 4. Calculer l'heure de fin basée sur l'activité et le type de session
   useEffect(() => {
@@ -128,11 +150,49 @@ const ReservationForm = () => {
       const endTime = calculateEndTime(watchedStartTime, selectedActivity.durationHalf, selectedActivity.durationFull, watchedSessionType);
       methods.setValue('endTime', endTime);
     }
-  }, [selectedActivity, watchedStartTime, watchedSessionType]);
+  }, [selectedActivity, watchedStartTime, watchedSessionType, methods]);
+
+  // Validation par étape
+  const validateCurrentStep = async () => {
+    const stepFields: Record<number, string[]> = {
+      1: ['clientFirstName', 'clientLastName', 'clientEmail', 'clientPhone'],
+      2: ['activityId', 'spotId', 'sessionType', 'date', 'startTime'],
+      3: ['participants'],
+      4: [] // Pas de validation pour les demandes spéciales
+    };
+
+    const fieldsToValidate = stepFields[currentStep];
+    if (fieldsToValidate.length === 0) return true;
+
+    try {
+      await methods.trigger(fieldsToValidate as (keyof typeof methods.getValues)[]);
+      return methods.formState.errors && Object.keys(methods.formState.errors).length === 0;
+    } catch {
+      return false;
+    }
+  };
+
+  // Navigation entre les étapes
+  const nextStep = async () => {
+    const isValid = await validateCurrentStep();
+    if (isValid && currentStep < TOTAL_STEPS) {
+      setCurrentStep(currentStep + 1);
+    } else if (!isValid) {
+      toast.error('Veuillez corriger les erreurs avant de continuer', {
+        icon: <AlertCircle className="w-4 h-4" />,
+      });
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
 
   // Ajouter un participant
   const addParticipant = () => {
-    if (selectedActivity && fields.length < selectedActivity.maxParticipants) {
+    if (selectedActivity) {
       append({ height: 0, weight: 0 });
     }
   };
@@ -146,22 +206,20 @@ const ReservationForm = () => {
 
   // Transformer les données du formulaire vers la structure Booking
   const transformFormDataToBooking = (data: Record<string, unknown>): IBooking => {
-    if (!selectedActivity) {
-      throw new Error('Aucune activité sélectionnée');
+    if (!selectedActivity || !selectedSpot) {
+      throw new Error('Aucune activité ou lieu sélectionné');
     }
 
-    // Calculer le prix applicable selon le type de session
+    // Validation des données client
+    if (!data.clientFirstName || !data.clientLastName || !data.clientEmail || !data.clientPhone) {
+      throw new Error('Données client manquantes');
+    }
+
     const sessionType = data.sessionType as 'full-day' | 'half-day';
-    const priceApplicable = sessionType === 'half-day' 
-      ? selectedActivity.priceHalf 
+    const priceApplicable = sessionType === 'half-day'
+      ? selectedActivity.priceHalf
       : selectedActivity.priceFull;
 
-    // Calculer la durée selon le type de session
-    const duration = sessionType === 'half-day' 
-      ? selectedActivity.durationHalf 
-      : selectedActivity.durationFull;
-
-    // Transformer les participants
     const participants = data.participants as Array<{ height: number; weight: number }>;
     const peopleList = participants.map(participant => ({
       size: participant.height.toString(),
@@ -170,12 +228,12 @@ const ReservationForm = () => {
       isReduced: false as const
     }));
 
-    // Créer l'objet Booking
     const booking: IBooking = {
+      message: data.specialRequests as string,
       customer: {
         date: new Date(),
         status: "Waiting",
-        typeOfReservation: "by_website",
+        typeOfReservation: "ByWeb",
         number_of_people: participants.length,
         last_name: data.clientLastName as string,
         first_names: data.clientFirstName as string,
@@ -192,11 +250,13 @@ const ReservationForm = () => {
         startTime: data.startTime as string,
         endTime: (data.endTime as string) || '',
         activity: data.activityId as string,
+        activityName: selectedActivity.name,
         spot: data.spotId as string,
+        spotName: selectedSpot.name,
         placesMax: selectedActivity.maxParticipants,
         placesReserved: participants.length,
         type_formule: sessionType === 'half-day' ? 'half_day' : 'full_day',
-        duration: `${duration}h`
+        duration: sessionType === 'half-day' ? formatDurationString(selectedActivity.durationHalf) : formatDurationString(selectedActivity.durationFull)
       }
     };
 
@@ -204,16 +264,46 @@ const ReservationForm = () => {
   };
 
   // Soumission du formulaire
-  const onSubmit = (data: Record<string, unknown>) => {
+  const onSubmit = async (data: Record<string, unknown>) => {
     try {
       const booking = transformFormDataToBooking(data);
-      console.log('Données de réservation transformées:', booking);
-      
-      // Envoyer la réservation à l'API
       bookingMutation.mutate(booking);
-      
+
+      try {
+        const response = await fetch("/api/reservation", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(booking),
+        });
+
+        if (!response.ok) {
+          console.warn('Erreur lors de l\'envoi de l\'email de sécurité:', await response.text());
+        }
+      } catch (emailError) {
+        console.warn('Erreur lors de l\'envoi de l\'email de sécurité:', emailError);
+      }
+
+      toast.success('Réservation envoyée avec succès !', {
+        description: 'Nous vous confirmerons votre réservation dans les plus brefs délais.',
+        duration: 5000,
+        icon: <CheckCircle className="w-4 h-4" />,
+      });
+
+      methods.reset();
+      setSelectedActivity(null);
+      setSelectedSpot(null);
+      setAvailableSpots([]);
+      setCurrentStep(1);
+
     } catch (error) {
       console.error('Erreur lors de la transformation des données:', error);
+      toast.error('Erreur lors de l\'envoi de la réservation', {
+        description: 'Veuillez réessayer ou nous contacter directement.',
+        duration: 6000,
+        icon: <AlertCircle className="w-4 h-4" />,
+      });
     }
   };
 
@@ -225,240 +315,435 @@ const ReservationForm = () => {
     );
   }
 
+  const stepTitles = [
+    "Vos informations",
+    "Activité et planning",
+    "Participants",
+    "Demandes spéciales"
+  ];
+
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="max-w-4xl mx-auto space-y-8">
-        {/* Section 1: Sélection de l'activité et du lieu */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <ActivityIcon className="w-6 h-6 text-blue-500" />
-            Sélection de l&apos;activité
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Activité */}
-            <SelectInput
-              name="activityId"
-              label="Activité *"
-              options={transformedActivities.map(activity => ({ id: activity.id, name: activity.name }))}
-              placeholder="Sélectionnez une activité"
-            />
+    <div className="p-4  mx-auto bg-gray-100  rounded-lg">
+      {/* Titre de l'étape */}
+      <div className="mb-8">
+        <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-800">
+          {stepTitles[currentStep - 1]}
+        </h2>
+      </div>
 
-            {/* Lieu */}
-            <SelectInput
-              name="spotId"
-              label="Lieu *"
-              options={availableSpots.map(spot => ({ id: spot.id, name: spot.name }))}
-              placeholder={watchedActivityId ? "Sélectionnez un lieu" : "Sélectionnez d'abord une activité"}
-              disabled={!watchedActivityId}
-            />
-          </div>
-
-          {/* Informations sur l'activité sélectionnée */}
-          {selectedActivity && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-md">
-              <h3 className="font-semibold text-blue-900">{selectedActivity.name}</h3>
-              <p className="text-blue-700 text-sm mt-1">{selectedActivity.description}</p>
-              <div className="flex gap-4 mt-2 text-sm text-blue-600">
-                <span>Durée: {watchedSessionType === 'half-day' ? selectedActivity.durationHalf : selectedActivity.durationFull}h</span>
-                <span>Prix: {watchedSessionType === 'half-day' ? selectedActivity.priceHalf : selectedActivity.priceFull}€</span>
-                <span>Participants: {selectedActivity.minParticipants}-{selectedActivity.maxParticipants}</span>
-                <span>Type: {selectedActivity.halfDayAvailable && selectedActivity.fullDayAvailable ? 'Journée/Demi-journée' : selectedActivity.halfDayAvailable ? 'Demi-journée uniquement' : 'Journée complète uniquement'}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Informations sur le spot sélectionné */}
-          {selectedSpot && (
-            <div className="mt-4 p-4 bg-green-50 rounded-md">
-              <h3 className="font-semibold text-green-900">{selectedSpot.name}</h3>
-              <p className="text-green-700 text-sm mt-1">{selectedSpot.description}</p>
-              <div className="flex gap-4 mt-2 text-sm text-green-600">
-                <span>Localisation: {selectedSpot.location}</span>
-                <span>Difficulté: {selectedSpot.difficulty}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Section 2: Date et horaires */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <Calendar className="w-6 h-6 text-blue-500" />
-            Date et horaires
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Type de session */}
-            <SelectInput
-              name="sessionType"
-              label="Type de session *"
-              options={[
-                { id: 'full-day', name: 'Journée complète' },
-                { id: 'half-day', name: 'Demi-journée' }
-              ]}
-              disabled={selectedActivity && !(selectedActivity.halfDayAvailable && selectedActivity.fullDayAvailable)}
-            />
-
-            {/* Date */}
-            <DateInput
-              name="date"
-              label="Date souhaitée *"
-              min={new Date().toISOString().split('T')[0]}
-            />
-
-            {/* Heure de départ */}
-            <TimeInput
-              name="startTime"
-              label="Heure de départ *"
-            />
-          </div>
-
-          {/* Heure de fin calculée */}
-          {methods.watch('endTime') && (
-            <div className="mt-4 p-3 bg-green-50 rounded-md">
-              <p className="text-green-700 text-sm">
-                <strong>Heure de fin calculée:</strong> {methods.watch('endTime')}
-              </p>
-              {selectedActivity && (
-                <p className="text-green-600 text-sm mt-1">
-                  Durée: {watchedSessionType === 'half-day' ? selectedActivity.durationHalf : selectedActivity.durationFull}h
-                </p>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Section 3: Informations du client principal */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <User className="w-6 h-6 text-blue-500" />
-            Vos informations
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <Input
-              name="clientFirstName"
-              type="text"
-              label="Prénom *"
-            />
-
-            <Input
-              name="clientLastName"
-              type="text"
-              label="Nom *"
-            />
-
-            <Input
-              name="clientPhone"
-              type="tel"
-              label="Téléphone *"
-            />
-
-            <Input
-              name="clientEmail"
-              type="email"
-              label="Email *"
-            />
-          </div>
-        </div>
-
-        {/* Section 4: Participants */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="w-6 h-6 text-blue-500" />
-              Participants ({fields.length}/{selectedActivity?.maxParticipants || 10})
-            </h2>
-            <button
-              type="button"
-              onClick={addParticipant}
-              disabled={!selectedActivity || fields.length >= (selectedActivity?.maxParticipants || 10)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            >
-              <Plus className="w-4 h-4" />
-              Ajouter un participant
-            </button>
-          </div>
-
-          <div className="space-y-6">
-            {fields.map((field, index) => (
-              <div key={field.id} className="border border-gray-200 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold">Participant {index + 1}</h3>
-                  {fields.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeParticipant(index)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
+      <div className="flex flex-col  gap-8">
+        {/* Formulaire principal */}
+        <div className="flex-1">
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Étape 1: Informations client */}
+                  {currentStep === 1 && (
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                      <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                        <User className="w-5 h-5 text-blue-500" />
+                        Vos informations
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <Input
+                          name="clientFirstName"
+                          type="text"
+                          label="Prénom *"
+                        />
+                        <Input
+                          name="clientLastName"
+                          type="text"
+                          label="Nom *"
+                        />
+                        <InputPhone
+                          name="clientPhone"
+                          type="tel"
+                          label="Téléphone *"
+                        />
+                        <Input
+                          name="clientEmail"
+                          type="email"
+                          label="Email *"
+                        />
+                      </div>
+                    </div>
                   )}
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <NumberInput
-                    name={`participants.${index}.height`}
-                    label="Taille (cm) *"
-                    min={100}
-                    max={250}
-                  />
+                  {/* Étape 2: Activité et planning */}
+                  {currentStep === 2 && (
+                    <div className="space-y-3 bg-white rounded-lg shadow-md p-6">
+                      <div className="">
+                        <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                          <ActivityIcon className="w-5 h-5 text-blue-500" />
+                          Sélection de l&apos;activité
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-sm font-medium text-gray-700">Activité *</label>
+                              {selectedActivity && (
+                                <button
+                                  type="button"
+                                  onClick={() => setIsActivityModalOpen(true)}
+                                  className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
+                                >
+                                  <Info className="w-4 h-4" />
+                                  Info
+                                </button>
+                              )}
+                            </div>
+                            <SelectInput
+                              name="activityId"
+                              label=""
+                              options={transformedActivities.map(activity => ({ value: activity.id, label: activity.name }))}
+                              placeholder="Sélectionnez une activité"
+                            />
+                          </div>
 
-                  <NumberInput
-                    name={`participants.${index}.weight`}
-                    label="Poids (kg) *"
-                    min={20}
-                    max={200}
-                  />
-                </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-sm font-medium text-gray-700">Lieu *</label>
+                              {selectedSpot && (
+                                <button
+                                  type="button"
+                                  onClick={() => setIsSpotModalOpen(true)}
+                                  className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
+                                >
+                                  <Info className="w-4 h-4" />
+                                  Info
+                                </button>
+                              )}
+                            </div>
+                            <SelectInput
+                              name="spotId"
+                              label=""
+                              options={availableSpots.map(spot => ({ value: spot.id, label: spot.name }))}
+                              placeholder={watchedActivityId ? "Sélectionnez un lieu" : "Sélectionnez d'abord une activité"}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="">
+                        <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                          <Calendar className="w-5 h-5 text-blue-500" />
+                          Date et horaires
+                        </h3>
+                        <div className="grid md:grid-cols-3 gap-6">
+                          <SelectInput
+                            name="sessionType"
+                            label="Type de session *"
+                            options={[
+                              { value: 'full-day', label: 'Journée complète' },
+                              { value: 'half-day', label: 'Demi-journée' }
+                            ]}
+                          />
+                          <DateInput
+                            name="date"
+                            label="Date souhaitée *"
+                            min={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                          />
+                          <TimeInput
+                            name="startTime"
+                            label="Heure de départ souhaitée *"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Étape 3: Participants */}
+                  {currentStep === 3 && (
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                      <div className="flex flex-col lg:flex-row gap-6 items-center justify-between mb-6">
+                        <div className='space-y-1'>
+                          <h3 className="text-xl font-bold flex items-center gap-2 mb-0">
+                            <Users className="w-5 h-5 text-secondary" />
+                            Participants ({fields.length})
+                          </h3>
+                          <div className="flex items-center gap-4  max-w-[600px]">
+                            <Info className="w-10 h-10 text-blue-500 opacity-50" />
+                            <div className='flex flex-col text-left'>
+                              <p className="text-xl font-title  ">Pourquoi j&apos;ai besoin de vos tailles et poids <span className='text-secondary'>?</span> </p>
+                              <p className="text-xs  text-gray-500">Ces informations sont nécessaires pour la préparation de l&apos;activité. Rien de plus désagréable qu&apos;une combinaison trop petite , ou de plus dangereux qu&apos;un baudrier trop grand ! </p>
+                            </div>
+                            </div>
+                        </div>
+                        <Button
+                          type="button"
+                          onClick={addParticipant}
+                          disabled={!selectedActivity}
+                          title="Ajouter un participant"
+                          variant="secondary"
+                          className="flex items-center gap-2  disabled:bg-gray-300 disabled:cursor-not-allowed"
+                          size="sm"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Ajouter un participant
+                        </Button>
+                      </div>
+
+                      <div className="space-y-6">
+                        {fields.map((field, index) => (
+                          <div key={field.id} className="border border-gray-200 rounded-lg p-4">
+                            <div className="flex items-center gap-4 mb-4">
+                              <Avatar
+                                seed={`participant-${field.id}`}
+                                size={48}
+                                style="adventurer"
+                              />
+                              <div className="flex-1">
+                                <h4 className="text-lg font-semibold">Participant {index + 1}</h4>
+                              </div>
+                              {fields.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => removeParticipant(index)}
+                                  className="text-red-500 hover:text-red-700"
+                                >
+                                  <Trash2 className="w-5 h-5" />
+                                </button>
+                              )}
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <NumberInput
+                                name={`participants.${index}.height`}
+                                label="Taille (cm) *"
+                                min={100}
+                                max={250}
+                              />
+                              <NumberInput
+                                name={`participants.${index}.weight`}
+                                label="Poids (kg) *"
+                                min={20}
+                                max={200}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Étape 4: Demandes spéciales */}
+                  {currentStep === 4 && (
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                      <h3 className="text-xl font-bold mb-6">Demandes spéciales</h3>
+                      <Textarea
+                        name="specialRequests"
+                        placeholder="Informations supplémentaires, allergies, préférences..."
+                        rows={6}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Barre de progression */}
+
+
+              {/* Boutons de navigation */}
+              <NavControl
+                prevStep={prevStep}
+                nextStep={nextStep}
+                currentStep={currentStep}
+                TOTAL_STEPS={TOTAL_STEPS}
+              />
+
+
+
+              {/* Récapitulatif */}
+              <div className="w-full flex-shrink-0" data-summary>
+                <ReservationSummary
+                  clientData={{
+                    firstName: methods.watch('clientFirstName') || '',
+                    lastName: methods.watch('clientLastName') || '',
+                    email: methods.watch('clientEmail') || '',
+                    phone: methods.watch('clientPhone') || ''
+                  }}
+                  activity={selectedActivity}
+                  spot={selectedSpot}
+                  sessionType={methods.watch('sessionType') as 'full-day' | 'half-day'}
+                  date={methods.watch('date') || ''}
+                  startTime={methods.watch('startTime') || ''}
+                  endTime={methods.watch('endTime') || ''}
+                  participants={methods.watch('participants') || []}
+                  specialRequests={methods.watch('specialRequests') || ''}
+                />
+
+                {/* Bouton d'envoi après le récapitulatif */}
+                {currentStep === TOTAL_STEPS && (
+                  <div className="mt-8 flex justify-center">
+                    <Button
+                      type="submit"
+                      variant="secondary"
+                      disabled={methods.formState.isSubmitting}
+                      className="flex items-center gap-2 disabled:cursor-not-allowed text-lg font-semibold shadow-lg"
+                      size="lg"
+                    >
+                      {methods.formState.isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                          Envoi en cours...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          Confirmer la réservation
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+            </form>
+          </FormProvider>
 
-          {methods.formState.errors.participants && (
-            <p className="text-red-500 text-sm mt-2">
-              {methods.formState.errors.participants.message?.toString()}
-            </p>
-          )}
+
         </div>
+      </div>
 
-        {/* Section 5: Demandes spéciales */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-6">Demandes spéciales</h2>
-          <Textarea
-            name="specialRequests"
-            placeholder="Informations supplémentaires, allergies, préférences..."
-            rows={4}
-          />
-        </div>
 
-        {/* Bouton de soumission */}
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            disabled={bookingMutation.isPending}
-            className="px-8 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg font-semibold"
-          >
-            {bookingMutation.isPending ? 'Envoi en cours...' : 'Réserver maintenant'}
-          </button>
-        </div>
+      {/* Modales */}
+      <ActivityInfoModal
+        activity={selectedActivity}
+        isOpen={isActivityModalOpen}
+        onClose={() => setIsActivityModalOpen(false)}
+      />
 
-        {/* Affichage des messages d'état */}
-        {bookingMutation.isError && (
-          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
-            <p className="text-red-700">Erreur lors de la réservation. Veuillez réessayer.</p>
-          </div>
-        )}
-
-        {bookingMutation.isSuccess && (
-          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-md">
-            <p className="text-green-700">Réservation créée avec succès !</p>
-          </div>
-        )}
-      </form>
-    </FormProvider>
+      <SpotInfoModal
+        spot={selectedSpot}
+        isOpen={isSpotModalOpen}
+        onClose={() => setIsSpotModalOpen(false)}
+      />
+    </div>
   );
 };
 
-export default ReservationForm; 
+export default ReservationForm;
+
+/**
+ * Composant de navigation pour le formulaire de réservation
+ * @param prevStep - Fonction pour revenir à l'étape précédente
+ * @param nextStep - Fonction pour passer à l'étape suivante
+ * @param currentStep - Étape courante
+ * @param TOTAL_STEPS - Nombre total d'étapes
+ * @returns Composant de navigation
+ */
+const NavControl = ({
+  prevStep,
+  nextStep,
+  currentStep,
+  TOTAL_STEPS
+}: {
+  prevStep: () => void;
+  nextStep: () => void;
+  currentStep: number;
+  TOTAL_STEPS: number;
+}) => {
+  const isMobile = useIsMobile();
+  if (isMobile) {
+    return (
+      <div className="flex flex-col justify-center items-center gap-6 ">
+        <div className=" w-full">
+          <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
+        </div>
+        <div className="flex justify-between items-center gap-4 w-full">
+          <Button
+            type="button"
+            onClick={prevStep}
+            disabled={currentStep === 1}
+            className="flex items-center gap-2 px-6 py-3 bg-transparent text-secondary hover:text-white rounded-md hover:bg-secondary border-secondary transition-all duration-300"
+            variant="outline"
+            size="sm"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            Précédent
+          </Button>
+
+          {currentStep < TOTAL_STEPS ? (
+            <Button
+              type="button"
+              onClick={nextStep}
+              className="flex items-center gap-2 px-6 py-3 bg-transparent text-secondary hover:text-white rounded-md hover:bg-secondary border-secondary transition-all duration-300"
+              variant="outline"
+              size="sm"
+            >
+              Suivant
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+
+          ) : (
+            <div
+              className="flex items-center gap-2 px-6 py-3 text-gray-400 cursor-pointer hover:text-gray-600 transition-colors"
+              onClick={() => {
+                // Scroll vers le récapitulatif
+                const summaryElement = document.querySelector('[data-summary]');
+                if (summaryElement) {
+                  summaryElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              <span className="text-sm">Voir le récapitulatif</span>
+              <ChevronDown className="w-4 h-4 animate-bounce" />
+            </div>
+          )}
+        </div></div>
+    )
+  } else {
+    return (
+      <div className="flex justify-between items-center gap-4 ">
+        <Button
+          type="button"
+          onClick={prevStep}
+          disabled={currentStep === 1}
+          className="flex items-center gap-2 px-6 py-3 bg-transparent text-secondary hover:text-white rounded-md hover:bg-secondary border-secondary transition-all duration-300"
+          variant="outline"
+          size="sm"
+        >
+          <ChevronLeft className="w-4 h-4" />
+          Précédent
+        </Button>
+        <div className=" flex-1">
+          <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
+        </div>
+        {currentStep < TOTAL_STEPS ? (
+          <Button
+            type="button"
+            onClick={nextStep}
+            className="flex items-center gap-2 px-6 py-3 bg-transparent text-secondary hover:text-white rounded-md hover:bg-secondary border-secondary transition-all duration-300"
+            variant="outline"
+            size="sm"
+          >
+            Suivant
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+        ) : (
+          <div
+            className="flex items-center gap-2 px-6 py-3 text-gray-400 cursor-pointer hover:text-gray-600 transition-colors"
+            onClick={() => {
+              // Scroll vers le récapitulatif
+              const summaryElement = document.querySelector('[data-summary]');
+              if (summaryElement) {
+                summaryElement.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            <span className="text-sm">Voir le récapitulatif</span>
+            <ChevronDown className="w-4 h-4 animate-bounce" />
+          </div>
+        )}
+      </div>
+    )
+  }
+}
+
+NavControl.displayName = 'NavControl';

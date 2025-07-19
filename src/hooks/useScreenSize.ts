@@ -1,9 +1,6 @@
+"use client"
 import { useState, useEffect } from 'react';
-
-/**
- * Types pour les tailles d'écran basés sur les breakpoints Tailwind CSS
- */
-export type ScreenSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+import { ScreenSize, ScreenInfo } from '@/types';
 
 /**
  * Breakpoints en pixels selon la convention Tailwind CSS
@@ -141,7 +138,7 @@ export function useScreenWidth(): number {
  * }
  * ```
  */
-export function useScreenInfo() {
+export function useScreenInfo(): ScreenInfo {
   const screenSize = useScreenSize();
   const width = useScreenWidth();
 
@@ -202,12 +199,15 @@ export function getScreenSize(): ScreenSize {
  * @example
  * ```tsx
  * if (isXs()) {
- *   // Logique pour très petits écrans
+ *   // Logique pour écran très petit
  * }
  * ```
  */
 export function isXs(): boolean {
-  return getScreenSize() === 'xs';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  return window.innerWidth < BREAKPOINTS.sm;
 }
 
 /**
@@ -219,12 +219,16 @@ export function isXs(): boolean {
  * @example
  * ```tsx
  * if (isSm()) {
- *   // Logique pour petits écrans
+ *   // Logique pour écran petit
  * }
  * ```
  */
 export function isSm(): boolean {
-  return getScreenSize() === 'sm';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  const width = window.innerWidth;
+  return width >= BREAKPOINTS.sm && width < BREAKPOINTS.md;
 }
 
 /**
@@ -236,12 +240,16 @@ export function isSm(): boolean {
  * @example
  * ```tsx
  * if (isMd()) {
- *   // Logique pour écrans moyens
+ *   // Logique pour écran moyen
  * }
  * ```
  */
 export function isMd(): boolean {
-  return getScreenSize() === 'md';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  const width = window.innerWidth;
+  return width >= BREAKPOINTS.md && width < BREAKPOINTS.lg;
 }
 
 /**
@@ -253,29 +261,37 @@ export function isMd(): boolean {
  * @example
  * ```tsx
  * if (isLg()) {
- *   // Logique pour grands écrans
+ *   // Logique pour écran grand
  * }
  * ```
  */
 export function isLg(): boolean {
-  return getScreenSize() === 'lg';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  const width = window.innerWidth;
+  return width >= BREAKPOINTS.lg && width < BREAKPOINTS.xl;
 }
 
 /**
  * Vérifie si l'écran actuel est très grand (xl)
- * ⚠️ Fonctionne uniquement côté client (retourne true côté serveur)
+ * ⚠️ Fonctionne uniquement côté client (retourne false côté serveur)
  * 
  * @returns {boolean} True si l'écran est très grand (1280px - 1535px)
  * 
  * @example
  * ```tsx
  * if (isXl()) {
- *   // Logique pour très grands écrans
+ *   // Logique pour écran très grand
  * }
  * ```
  */
 export function isXl(): boolean {
-  return getScreenSize() === 'xl';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  const width = window.innerWidth;
+  return width >= BREAKPOINTS.xl && width < BREAKPOINTS['2xl'];
 }
 
 /**
@@ -287,12 +303,15 @@ export function isXl(): boolean {
  * @example
  * ```tsx
  * if (is2xl()) {
- *   // Logique pour écrans extra larges
+ *   // Logique pour écran extra large
  * }
  * ```
  */
 export function is2xl(): boolean {
-  return getScreenSize() === '2xl';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  return window.innerWidth >= BREAKPOINTS['2xl'];
 }
 
 /**
@@ -309,8 +328,10 @@ export function is2xl(): boolean {
  * ```
  */
 export function isMobile(): boolean {
-  const size = getScreenSize();
-  return size === 'xs' || size === 'sm';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  return window.innerWidth < BREAKPOINTS.md;
 }
 
 /**
@@ -327,12 +348,16 @@ export function isMobile(): boolean {
  * ```
  */
 export function isTablet(): boolean {
-  return getScreenSize() === 'md';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  const width = window.innerWidth;
+  return width >= BREAKPOINTS.md && width < BREAKPOINTS.lg;
 }
 
 /**
  * Vérifie si l'écran actuel est desktop (lg, xl, 2xl)
- * ⚠️ Fonctionne uniquement côté client (retourne true côté serveur)
+ * ⚠️ Fonctionne uniquement côté client (retourne false côté serveur)
  * 
  * @returns {boolean} True si l'écran est desktop (≥ 1024px)
  * 
@@ -344,12 +369,14 @@ export function isTablet(): boolean {
  * ```
  */
 export function isDesktop(): boolean {
-  const size = getScreenSize();
-  return size === 'lg' || size === 'xl' || size === '2xl';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  return window.innerWidth >= BREAKPOINTS.lg;
 }
 
 /**
- * Vérifie si l'écran actuel est mobile ou tablette
+ * Vérifie si l'écran actuel est mobile ou tablette (xs, sm, md)
  * ⚠️ Fonctionne uniquement côté client (retourne false côté serveur)
  * 
  * @returns {boolean} True si l'écran est mobile ou tablette (< 1024px)
@@ -357,12 +384,13 @@ export function isDesktop(): boolean {
  * @example
  * ```tsx
  * if (isMobileOrTablet()) {
- *   // Logique pour mobile et tablette
- *   // Par exemple, masquer certains éléments sur petits écrans
+ *   // Logique pour mobile ou tablette
  * }
  * ```
  */
 export function isMobileOrTablet(): boolean {
-  const size = getScreenSize();
-  return size === 'xs' || size === 'sm' || size === 'md';
+  if (typeof window === 'undefined') {
+    return false; // Fallback pour SSR
+  }
+  return window.innerWidth < BREAKPOINTS.lg;
 } 

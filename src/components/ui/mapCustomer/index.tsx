@@ -17,13 +17,12 @@ import { Icon, LatLngBounds } from "leaflet";
 /* Types */
 import { ISpot } from "@/types";
 import Image from "next/image";
-import { MarkerLineSvg } from "@/components/ui/svg/MarkerLine.svg";
 
 /**
  * Component to display a map with markers for each spot.
  * @param spots - The spots to be displayed on the map.
  */
-function MapCustomer({ spots }: { spots: ISpot[] | null }) {
+function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className?: string }) {
 
   // useEffect(() => {
   //   if (typeof window !== 'undefined') {
@@ -50,7 +49,7 @@ if (spots === null) return null;
     <MapContainer 
       center={[0, 0]} 
       zoom={9} 
-      className="box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative" 
+      className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`} 
     >
       <SetViewComponent spots={spots} />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -124,6 +123,8 @@ const markerIcon = (spot: ISpot) => {
   }
   // otherwise, get the activity
   const activity = practicedActivities[0].activityName.toLocaleLowerCase().trim();
+  console.log("spot", spot);
+  console.log("practicedActivities", practicedActivities);
   console.log("activity", activity);
 
   switch (activity) {

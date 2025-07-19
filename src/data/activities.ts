@@ -5,7 +5,7 @@ const activities = [
     title: "Escalade",
     text: "Grimpez et prenez de la hauteur sur les magnifiques falaises de la région.",
     links: [
-      { href: "/", label: "Réserver", style: "secondary" },
+      { href: "/reservation?activity=escalade", label: "Réserver", style: "secondary" },
       { href: "/activites/escalade", label: "En savoir plus", style: "primary" }
     ]
   }, 
@@ -15,7 +15,7 @@ const activities = [
     title: "Canyoning",
     text: "Sautez, glissez sur les toboggans naturels et nagez dans les eaux fraîches des gorges sauvages pour une aventure aquatique rafraîchissante et riche en sensations.",
     links: [
-      { href: "/", label: "Réserver", style: "secondary" },
+      { href: "/reservation?activity=canyoning", label: "Réserver", style: "secondary" },
       { href: "/activites/canyoning", label: "En savoir plus", style: "primary" }
     ]
   },
@@ -25,7 +25,7 @@ const activities = [
     title: "Spéléologie",
     text: "Explorez les merveilles cachées du monde souterrain au coeur des nombreuses grottes du secteur.",
     links: [
-      { href: "/", label: "Réserver", style: "secondary" },
+      { href: "/reservation?activity=speleo", label: "Réserver", style: "secondary" },
       { href: "/activites/speleo", label: "En savoir plus", style: "primary" }
     ]
   },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useSpots } from '@/hooks/useQuery';
-import type { Spot } from '@/hooks/useQuery';
+import type { ISpot } from '@/types';
 import Image from 'next/image';
 
 export default function SpotsList() {
@@ -45,7 +45,7 @@ export default function SpotsList() {
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-6">Nos Spots ({spots.length})</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {spots.map((spot: Spot) => (
+        {spots.map((spot: ISpot) => (
           <div
             key={spot._id}
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"

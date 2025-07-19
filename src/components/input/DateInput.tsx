@@ -1,128 +1,58 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { getNestedValue } from "@/lib/utils/customLoadash.utils";
-
-/**
- * ErrorMessage Component for Inputs
- * @param errorMessage: string
- */
-const ErrorMessage = ({ errorMessage }: { errorMessage: string }) => {
-  if (!errorMessage) return null;
-  return (
-    <span role="alert" className="text-red-500 text-sm mt-1">
-      {errorMessage}
-    </span>
-  );
-};
-
-/**
- * Wrapper Component for Inputs
- * @param children: React.ReactNode
- * @param className: string
- * @param wIsRaw: boolean (default: false)
- */
-const Wrapper = ({
-  children,
-  className,
-  wIsRaw = false,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  wIsRaw?: boolean;
-}) => {
-  return (
-    <div
-      className={`flex ${
-        wIsRaw
-          ? "flex-col md:flex-row md:items-center md:text-right items-start gap-0 md:gap-2"
-          : "flex-col items-start gap-0"
-      } flex-1 ${className || ""}`}
-    >
-      {children}
-    </div>
-  );
-};
-
-type TInputBase = {
-  wIsRaw?: boolean;
-  name: string;
-  placeholder?: string;
-  label?: string;
-  className?: string;
-  errorsName?: string;
-  disabled?: boolean;
-};
-
-/**
- * ClassNameForInput Function
- * @param errorMessage: string
- * @returns string
- */
-const ClassNameForInput = (errorMessage: string) => {
-  return `w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-    errorMessage
-      ? "border-red-500 shadow-md shadow-red-500"
-      : "border-gray-300 focus:border-blue-500"
-  }`;
-};
+import { ErrorMessage, Wrapper, ClassNameForInput } from "./utils";
+import { DateInputProps } from "@/types";
 
 /**
  * DateInput Component
+ * @param wIsRaw: boolean (default: false)
  * @param name: string
+ * @param placeholder: string
  * @param label: string
  * @param className: string
  * @param errorsName: string
+ * @param disabled: boolean (default: false)
  * @param min: string (date minimum)
  * @param max: string (date maximum)
  */
 export const DateInput = ({
+  wIsRaw = false,
   name,
+  placeholder,
   label,
   className,
-  errorsName = name,
+  errorsName,
   disabled = false,
-  wIsRaw = false,
   min,
   max,
-}: TInputBase & {
-  min?: string;
-  max?: string;
-}) => {
+}: DateInputProps) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const error = getNestedValue(errors, errorsName);
-  const errorMessage = error && typeof error === 'object' && 'message' in error 
-    ? error.message as string 
-    : '';
+  const errorMessage = errorsName
+    ? errors[errorsName]?.message as string
+    : errors[name]?.message as string;
 
   return (
     <Wrapper wIsRaw={wIsRaw} className={className}>
       {label && (
-        <label
-          htmlFor={name}
-          className="block text-sm font-medium text-gray-700 mb-2"
-        >
+        <label htmlFor={name} className="text-sm font-medium text-gray-700 mb-1">
           {label}
         </label>
       )}
-      <div className="flex flex-col gap-0 w-full">
-        <input
-          id={name}
-          type="date"
-          {...register(name)}
-          className={`${ClassNameForInput(errorMessage)} ${
-            disabled ? "opacity-70 bg-gray-100" : ""
-          }`}
-          aria-invalid={errorMessage ? "true" : "false"}
-          disabled={disabled}
-          min={min}
-          max={max}
-        />
-        <ErrorMessage errorMessage={errorMessage} />
-      </div>
+      <input
+        {...register(name)}
+        type="date"
+        id={name}
+        placeholder={placeholder}
+        disabled={disabled}
+        min={min}
+        max={max}
+        className={ClassNameForInput(errorMessage)}
+      />
+      <ErrorMessage errorMessage={errorMessage} />
     </Wrapper>
   );
 }; 

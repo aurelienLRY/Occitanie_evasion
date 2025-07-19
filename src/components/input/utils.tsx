@@ -32,23 +32,13 @@ export const Wrapper = ({
     <div
       className={`flex ${
         wIsRaw
-          ? "flex-col md:flex-row md:items-center md:text-right items-start gap-0 md:gap-2"
-          : "flex-col items-start gap-0"
+          ? "flex-col md:flex-row md:items-center md:text-right items-start gap-0 md:gap-2 "
+          : "flex-col items-start gap-0 "
       } flex-1 ${className || ""}`}
     >
       {children}
     </div>
   );
-};
-
-export type TInputBase = {
-  wIsRaw?: boolean;
-  name: string;
-  placeholder?: string;
-  label?: string;
-  className?: string;
-  errorsName?: string;
-  disabled?: boolean;
 };
 
 /**
@@ -57,9 +47,9 @@ export type TInputBase = {
  * @returns string
  */
 export const ClassNameForInput = (errorMessage: string) => {
-  return `w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
+  return `w-full px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-200 ${
     errorMessage
       ? "border-red-500 shadow-md shadow-red-500"
-      : "border-gray-300 focus:border-blue-500"
+      : "border-gray-300 "
   }`;
 }; 

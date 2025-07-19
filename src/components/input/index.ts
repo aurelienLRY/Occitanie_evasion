@@ -3,4 +3,6 @@ export { SelectInput } from './SelectInput';
 export { Textarea } from './Textarea';
 export { DateInput } from './DateInput';
 export { TimeInput } from './TimeInput';
-export { NumberInput } from './NumberInput'; 
+export { NumberInput } from './NumberInput';
+export { InputPhone } from './phoneInput';
+export { ErrorMessage, Wrapper, ClassNameForInput } from './utils'; 

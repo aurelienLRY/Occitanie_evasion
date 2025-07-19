@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import GoogleAvisCard from '@/components/ui/card/googleAvis.Card';
-import { GoogleReview } from '@/hooks/useGoogleReviews';
+import { GoogleReview } from '@/types';
 
 interface GoogleAvisCarouselProps {
   reviews: GoogleReview[];
@@ -42,7 +42,7 @@ const GoogleAvisCarousel = ({
   const maxIndex = Math.max(0, totalSlides - slidesToShow);
 
   // Fonction pour passer au slide suivant
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (infinite || currentIndex < maxIndex) {
       setCurrentIndex((prev) => 
         infinite 
@@ -50,7 +50,7 @@ const GoogleAvisCarousel = ({
           : Math.min(prev + 1, maxIndex)
       );
     }
-  };
+  }, [infinite, currentIndex, maxIndex, totalSlides]);
 
   // Fonction pour passer au slide précédent
   const prevSlide = () => {
@@ -88,7 +88,7 @@ const GoogleAvisCarousel = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [autoPlay, isPlaying, isHovered, autoPlayInterval, currentIndex, infinite, totalSlides, maxIndex]);
+  }, [autoPlay, isPlaying, isHovered, autoPlayInterval, currentIndex, infinite, totalSlides, maxIndex, nextSlide]);
 
   // Pause sur hover
   const handleMouseEnter = () => setIsHovered(true);

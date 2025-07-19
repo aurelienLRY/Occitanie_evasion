@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export const AboutSection = ( { className }: { className?: string } ) => {
     return (
-        <section className={`flex flex-col-reverse lg:flex-row  lg:gap-6  w-full   overflow-hidden ${className}`}>
+        <section className={`flex flex-col-reverse lg:flex-row  lg:gap-6  w-full py-12   overflow-hidden ${className}`}>
+           
 
             <div className="flex flex-col max-w-4xl">
                 <h2 className="text-6xl lg:text-8xl text-center lg:text-start ">Qui suis-je<span className="text-secondary">?</span></h2>
@@ -33,7 +34,6 @@ export const AboutSection = ( { className }: { className?: string } ) => {
                         className=" hidden lg:block rounded-lg object-cover object-center  aspect-square  absolute bottom-0 -left-10  translate-y-1/2 shadow-md shadow-black/50  " />
                 </div>
             </div>
-
 
 
         </section>

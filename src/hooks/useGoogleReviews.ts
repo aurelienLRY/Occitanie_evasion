@@ -1,39 +1,10 @@
-import { useState, useEffect } from 'react';
-
-// Types pour les avis Google
-export interface GoogleReview {
-  id: string;
-  author_name: string;
-  author_url?: string;
-  profile_photo_url?: string;
-  rating: number;
-  relative_time_description: string;
-  text: string;
-  time: number;
-  translated?: boolean;
-  language?: string;
-}
-
-export interface GooglePlaceData {
-  place_id: string;
-  name: string;
-  rating: number;
-  user_ratings_total: number;
-  reviews: GoogleReview[];
-}
-
-interface UseGoogleReviewsProps {
-  placeId: string;
-  apiKey: string;
-  maxReviews?: number;
-}
-
-interface UseGoogleReviewsReturn {
-  data: GooglePlaceData | null;
-  loading: boolean;
-  error: string | null;
-  refetch: () => void;
-}
+"use client"
+import { useState, useEffect, useCallback } from 'react';
+import { 
+  GooglePlaceData, 
+  UseGoogleReviewsProps, 
+  UseGoogleReviewsReturn 
+} from '@/types';
 
 export const useGoogleReviews = ({ 
   placeId, 
@@ -44,7 +15,7 @@ export const useGoogleReviews = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -83,13 +54,13 @@ export const useGoogleReviews = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [placeId, apiKey, maxReviews]);
 
   useEffect(() => {
     if (placeId && apiKey) {
       fetchReviews();
     }
-  }, [placeId, apiKey, maxReviews]);
+  }, [placeId, apiKey, maxReviews, fetchReviews]);
 
   return {
     data,

@@ -1,4 +1,4 @@
-import { ProfileCardProps, SocialMedia } from "@/types/profile";
+import { ProfileCardProps, SocialMedia } from "@/types";
 
 // Informations de base de l'entreprise
 export const businessInformation = {

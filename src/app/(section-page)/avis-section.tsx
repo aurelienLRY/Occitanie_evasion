@@ -17,13 +17,13 @@ const AvisSection = ({className}: {className?: string}) => {
         TopMarker={true}
         BottomMarker={true}
         >
-            <div className="flex flex-col justify-center gap-8  w-full max-w-7xl mx-auto">
+            <div className="flex flex-col justify-center gap-8  w-full max-w-7xl mx-auto mt-20">
             <div className="text-center lg:text-left">
-                <h2 className="text-8xl font-bold mb-4">Ils nous ont fait confiance <span className="text-secondary">!</span></h2>
-                <h3 className="text-4xl opacity-70">Toi aussi, réservez ta sortie <span className="text-secondary opacity-70">!</span></h3> 
+                <h2 className="text-6xl lg:text-8xl font-bold mb-4">Ils nous ont fait confiance <span className="text-secondary">!</span></h2>
+                <h3 className="text-2xl lg:text-4xl opacity-70">Toi aussi, réservez ta sortie <span className="text-secondary opacity-70">!</span></h3> 
             </div>
            
-            <div className="w-full ">
+            <div className="w-full mb-12 ">
                 {loading ? (
                     <div className="flex items-center justify-center h-64">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -40,6 +40,7 @@ const AvisSection = ({className}: {className?: string}) => {
                     </div>
                     <div className="text-sm text-gray-600">Note moyenne</div>
                   </div>
+                  
                     <GoogleAvisCarousel
                         reviews={data.reviews}
                         autoPlay={true}
@@ -53,6 +54,7 @@ const AvisSection = ({className}: {className?: string}) => {
                         className="w-full"
                         cardClassName="bg-white/90 backdrop-blur-sm"
                     />  
+                   
                     </>
                 ) : (
                     <div className="text-center text-gray-500">

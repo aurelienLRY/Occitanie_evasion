@@ -4,7 +4,7 @@ import { Permanent_Marker , Slackside_One , Nunito} from "next/font/google";
 import "@/styles/globals.css"
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ThemeProvider from "../components/ui/ToogleTheme/ThemeProvider";
+import ThemeProvider from "../components/providers/ThemeProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { Toaster } from 'sonner';
 
@@ -48,7 +48,7 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeProvider>
             <Header  className="absolute top-0 left-0 w-full"/>
-            <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative" >{children}</main>
+            <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
             <Footer />
             <Toaster 
               position="bottom-right"

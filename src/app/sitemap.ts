@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { Routes, TRoutes } from "@/config/Routes";
+import { AppRoutes, TRoutes } from "@/config/App-Routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 
-     const  routesMap = Routes.map((route: TRoutes) => ({
+     const  routesMap = AppRoutes.map((route: TRoutes) => ({
       url: `${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}${route.path}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,

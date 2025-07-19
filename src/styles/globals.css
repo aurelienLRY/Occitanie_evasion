@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "../components/ui/ToogleTheme/styles.css" layer(base);
 @import "./leaflet.mapComponent.css" layer(base);
+@import "./toogle-theme.css" layer(base);
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -39,6 +39,21 @@ h1 , h2 , h3 , h4 , h5 , h6 {
   font-weight: 400;
 }
 
+h1 {
+  @apply text-4xl lg:text-8xl; 
+}
+
+h2{
+  @apply text-4xl lg:text-6xl; 
+}
+
+h3{
+  @apply text-2xl lg:text-4xl; 
+}
+
+
+
+
 .font-title {
 font-family: "Slackside One", sans-serif;
   font-weight: 400;
@@ -57,5 +72,43 @@ font-family: "Slackside One", sans-serif;
 html {
   font-family: "Nunito", sans-serif;
   font-weight: 400;
+}
+
+.react-international-phone-input{
+  border: none !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.react-international-phone-country-selector-button{
+  height: 100% !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+
+.react-international-phone-input-container {
+ min-height: 42px !important;
+border : 1px solid var(--color-gray-300) !important;
+padding: 0px !important;
+padding-left: 8px !important;
+padding-right: 8px !important;
+height: 100% !important;
+transition: border 0.2s ease-in-out !important;
+}
+.react-international-phone-input-container:focus-within{
+  border: 2px solid var(--color-secondary) !important;
+}
+
+.react-international-phone-country-selector-button{
+  
+  border: none !important;
+  border-right: 1px solid #e0e0e0 !important;
+  padding-right:2px !important;
+  padding-left:2px !important;
 }
 

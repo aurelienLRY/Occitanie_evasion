@@ -1,5 +1,5 @@
 "use client";
-import Routes from "@/config/Routes";
+import Routes from "@/config/App-Routing";
 import {
   Navbar,
   NavBody,

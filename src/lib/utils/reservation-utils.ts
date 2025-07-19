@@ -1,36 +1,57 @@
-import { IActivity, ISpot } from '@/types';
+import { IActivity, ISpot, ActivityFormData, SpotFormData } from '@/types';
 
-// Interface pour les données transformées utilisées dans le formulaire
-export interface ActivityFormData {
-  id: string;
-  name: string;
-  description: string;
-  durationHalf: number; // durée demi-journée en heures
-  durationFull: number; // durée journée complète en heures
-  maxParticipants: number;
-  minParticipants: number;
-  priceHalf: number; // prix demi-journée
-  priceFull: number; // prix journée complète
-  halfDayAvailable: boolean;
-  fullDayAvailable: boolean;
-}
+/**
+ * Parse une durée au format string (ex: "5h", "5h30", "5h00") en heures décimales
+ * @param durationString - La durée au format string
+ * @returns Le nombre d'heures en décimal (ex: 5.5 pour "5h30")
+ */
+export const parseDurationString = (durationString: string): number => {
+  if (!durationString) return 0;
+  
+  // Nettoyer la chaîne et convertir en minuscules
+  const cleanString = durationString.toLowerCase().trim();
+  
+  // Pattern pour matcher "5h", "5h30", "5h00", etc.
+  const pattern = /^(\d+)(?:h(\d{2})?)?$/;
+  const match = cleanString.match(pattern);
+  
+  if (!match) {
+    console.warn(`Format de durée non reconnu: ${durationString}`);
+    return 0;
+  }
+  
+  const hours = parseInt(match[1], 10);
+  const minutes = match[2] ? parseInt(match[2], 10) : 0;
+  
+  // Convertir en heures décimales
+  return hours + (minutes / 60);
+};
 
-export interface SpotFormData {
-  id: string;
-  name: string;
-  description: string;
-  location: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  activities: string[]; // IDs des activités disponibles
-}
+/**
+ * Formate une durée en heures décimales vers un format lisible (ex: 5.5 -> "5h30")
+ * @param durationHours - La durée en heures décimales
+ * @returns La durée formatée en string
+ */
+export const formatDurationString = (durationHours: number): string => {
+  if (durationHours <= 0) return '0h';
+  
+  const hours = Math.floor(durationHours);
+  const minutes = Math.round((durationHours - hours) * 60);
+  
+  if (minutes === 0) {
+    return `${hours}h`;
+  } else {
+    return `${hours}h${minutes.toString().padStart(2, '0')}`;
+  }
+};
 
 // Transformer une activité de l'API vers le format du formulaire
 export const transformActivityToFormData = (activity: IActivity): ActivityFormData => {
-  // Calculer les durées en heures
+  // Calculer les durées en heures décimales
   const durationHalfString = activity.duration.half || '0';
   const durationFullString = activity.duration.full || '0';
-  const durationHalf = parseFloat(durationHalfString.replace('h', '')) || 0;
-  const durationFull = parseFloat(durationFullString.replace('h', '')) || 0;
+  const durationHalf = parseDurationString(durationHalfString);
+  const durationFull = parseDurationString(durationFullString);
   
   // Calculer les prix (prix standard)
   const priceHalf = activity.price_half_day?.standard || 0;
@@ -48,6 +69,7 @@ export const transformActivityToFormData = (activity: IActivity): ActivityFormDa
     priceFull,
     halfDayAvailable: activity.half_day || false,
     fullDayAvailable: activity.full_day || false,
+    minAge: activity.min_age,
   };
 };
 
@@ -58,8 +80,9 @@ export const transformSpotToFormData = (spot: ISpot): SpotFormData => {
     name: spot.name,
     description: spot.description,
     location: spot.gpsCoordinates, // Utiliser les coordonnées GPS comme localisation
-    difficulty: 'medium', // Par défaut, à adapter selon vos besoins
-    activities: spot.practicedActivities.map(pa => pa.activityId),
+    activities: spot.practicedActivities.map(pa => pa.activityId ),
+    practicedActivities: spot.practicedActivities,
+    photo: spot.photo,
   };
 };
 

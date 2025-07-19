@@ -37,7 +37,13 @@ export const reservationSchema = yup.object({
     .min(2, 'Le nom doit contenir au moins 2 caractères'),
   clientPhone: yup.string()
     .required('Le téléphone est requis')
-    .matches(/^(\+33|0)[1-9](\d{8})$/, 'Format de téléphone invalide'),
+    .test('phone-format', 'Format de téléphone international invalide', (value) => {
+      if (!value) return false;
+      // Nettoyer le numéro en supprimant les espaces et caractères spéciaux
+      const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
+      // Vérifier le format international avec ou sans espaces
+      return /^\+[1-9]\d{1,14}$/.test(cleanPhone);
+    }),
   clientEmail: yup.string()
     .required('L\'email est requis')
     .email('Format d\'email invalide'),
