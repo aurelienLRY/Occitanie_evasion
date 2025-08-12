@@ -161,7 +161,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
     if (urlParams && transformedActivities.length > 0 && transformedSpots.length > 0) {
       // Pré-remplir l'activité
       if (urlParams.activity) {
-        const activity = transformedActivities.find(a => 
+        const activity = transformedActivities.find(a =>
           a.name.toLowerCase().includes(urlParams.activity!.toLowerCase()) ||
           a.id.toLowerCase().includes(urlParams.activity!.toLowerCase())
         );
@@ -178,7 +178,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
 
       // Pré-remplir le lieu (spot)
       if (urlParams.lieux) {
-        const spot = transformedSpots.find(s => 
+        const spot = transformedSpots.find(s =>
           s.name.toLowerCase().includes(urlParams.lieux!.toLowerCase()) ||
           s.location.toLowerCase().includes(urlParams.lieux!.toLowerCase())
         );
@@ -352,21 +352,23 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
     );
   }
 
-  const stepTitles = [
-    "Vos informations",
-    "Activité et planning",
-    "Participants",
-    "Demandes spéciales"
-  ];
 
   return (
     <div className="p-4  mx-auto bg-gray-100  rounded-lg">
       {/* Titre de l'étape */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-bold text-center text-gray-800">
-          {stepTitles[currentStep - 1]}
+
+
+
+      <div className='mb-8'>
+        <h2 className='   '>
+          Crée ta session<span className='text-secondary'>!</span>
         </h2>
+        <p className=' text-gray-600  '>
+          Utilise le formulaire pour réserver ton activité.
+        </p>
       </div>
+
+
 
       <div className="flex flex-col  gap-8">
         {/* Formulaire principal */}
@@ -511,7 +513,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                               <p className="text-xl font-title  ">Pourquoi j&apos;ai besoin de vos tailles et poids <span className='text-secondary'>?</span> </p>
                               <p className="text-xs  text-gray-500">Ces informations sont nécessaires pour la préparation de l&apos;activité. Rien de plus désagréable qu&apos;une combinaison trop petite , ou de plus dangereux qu&apos;un baudrier trop grand ! </p>
                             </div>
-                            </div>
+                          </div>
                         </div>
                         <Button
                           type="button"
