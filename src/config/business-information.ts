@@ -117,3 +117,11 @@ export const getSocialMedia = () => {
 export const getBusinessHours = () => {
   return businessInformation.businessHours;
 };
+
+// Configuration Google Reviews
+export const GOOGLE_REVIEWS_CONFIG = {
+    featurableId: process.env.NEXT_PUBLIC_GOOGLE_REVIEWS || "example",
+    // Remplacez "example" par votre véritable Featurable Widget ID
+    // Créez un compte gratuit sur https://featurable.com
+    // Puis créez un widget et copiez l'ID
+};

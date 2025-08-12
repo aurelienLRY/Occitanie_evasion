@@ -8,8 +8,8 @@ const ContactPage = () => {
             className="min-h-[100vh] w-full mx-auto flex flex-col gap-12 justify-center relative max-w-7xl mt-20 px-4"
         >
                 <div className="text-center lg:text-left">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Une question , une idée , un besoin spécifique <span className="text-secondary">?</span></h1>
-                    <h2 className=" font-paragraphe text-lg md:text-xl  opacity-80 ">
+                    <h1 className="!text-4xl md:!text-6xl font-bold mb-4">Une question , une idée , un besoin spécifique <span className="text-secondary">?</span></h1>
+                    <h2 className=" font-paragraphe !text-lg md:!text-xl  opacity-80 ">
                       Je serai ravis d&apos;échanger avec toi directement par téléphone, par email ou via le formulaire ci-dessous. 😉
                     </h2>
                 </div>

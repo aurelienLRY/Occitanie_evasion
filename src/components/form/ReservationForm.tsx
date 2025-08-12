@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { reservationSchema } from '@/lib/validation/reservation-schema';
 import { useActivities, useSpots, useBooking, useIsMobile } from '@/hooks';
 import { transformActivityToFormData, transformSpotToFormData, calculateEndTime, formatDurationString } from '@/lib/utils/reservation-utils';
-import { IBooking, ActivityFormData, SpotFormData } from '@/types';
+import { IBooking, ActivityFormData, SpotFormData, ReservationUrlParams } from '@/types';
 import {
   SelectInput,
   DateInput,
@@ -41,7 +41,11 @@ import {
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ReservationForm = () => {
+interface ReservationFormProps {
+  urlParams?: ReservationUrlParams;
+}
+
+const ReservationForm = ({ urlParams }: ReservationFormProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedActivity, setSelectedActivity] = useState<ActivityFormData | null>(null);
   const [selectedSpot, setSelectedSpot] = useState<SpotFormData | null>(null);
@@ -151,6 +155,39 @@ const ReservationForm = () => {
       methods.setValue('endTime', endTime);
     }
   }, [selectedActivity, watchedStartTime, watchedSessionType, methods]);
+
+  // 5. Traiter les paramètres d'URL pour pré-remplir le formulaire
+  useEffect(() => {
+    if (urlParams && transformedActivities.length > 0 && transformedSpots.length > 0) {
+      // Pré-remplir l'activité
+      if (urlParams.activity) {
+        const activity = transformedActivities.find(a => 
+          a.name.toLowerCase().includes(urlParams.activity!.toLowerCase()) ||
+          a.id.toLowerCase().includes(urlParams.activity!.toLowerCase())
+        );
+        if (activity) {
+          methods.setValue('activityId', activity.id);
+        }
+      }
+
+      // Pré-remplir le type de session
+      if (urlParams.sessionType) {
+        const sessionType = urlParams.sessionType === 'demi-journee' ? 'half-day' : 'full-day';
+        methods.setValue('sessionType', sessionType);
+      }
+
+      // Pré-remplir le lieu (spot)
+      if (urlParams.lieux) {
+        const spot = transformedSpots.find(s => 
+          s.name.toLowerCase().includes(urlParams.lieux!.toLowerCase()) ||
+          s.location.toLowerCase().includes(urlParams.lieux!.toLowerCase())
+        );
+        if (spot) {
+          methods.setValue('spotId', spot.id);
+        }
+      }
+    }
+  }, [urlParams, transformedActivities, transformedSpots, methods]);
 
   // Validation par étape
   const validateCurrentStep = async () => {

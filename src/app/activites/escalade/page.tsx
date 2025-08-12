@@ -37,44 +37,6 @@ const EscaladePage = () => {
                 </div>
             </article>
 
-            {/* Sites d'escalade */}
-            <article className="container mx-auto flex flex-col gap-8 px-6">
-                <h2 className="text-center">Nos sites d&apos;escalade</h2>
-                <div className="bg-primary/10 p-6 rounded-lg">
-                    <p className="text-lg mb-4">Les falaises des alentours offrent un terrain de jeu incroyable pour découvrir l&apos;escalade en milieu naturel :</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex items-start gap-3">
-                            <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                            <div>
-                                <h3 className="font-semibold">Notre Dame du Cross</h3>
-                                <p className="text-sm text-gray-600">Au cœur du Minervois</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                            <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                            <div>
-                                <h3 className="font-semibold">Falaises de La Clape</h3>
-                                <p className="text-sm text-gray-600">Site majeur de la région</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                            <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                            <div>
-                                <h3 className="font-semibold">Haute vallée de l&apos;Aude</h3>
-                                <p className="text-sm text-gray-600">Sites variés et techniques</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                            <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                            <div>
-                                <h3 className="font-semibold">Gorges d&apos;Héric</h3>
-                                <p className="text-sm text-gray-600">Environnement sauvage</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
             {/* Carrousel */}
             <div className="w-full flex flex-col gap-6 items-center min-h-[500px] relative">
                 <div className="absolute w-[90%] min-h-[200px] bottom-19 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:h-full lg:w-1/3 lg:top-0 lg:left-0 z-50">
@@ -116,92 +78,6 @@ const EscaladePage = () => {
                     ACMPriceConditions="Tarif ACM : 8 enfants + 1 accompagnateur = 280€. Contactez-moi pour plus d'informations."
                 />
             </div>
-
-            {/* Informations pratiques détaillées */}
-            <article className="container mx-auto flex flex-col gap-12 px-16">
-                <h2 className="text-center">Informations pratiques détaillées</h2>
-                
-                {/* Horaires et lieux */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="space-y-6 bg-primary/10 p-6 rounded-lg">
-                        <h3 className="text-primary text-xl font-bold flex items-center gap-2">
-                            <Clock className="w-5 h-5" />
-                            Horaires et durée
-                        </h3>
-                        <div className="space-y-4">
-                            <div>
-                                <h4 className="font-semibold text-lg">Horaires de départ :</h4>
-                                <ul className="space-y-2 ml-4">
-                                    <li>• Départ matin : <strong>09h30</strong></li>
-                                    <li>• Départ après-midi : <strong>14h00</strong></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-lg">Durée d&apos;activité :</h4>
-                                <p className="ml-4"><strong>3h</strong> comprenant :</p>
-                                <ul className="space-y-1 ml-8">
-                                    <li>• 15 min d&apos;équipement</li>
-                                    <li>• 10 min de marche d&apos;approche</li>
-                                    <li>• 10 min de marche retour</li>
-                                    <li>• 20 min de débrief convivial</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-lg">Âge minimum :</h4>
-                                <p className="ml-4"><strong>6 ans</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="space-y-6 bg-primary/10 p-6 rounded-lg">
-                        <h3 className="text-primary text-xl font-bold flex items-center gap-2">
-                            <MapPin className="w-5 h-5" />
-                            Lieu et période
-                        </h3>
-                        <div className="space-y-4">
-                            <div>
-                                <h4 className="font-semibold text-lg">Période de pratique :</h4>
-                                <p className="ml-4"><strong>Toute l&apos;année</strong></p>
-                                <p className="ml-4 text-sm text-gray-600">Suivant la météo du moment</p>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-lg">Groupes :</h4>
-                                <p className="ml-4"><strong>4 à 10 personnes</strong></p>
-                                <p className="ml-4 text-sm text-gray-600">Pour les groupes de + de 10 personnes, contactez-moi directement</p>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-lg">Niveaux :</h4>
-                                <p className="ml-4"><strong>Du 4 au 7ème degrés</strong></p>
-                                <p className="ml-4 text-sm text-gray-600">Du très facile au très technique</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Contact et réservation */}
-                <div className="bg-primary/20 p-6 rounded-lg">
-                    <h3 className="text-primary text-xl font-bold mb-4 flex items-center gap-2">
-                        <Phone className="w-5 h-5" />
-                        Contact et réservation
-                    </h3>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-primary" />
-                                <span><strong>Téléphone :</strong> 06 20 56 25 07</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Mail className="w-4 h-4 text-primary" />
-                                <span><strong>Email :</strong> occitanie-evasion@gmail.com</span>
-                            </div>
-                        </div>
-                        <div className="space-y-3">
-                            <p className="text-sm"><strong>Note :</strong> Vous organisez un EVG ou EVJF ? Merci de le préciser lors de votre demande.</p>
-                            <p className="text-sm"><strong>Important :</strong> Toutes les informations nécessaires concernant le lieu de RDV et le déroulement de l&apos;activité vous seront transmises par mail et/ou sms.</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
 
             {/* Spots */}
             <div className="w-full flex flex-col gap-6 px-16 items-center justify-center bg-primary py-16 relative min-h-[800px]">

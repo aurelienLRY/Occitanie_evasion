@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Carousel } from './Carrousel';
 import dynamic from 'next/dynamic';
 import { MarkerLineSvg } from '@/components/ui/svg/MarkerLine.svg';
+import ReservationLink from './ReservationLink';
 
 interface ActivitySpotsProps {
   activityName: string;
@@ -85,6 +86,13 @@ export const ActivitySpots = ({ activityName }: ActivitySpotsProps) => {
                   {spot.description}
                 </p>
               </div>
+              <ReservationLink 
+              activity={activity.name} 
+              lieux={spot.name} 
+              aria-label={`Réserver une journée complète de ${activityName} à ${spot.name}`}
+              className="w-full py-2 px-6 text-lg font-semibold bg-white text-primary text-center rounded-lg hover:bg-white/80 transition-all duration-300">
+                  Réserver
+              </ReservationLink>
             </div>
           ))}
         </Carousel>

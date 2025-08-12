@@ -5,7 +5,7 @@ import { Facebook, Instagram } from "lucide-react"
 import Link from "next/link";
 
 const Footer = () => {
-    const FooterLinkClassName = "text-white/70 text-sm hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary rounded-md p-1"
+    const FooterLinkClassName = "text-white/70 text-sm hover:text-secondary transition-colors duration-300 focus:outline-none focus:text-secondary rounded-md p-1"
 
     return (
         <footer 

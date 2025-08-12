@@ -3,8 +3,8 @@ import { MarkerLineSvg } from "@/components/ui/svg/MarkerLine.svg";
 import { Carousel } from "@/components/ui/Carrousel";
 import { ActivityFormulas, ActivitySpots } from "@/components/ui";
 import Image from "next/image";
-import Link from "next/link";
 import { Info, Star, Users } from "lucide-react";
+import ReservationLink from "@/components/ui/ReservationLink";
 
 const CanyoningPage = () => {
 
@@ -47,9 +47,9 @@ const CanyoningPage = () => {
                     <div className="w-full h-full   bg-white/30 p-4 rounded-lg flex flex-col justify-center px-12 gap-0">
                         <p className="text-white/90 py-4 font-title text-2xl lg:text-4xl font-bold ">Ils l&apos;ont fait !</p>
                         <p className=" text-white font-title text-4xl lg:text-6xl  ">Pourquoi pas toi <span className="text-primary">?</span></p>
-                        <Link href="/reservation?activity=canyoning" className="text-white  bg-primary/80 px-4 py-2 rounded-lg w-fit mt-6 hover:bg-primary transition-all duration-300">
+                        <ReservationLink activity="canyoning" className="text-white  bg-primary/80 px-4 py-2 rounded-lg w-fit mt-6 hover:bg-primary transition-all duration-300">
                             Réserver
-                        </Link>
+                        </ReservationLink>
                     </div>
                 </div>
                 <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full ">

@@ -76,7 +76,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
             </div>
           </div>
           <div className="absolute top-[10%] lg:top-[30%] left-[5%] lg:group-hover:left-[25%] transition-all duration-500  min-w-min w-[80%] lg:w-[60%] max-w-max    flex flex-col gap-2 overflow-hidden z-10 px-4 lg:px-0 ">
-            <h3 className="text-6xl lg:text-7xl break-words font-bold text-white mb-2 drop-shadow-lg leading-none ">
+            <h3 className="!text-6xl lg:!text-7xl break-words font-bold text-white mb-2 drop-shadow-lg leading-none ">
               {activity.title}
             </h3>
             <p className={`text-white text-lg text-justify ${BannerTextAnimation} `}>

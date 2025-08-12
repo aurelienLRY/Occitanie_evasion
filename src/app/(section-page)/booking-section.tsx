@@ -13,7 +13,7 @@ import CustomSection from "@/components/layout/Section";
             </div>
             <div className="flex flex-col items-center justify-center gap-6">
                 <span className="text-2xl lg:text-4xl mt-4 ">👇</span>
-                    <Link href="#" className=" bg-white text-black  text-xl px-4 py-2 rounded-lg hover:scale-105 hover:bg-white/80 transition-all duration-300">Go pour l’aventure !</Link>      
+                    <Link href="/reservation" className=" bg-white text-black  text-xl px-4 py-2 rounded-lg hover:scale-105 hover:bg-white/80 transition-all duration-300">Go pour l’aventure !</Link>      
             </div>
 
         </CustomSection>

@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import CustomSection from "@/components/layout/Section";
 import { FAQ } from "@/components/ui/FAQ";
+import ContactForm from "@/components/form/contact";
+import { ProfileCard } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "FAQ - Questions Fréquentes | Occitanie Évasion",
@@ -21,7 +23,7 @@ export default function FAQPage() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Trouvez rapidement les réponses à toutes vos questions sur nos activités de plein air. 
+            Trouvez rapidement les réponses à toutes vos questions sur nos activités de plein air.
             De la réservation à la sécurité, nous avons tout prévu pour vous accompagner.
           </p>
         </div>
@@ -35,29 +37,22 @@ export default function FAQPage() {
       </CustomSection>
 
       {/* Contact CTA */}
-      <CustomSection className="py-16 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-            Vous ne trouvez pas votre réponse ?
+      <CustomSection className="py-16 px-4 text-center container mx-auto">
+          <h2 className="text-4xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+            Vous ne trouvez pas votre réponse <span className="text-secondary">?</span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Notre équipe est là pour vous aider. N&apos;hésitez pas à nous contacter pour toute question spécifique.
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 ">
+            Je suis là pour vous aider. N&apos;hésite pas à me contacter pour toute question spécifique.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Nous Contacter
-            </a>
-            <a
-              href="tel:06XXXXXXXX"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Appeler Maintenant
-            </a>
+
+          <div className="flex flex-col items-center lg:flex-row gap-6 w-full ">
+            <div className=" lg:flex-1/3">
+              <ProfileCard />
+            </div>
+            <ContactForm className="w-full " />
           </div>
-        </div>
+
+
       </CustomSection>
     </>
   );

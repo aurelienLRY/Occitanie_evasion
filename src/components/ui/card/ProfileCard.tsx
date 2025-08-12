@@ -160,7 +160,7 @@ const ProfileCard = (props: Partial<ProfileCardProps> = {}) => {
                     <section aria-labelledby="business-hours-section-title">
                         <hr className="min-w-[150px] text-secondary border-secondary border-1 mx-auto my-1" />
                         
-                        <h3 id="business-hours-section-title" className="text-2xl font-semibold text-gray-800">
+                        <h3 id="business-hours-section-title" className="!text-2xl font-semibold text-gray-800">
                             Horaires d&apos;ouverture
                         </h3>
                         

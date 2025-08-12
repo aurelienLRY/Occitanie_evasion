@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button } from './button';
 import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
 import { useState } from 'react';
+import ReservationLink from './ReservationLink';
 
 interface ActivityFormulasProps {
     activityName: string;
@@ -54,7 +55,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     }
 
     return (
-        <section className="container mx-auto flex flex-col gap-8" aria-labelledby="formulas-title">
+        <section className="container mx-auto my-16 flex flex-col gap-8" aria-labelledby="formulas-title">
             <h2 id="formulas-title" className="sr-only">Formules disponibles pour {activityName}</h2>
             <div className="flex flex-col lg:flex-row gap-8 mx-auto" role="list" aria-label="Formules d'activité">
                 {activity.half_day && (
@@ -193,11 +194,15 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                             </div>
                         </div>
 
-                        <Link href={`/reservation?activity=${activity._id}&type=half`} aria-label={`Réserver une demi-journée de ${activityName}`}>
-                            <Button variant="primary" className="w-full py-3 text-lg font-semibold">
-                                Réserver demi-journée
-                            </Button>
-                        </Link>
+                        <ReservationLink 
+                        activity={activity.name} 
+                        sessionType="half-day" 
+                        aria-label={`Réserver une demi-journée de ${activityName}`}
+                        className="w-full py-3 text-lg font-semibold bg-primary text-white text-center rounded-lg hover:bg-primary/80 transition-all duration-300">
+                            Réserver demi-journée
+                        </ReservationLink>
+
+                
                         </div>
                     </article>
                 )}
@@ -233,7 +238,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                 <div className="flex items-center gap-3" role="listitem">
                                     <Users className="w-5 h-5 text-gray-500" aria-hidden="true" />
                                     <span className="text-gray-600">Participants:</span>
-                                    <span className="font-semibold text-gray-800 ml-auto">{activity.min_OfPeople}-{activity.max_OfPeople}</span>
+                                    <span className="font-semibold text-gray-800 ml-auto"> de {activity.min_OfPeople} à {activity.max_OfPeople}</span>
                                 </div>
 
                                 <div className="flex items-center gap-3" role="listitem">
@@ -343,11 +348,13 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                 </div>
                             </div>
 
-                            <Link href={`/reservation?activity=${activity._id}&type=full`} aria-label={`Réserver une journée complète de ${activityName}`}>
-                                <Button variant="primary" className="w-full py-3 text-lg font-semibold">
-                                    Réserver journée complète
-                                </Button>
-                            </Link>
+                            <ReservationLink 
+                            activity={activity.name} 
+                            sessionType="full-day" 
+                            aria-label={`Réserver une journée complète de ${activityName}`}
+                            className="w-full py-3 text-lg font-semibold bg-primary text-white text-center rounded-lg hover:bg-primary/80 transition-all duration-300">
+                                Réserver journée complète
+                            </ReservationLink>
                         </div>
                     </article>
                 )}

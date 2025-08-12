@@ -19,6 +19,8 @@ export { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, M
 export { default as RotatingText } from './rotating-text';
 export { default as Switch } from './switch';
 export { ThemeSwitch } from './ToogleTheme';
+export { default as GoogleReviews } from './googleReviews';
+export { default as ReservationLink } from './ReservationLink';
 
 // Activity components
 export { ActivityDetails } from './ActivityDetails';

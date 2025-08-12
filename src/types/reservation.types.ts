@@ -70,4 +70,28 @@ export interface ReservationFormData {
 export type ReservationStatus = 'Waiting' | 'Confirmed' | 'Cancelled' | 'Completed';
 
 // Types pour les types de réservation
-export type ReservationType = 'by_website' | 'by_phone' | 'by_email' | 'in_person'; 
+export type ReservationType = 'by_website' | 'by_phone' | 'by_email' | 'in_person';
+
+// Types pour les paramètres de réservation via URL
+export interface ReservationUrlParams {
+  activity?: string;
+  lieux?: string;
+  sessionType?: string;
+}
+
+// Types pour les valeurs possibles
+export type ActivityType = string;
+
+export type SessionType = 'full-day' | 'half-day';
+
+export type LieuxType = string;
+
+// Interface pour le composant ReservationLink
+export interface ReservationLinkProps {
+  children: React.ReactNode;
+  activity?: ActivityType;
+  lieux?: LieuxType;
+  sessionType?: SessionType;
+  className?: string;
+  onClick?: () => void;
+} 
