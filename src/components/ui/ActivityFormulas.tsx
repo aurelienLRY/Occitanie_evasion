@@ -2,8 +2,6 @@
 
 import { useActivities } from '@/hooks/useQuery';
 import { IActivity } from '@/types';
-import Link from 'next/link';
-import { Button } from './button';
 import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
 import { useState } from 'react';
 import ReservationLink from './ReservationLink';

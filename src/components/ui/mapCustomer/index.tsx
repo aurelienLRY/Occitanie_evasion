@@ -24,14 +24,6 @@ import Image from "next/image";
  */
 function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className?: string }) {
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     console.log('window is defined');
-  //   }
-  //   // Retourner undefined au lieu de null
-  //   return undefined;
-  // }, []);
-
   const SetViewComponent = ({ spots }: { spots: ISpot[] }) => {
     const map = useMap();
     useEffect(() => {
@@ -123,9 +115,7 @@ const markerIcon = (spot: ISpot) => {
   }
   // otherwise, get the activity
   const activity = practicedActivities[0].activityName.toLocaleLowerCase().trim();
-  console.log("spot", spot);
-  console.log("practicedActivities", practicedActivities);
-  console.log("activity", activity);
+
 
   switch (activity) {
     case "escalade":      return markerEscalade;

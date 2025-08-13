@@ -53,12 +53,14 @@ const GoogleReviews = ({
   const [reviews, setReviews] = useState<CustomReviewCard[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  {/* 
   // Fonction pour calculer la note moyenne
   const calculateAverageRating = (reviews: CustomReviewCard[]) => {
     if (reviews.length === 0) return 0;
     const totalRating = reviews.reduce((sum, review) => sum + review.starRating, 0);
     return totalRating / reviews.length;
   };
+  */}
 
   // Fonction pour générer les étoiles
   const renderStars = (rating: number) => {

@@ -139,8 +139,8 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Utiliser les noms fournis par le formulaire
-    const activityName =  booking.session.activity.name || booking.session.activityName || "Unknown";
-    const spotName = booking.session.spotName || booking.session.spot.name || "Unknown";
+    const activityName =  booking.session.activity.name || "Unknown";
+    const spotName =  booking.session.spot.name || "Unknown";
 
     // Préparer le contenu HTML de l'email
     const emailHtml = `

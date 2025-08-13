@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useForm, useFieldArray, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ISession } from '@/types';
@@ -39,7 +39,7 @@ interface QuickBookingModalProps {
   onClose: () => void;
 }
 
-const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps) => {
+const QuickBookingModal = React.memo(({ session, isOpen, onClose }: QuickBookingModalProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [participantCount, setParticipantCount] = useState(1);
@@ -52,7 +52,8 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
     defaultValues: {
       participants: [{ height: 0, weight: 0 }],
       specialRequests: ''
-    }
+    },
+    mode: 'onBlur' // Validation seulement au blur, pas à chaque frappe
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -63,7 +64,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
 
 
   // Validation par étape
-  const validateCurrentStep = async () => {
+  const validateCurrentStep = useCallback(async () => {
     const stepFields: Record<number, string[]> = {
       1: ['clientFirstName', 'clientLastName', 'clientEmail', 'clientPhone'],
       2: ['participants'],
@@ -79,10 +80,10 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
     } catch {
       return false;
     }
-  };
+  }, [currentStep, methods]);
 
   // Navigation entre les étapes
-  const nextStep = async () => {
+  const nextStep = useCallback(async () => {
     const isValid = await validateCurrentStep();
     if (isValid && currentStep < TOTAL_STEPS) {
       setCurrentStep(currentStep + 1);
@@ -91,33 +92,33 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
         icon: <AlertCircle className="w-4 h-4" />,
       });
     }
-  };
+  }, [currentStep, validateCurrentStep]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
-  };
+  }, [currentStep]);
 
   // Ajouter un participant
-  const addParticipant = () => {
+  const addParticipant = useCallback(() => {
     if (participantCount < session.placesMax - session.placesReserved) {
       append({ height: 0, weight: 0 });
       setParticipantCount(prev => prev + 1);
     }
-  };
+  }, [participantCount, session.placesMax, session.placesReserved, append]);
 
   // Supprimer un participant
-  const removeParticipant = (index: number) => {
+  const removeParticipant = useCallback((index: number) => {
     if (fields.length > 1) {
       remove(index);
       setParticipantCount(prev => prev - 1);
     }
-  };
+  }, [fields.length, remove]);
 
 
 
-  
+
 
   // Soumission du formulaire
   const onSubmit = async (data: {
@@ -129,7 +130,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
     specialRequests?: string;
   }) => {
     setIsSubmitting(true);
-    
+
     try {
       // Préparer les données pour l'API
       const bookingData: IAddCustomerBooking = {
@@ -155,10 +156,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
         },
         message: data.specialRequests || ''
       };
-
-      console.log("bookingData>>>>>>>>>>>>>>", bookingData);
-      const response = await addCustomerBooking(bookingData);
-      console.log("response>>>>>>>>>>>>>>", response);
+      await addCustomerBooking(bookingData);
 
 
       // Envoi de l'email de confirmation
@@ -213,7 +211,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
     } catch (error) {
       console.error('Erreur lors de la réservation:', error);
       toast.error('Erreur lors de la réservation', {
-        description: 'Veuillez réessayer ou nous contacter directement.',
+        description: 'Veuillez réessayer ou me contacter directement.',
         duration: 6000,
         icon: <AlertCircle className="w-4 h-4" />,
       });
@@ -222,78 +220,88 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
     }
   };
 
-  const availablePlaces = session.placesMax - session.placesReserved;
-  const isReduced = isReducedUtils(session);
+  const availablePlaces = useMemo(() =>
+    session.placesMax - session.placesReserved,
+    [session.placesMax, session.placesReserved]
+  );
+
+  const isReduced = useMemo(() =>
+    isReducedUtils(session),
+    [session]
+  );
 
   // Calculer le prix selon le type de session et le nombre de participants
   const calculatePrice = useMemo(() => {
     const sessionType = session.type_formule;
-    const basePrice = sessionType === 'half_day' 
+    const basePrice = sessionType === 'half_day'
       ? (isReduced ? session.activity.price_half_day.reduced : session.activity.price_half_day.standard)
       : (isReduced ? session.activity.price_full_day.reduced : session.activity.price_full_day.standard);
-    
+
     return basePrice * fields.length;
   }, [session.type_formule, isReduced, session.activity.price_half_day, session.activity.price_full_day, fields.length]);
 
   // Prix unitaire affiché
-  const unitPrice = session.type_formule === 'half_day' 
-    ? (isReduced ? session.activity.price_half_day.reduced : session.activity.price_half_day.standard)
-    : (isReduced ? session.activity.price_full_day.reduced : session.activity.price_full_day.standard);
+  const unitPrice = useMemo(() =>
+    session.type_formule === 'half_day'
+      ? (isReduced ? session.activity.price_half_day.reduced : session.activity.price_half_day.standard)
+      : (isReduced ? session.activity.price_full_day.reduced : session.activity.price_full_day.standard),
+    [session.type_formule, isReduced, session.activity.price_half_day, session.activity.price_full_day]
+  );
 
   // Obtenir la durée selon le type de session
   const getDuration = useMemo(() => {
-    return session.type_formule === 'half_day' 
-      ? session.activity.duration.half 
-      : session.activity.duration.full ;
+    return session.type_formule === 'half_day'
+      ? session.activity.duration.half
+      : session.activity.duration.full;
   }, [session.type_formule, session.activity.duration.half, session.activity.duration.full]);
 
   // Prix affiché dans l'en-tête
-  const displayPrice = unitPrice;
+  const displayPrice = useMemo(() => unitPrice, [unitPrice]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl" title={`Rejoindre la session "${session.activity.name}"`}>
       <div className="p-6">
         {/* En-tête avec informations de la session */}
-    
-          {/* Résumé de la session */}
-          <div className="bg-gray-50 rounded-lg p-4 lg:px-14 grid grid-cols-1 md:grid-cols-2  gap-1">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-secondary" />
-              <span className="font-medium">
-                le {" "}
-                {new Date(session.date).toLocaleDateString('fr-FR', { 
-                  weekday: 'long', 
-                  day: '2-digit', 
-                  month: 'long', 
-                  year: 'numeric' 
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-secondary" />
-              <span className="font-medium"> formule {session.type_formule === 'half_day' ? 'Demi-journée' : 'Journée complète'}</span>
-             <span className="font-medium">
-                de {session.startTime} à {session.endTime}
-              </span> 
-             <span className="font-medium"> ({getDuration})</span>
-            </div>
-             <div className="flex items-center gap-2">
-              <Euro className="w-4 h-4 text-secondary" />
-              <span className="font-medium">Tarif {isReduced ? ' réduit' : ''} : {displayPrice}€</span>
-             </div>
-            
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-secondary" />
-              <span className="font-medium">{session.spot.name}</span>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-secondary" />
-              <span className="font-medium">
-                {availablePlaces} place{availablePlaces > 1 ? 's' : ''} disponible{availablePlaces > 1 ? 's' : ''}
-              </span>
-            </div>
-          
+
+        {/* Résumé de la session */}
+        <div className="bg-gray-50 rounded-lg p-4 lg:px-14 grid grid-cols-1 md:grid-cols-2  gap-1">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-secondary" />
+            <span className="font-medium">
+              le {" "}
+              {new Date(session.date).toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+              })}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-secondary" />
+            <span className="font-medium"> formule {session.type_formule === 'half_day' ? 'Demi-journée' : 'Journée complète'}</span>
+            <span className="font-medium">
+              de {session.startTime} à {session.endTime}
+            </span>
+            <span className="font-medium"> ({getDuration})</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Euro className="w-4 h-4 text-secondary" />
+            <span className="font-medium">Tarif {isReduced ? ' réduit' : ''} : {displayPrice}€</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-secondary" />
+            <span className="font-medium">{session.spot.name}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4 text-secondary" />
+            <span className="font-medium">
+              {availablePlaces} place{availablePlaces > 1 ? 's' : ''} disponible{availablePlaces > 1 ? 's' : ''}
+            </span>
+          </div>
+
         </div>
 
         {/* Formulaire de réservation avec slides */}
@@ -339,7 +347,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
                   </div>
                 )}
 
-           
+
 
                 {/* Étape 2: Participants */}
                 {currentStep === 2 && (
@@ -435,7 +443,7 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
               <div className="w-full">
                 <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
               </div>
-              
+
               <div className="flex justify-between items-center gap-4">
                 <Button
                   type="button"
@@ -532,7 +540,8 @@ const QuickBookingModal = ({ session, isOpen, onClose }: QuickBookingModalProps)
       </div>
     </Modal>
   );
-};
+});
+
+QuickBookingModal.displayName = "QuickBookingModal";
 
 export default QuickBookingModal;
-QuickBookingModal.displayName = "QuickBookingModal";

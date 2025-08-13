@@ -3,7 +3,7 @@ import { Carousel } from "@/components/ui/Carrousel";
 import { ActivityFormulas, ActivitySpots } from "@/components/ui";
 import Image from "next/image";
 import Link from "next/link";
-import { Info, Star, Users, Clock, MapPin, Phone, Mail } from "lucide-react";
+import { Info, Star, Users } from "lucide-react";
 
 const EscaladePage = () => {
     return (

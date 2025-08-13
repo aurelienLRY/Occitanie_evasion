@@ -1,4 +1,4 @@
-import { ISession } from "./session.types";
+import { ISession } from "@/types";
 
 // Types pour les réservations et sessions
 

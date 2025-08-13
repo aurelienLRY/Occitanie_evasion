@@ -12,15 +12,13 @@ interface ActivityInfoModalProps {
   onClose: () => void;
 }
 
-const ActivityInfoModal: React.FC<ActivityInfoModalProps> = ({
+const ActivityInfoModal: React.FC<ActivityInfoModalProps> = React.memo(({
   activity,
   isOpen,
   onClose
 }) => {
   if (!activity) return null;
 
-
-   console.log("activity",activity);
   return (
     <Modal
       isOpen={isOpen}
@@ -103,6 +101,8 @@ const ActivityInfoModal: React.FC<ActivityInfoModalProps> = ({
       </div>
     </Modal>
   );
-};
+});
 
-export default ActivityInfoModal; 
+export default ActivityInfoModal;
+
+ActivityInfoModal.displayName = 'ActivityInfoModal'; 

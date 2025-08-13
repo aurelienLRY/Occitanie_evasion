@@ -1,4 +1,3 @@
-import { IActivity, ISpot, ActivityFormData, SpotFormData} from '@/types';
 
 /**
  * Parse une durée au format string (ex: "5h", "5h30", "5h00") en heures décimales
