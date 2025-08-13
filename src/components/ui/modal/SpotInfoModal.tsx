@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { SpotFormData } from '@/types';
+import { ISpot } from '@/types';
 import { MapPin, Info } from 'lucide-react';
 import Modal from './Modal';
 import dynamic from 'next/dynamic';
@@ -18,7 +18,7 @@ const MapCustomer = dynamic(() => import('../mapCustomer'), {
 });
 
 interface SpotInfoModalProps {
-  spot: SpotFormData | null;
+  spot: ISpot | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -30,17 +30,7 @@ const SpotInfoModal: React.FC<SpotInfoModalProps> = ({
 }) => {
   if (!spot) return null;
 
-  // Convertir SpotFormData en ISpot pour la carte
-  const spotForMap = {
-    _id: spot.id,
-    name: spot.name,
-    description: spot.description,
-    gpsCoordinates: spot.location, // Utiliser location comme coordonnées GPS
-    photo: '', // Pas de photo dans SpotFormData
-    practicedActivities: spot.practicedActivities || [],
-    meetingPoint: { half_day: null, full_day: null },
-    __v: 0
-  };
+
 
   return (
     <Modal
@@ -93,7 +83,7 @@ const SpotInfoModal: React.FC<SpotInfoModalProps> = ({
             Localisation
           </h4>
           <div className="w-full h-80 rounded-lg overflow-hidden border border-gray-200">
-            <MapCustomer spots={[spotForMap]} />
+            <MapCustomer spots={[spot]} />
           </div>
         </div>
 

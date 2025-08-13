@@ -1,45 +1,50 @@
 "use client";
 
-import { ActivityFormData, SpotFormData } from '@/types';
-import { formatDurationString } from '@/lib/utils/reservation-utils';
 import { Calendar, MapPin, Users, Clock, Euro, Activity, User, Mail, Phone, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ActivityInfoModal, SpotInfoModal } from '@/components/ui/modal';
 import { useState } from 'react';
-
-interface ReservationSummaryProps {
-  clientData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-  };
-  activity: ActivityFormData | null;
-  spot: SpotFormData | null;
-  sessionType: 'full-day' | 'half-day';
-  date: string;
-  startTime: string;
-  endTime: string;
-  participants: Array<{ height: number; weight: number }>;
-  specialRequests: string;
-}
+import { useActivities, useSpots } from '@/hooks';
+import { ReservationSummaryProps } from '@/types/reservation.types';
 
 const ReservationSummary = ({
   clientData,
-  activity,
-  spot,
+  activityId,
+  spotId,
   sessionType,
   date,
   startTime,
   endTime,
   participants,
-  specialRequests
+  specialRequests,
+  customPrice
 }: ReservationSummaryProps) => {
   // États pour les modales
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [isSpotModalOpen, setIsSpotModalOpen] = useState(false);
+
+  // Récupération des données via hooks
+  const { data: activities } = useActivities();
+  const { data: spots } = useSpots();
+
+  // Trouver l'activité et le spot correspondants
+  const activity = activities?.find(a => a._id === activityId) || null;
+  const spot = spots?.find(s => s._id === spotId) || null;
+
+  // Calcul du prix total
   const totalPrice = activity && participants.length > 0
-    ? (sessionType === 'half-day' ? activity.priceHalf : activity.priceFull) * participants.length
+    ? (sessionType === 'half-day' 
+        ? (customPrice?.priceHalf || Number(activity.price_half_day.standard))
+        : (customPrice?.priceFull || Number(activity.price_full_day.standard))
+      ) * participants.length
+    : 0;
+
+  // Prix unitaire affiché
+  const unitPrice = activity 
+    ? (sessionType === 'half-day' 
+        ? (customPrice?.priceHalf || Number(activity.price_half_day.standard))
+        : (customPrice?.priceFull || Number(activity.price_full_day.standard))
+      )
     : 0;
 
   const formatDate = (dateString: string) => {
@@ -50,6 +55,8 @@ const ReservationSummary = ({
       day: 'numeric'
     });
   };
+
+
 
   return (
     clientData.firstName && clientData.lastName  ?
@@ -146,8 +153,8 @@ const ReservationSummary = ({
                     <span className="font-medium text-gray-600">Durée:</span>
                     <span className="text-gray-900">
                       {sessionType === 'half-day'
-                        ? formatDurationString(activity.durationHalf)
-                        : formatDurationString(activity.durationFull)
+                        ? (activity.duration.half ? activity.duration.half : '4h')
+                        : (activity.duration.full ? activity.duration.full : '8h')
                       }
                     </span>
                   </div>
@@ -191,7 +198,7 @@ const ReservationSummary = ({
           <span className="text-2xl font-bold text-primary/80">{totalPrice}€</span>
         </div>
         <p className="text-sm text-gray-600 mt-1">
-          {participants.length} participant(s) × {(activity && (sessionType === 'half-day' ? activity.priceHalf : activity.priceFull))}€
+          {participants.length} participant(s) × {unitPrice}€
         </p>
       </div>
       </div>

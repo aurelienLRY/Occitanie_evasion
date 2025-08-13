@@ -11,13 +11,13 @@ export interface ActivityFormData {
   id: string;
   name: string;
   description: string;
-  durationHalf: number; // durée demi-journée en heures décimales (ex: 5.5 pour 5h30)
-  durationFull: number; // durée journée complète en heures décimales (ex: 8.0 pour 8h00)
+  durationHalf: number ; // durée demi-journée en heures décimales (ex: 5.5 pour 5h30)
+  durationFull: number ; // durée journée complète en heures décimales (ex: 8.0 pour 8h00)
   maxParticipants: number;
   minParticipants: number;
   minAge?: number;
-  priceHalf: number; // prix demi-journée
-  priceFull: number; // prix journée complète
+  priceHalf: number | string; // prix demi-journée
+  priceFull: number | string; // prix journée complète
   halfDayAvailable: boolean;
   fullDayAvailable: boolean;
 }

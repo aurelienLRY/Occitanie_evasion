@@ -17,10 +17,6 @@ export * from './common.types';
 // Ces exports seront supprimés une fois que tous les imports auront été mis à jour
 export type {
   // API Types
-  PracticedActivity,
-  IMeetingPoint,
-  IPriceInfo,
-  IDurationInfo,
   IActivityDetails,
   ISpot,
   IActivity,
@@ -52,9 +48,8 @@ export type {
   ICustomer,
   IReservationSession,
   IBooking,
+  IAddCustomerBooking,
   ReservationFormData,
-  ReservationStatus,
-  ReservationType,
 } from './reservation.types';
 
 // Nouveaux types organisés

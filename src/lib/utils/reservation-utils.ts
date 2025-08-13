@@ -1,4 +1,4 @@
-import { IActivity, ISpot, ActivityFormData, SpotFormData } from '@/types';
+import { IActivity, ISpot, ActivityFormData, SpotFormData} from '@/types';
 
 /**
  * Parse une durée au format string (ex: "5h", "5h30", "5h00") en heures décimales
@@ -45,48 +45,17 @@ export const formatDurationString = (durationHours: number): string => {
   }
 };
 
-// Transformer une activité de l'API vers le format du formulaire
-export const transformActivityToFormData = (activity: IActivity): ActivityFormData => {
-  // Calculer les durées en heures décimales
-  const durationHalfString = activity.duration.half || '0';
-  const durationFullString = activity.duration.full || '0';
-  const durationHalf = parseDurationString(durationHalfString);
-  const durationFull = parseDurationString(durationFullString);
-  
-  // Calculer les prix (prix standard)
-  const priceHalf = activity.price_half_day?.standard || 0;
-  const priceFull = activity.price_full_day?.standard || 0;
-  
-  return {
-    id: activity._id,
-    name: activity.name,
-    description: activity.description,
-    durationHalf,
-    durationFull,
-    maxParticipants: activity.max_OfPeople,
-    minParticipants: activity.min_OfPeople,
-    priceHalf,
-    priceFull,
-    halfDayAvailable: activity.half_day || false,
-    fullDayAvailable: activity.full_day || false,
-    minAge: activity.min_age,
-  };
-};
 
-// Transformer un spot de l'API vers le format du formulaire
-export const transformSpotToFormData = (spot: ISpot): SpotFormData => {
-  return {
-    id: spot._id,
-    name: spot.name,
-    description: spot.description,
-    location: spot.gpsCoordinates, // Utiliser les coordonnées GPS comme localisation
-    activities: spot.practicedActivities.map(pa => pa.activityId ),
-    practicedActivities: spot.practicedActivities,
-    photo: spot.photo,
-  };
-};
 
-// Calculer l'heure de fin basée sur l'heure de début et la durée
+
+/**
+ * Calculer l'heure de fin basée sur l'heure de début et la durée
+ * @param startTime - L'heure de début de la session
+ * @param durationHalf 
+ * @param durationFull - La durée de la session en demi-journée
+ * @param sessionType - Le type de session (full-day ou half-day)
+ * @returns L'heure de fin de la session
+ */
 export const calculateEndTime = (startTime: string, durationHalf: number, durationFull: number, sessionType: 'full-day' | 'half-day'): string => {
   const startDate = new Date(`2000-01-01T${startTime}`);
   const actualDuration = sessionType === 'half-day' ? durationHalf : durationFull;
@@ -94,7 +63,11 @@ export const calculateEndTime = (startTime: string, durationHalf: number, durati
   return endDate.toTimeString().slice(0, 5);
 };
 
-// Formater un numéro de téléphone français
+/**
+ * Formater un numéro de téléphone français
+ * @param phone - Le numéro de téléphone à formater
+ * @returns Le numéro de téléphone formaté
+ */
 export const formatPhoneNumber = (phone: string): string => {
   // Supprimer tous les caractères non numériques
   const cleaned = phone.replace(/\D/g, '');
@@ -108,3 +81,7 @@ export const formatPhoneNumber = (phone: string): string => {
   
   return phone;
 }; 
+
+
+
+

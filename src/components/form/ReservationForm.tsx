@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, useFieldArray, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { reservationSchema } from '@/lib/validation/reservation-schema';
 import { useActivities, useSpots, useBooking, useIsMobile } from '@/hooks';
-import { transformActivityToFormData, transformSpotToFormData, calculateEndTime, formatDurationString } from '@/lib/utils/reservation-utils';
-import { IBooking, ActivityFormData, SpotFormData, ReservationUrlParams } from '@/types';
+import { calculateEndTime } from '@/lib/utils/reservation-utils';
+import { IBooking, IActivity, ISpot, ReservationUrlParams } from '@/types';
 import {
   SelectInput,
   DateInput,
@@ -15,14 +15,13 @@ import {
   NumberInput,
   Textarea,
   InputPhone,
-
 } from '@/components/input';
 
 import { Button } from '@/components/ui/button';
 import { ProgressBar } from '@/components/ui/progress';
 import { Avatar } from '@/components/ui/avatar';
 import { ReservationSummary } from '@/components/ui/summary';
-import { ActivityInfoModal, SpotInfoModal } from '@/components/ui/modal';
+// Plus besoin d'importer les modales, on utilise les callbacks
 import {
   Calendar,
   User,
@@ -43,17 +42,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface ReservationFormProps {
   urlParams?: ReservationUrlParams;
+  onActivityInfoClick?: (activity: IActivity) => void;
+  onSpotInfoClick?: (spot: ISpot) => void;
 }
 
-const ReservationForm = ({ urlParams }: ReservationFormProps) => {
+const ReservationForm = ({ urlParams, onActivityInfoClick, onSpotInfoClick }: ReservationFormProps) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedActivity, setSelectedActivity] = useState<ActivityFormData | null>(null);
-  const [selectedSpot, setSelectedSpot] = useState<SpotFormData | null>(null);
-  const [availableSpots, setAvailableSpots] = useState<SpotFormData[]>([]);
+  const [availableSpots, setAvailableSpots] = useState<ISpot[]>([]);
 
-  // États pour les modales
-  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
-  const [isSpotModalOpen, setIsSpotModalOpen] = useState(false);
+  // Plus besoin d'états de modales, on utilise les callbacks
 
   const TOTAL_STEPS = 4;
 
@@ -72,8 +69,6 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
     }
   });
 
-
-
   const { fields, append, remove } = useFieldArray({
     control: methods.control,
     name: "participants"
@@ -85,88 +80,71 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
   const watchedSpotId = methods.watch('spotId');
   const watchedStartTime = methods.watch('startTime');
 
-  // Transformer les données de l'API avec useMemo pour éviter les recalculs
-  const transformedActivities = useMemo(() =>
-    activities?.map(transformActivityToFormData) || [],
-    [activities]
-  );
-  const transformedSpots = useMemo(() =>
-    allSpots?.map(transformSpotToFormData) || [],
-    [allSpots]
-  );
+  // Trouver l'activité et le spot sélectionnés directement depuis l'API
+  const selectedActivity = activities?.find(a => a._id === watchedActivityId) || null;
+  const selectedSpot = allSpots?.find(s => s._id === watchedSpotId) || null;
 
-  // Filtrer les spots disponibles selon l'activité sélectionnée
-  const availableSpotsForActivity = useMemo(() => {
-    if (watchedActivityId && transformedSpots.length > 0) {
-      return transformedSpots.filter(spot =>
-        spot.activities.includes(watchedActivityId)
-      );
-    }
-    return [];
-  }, [watchedActivityId, transformedSpots]);
+
 
   // 1. Surveiller l'activité sélectionnée et ajuster le type de session
   useEffect(() => {
-    if (watchedActivityId && transformedActivities.length > 0) {
-      const activity = transformedActivities.find(a => a.id === watchedActivityId);
-      setSelectedActivity(activity || null);
+    if (watchedActivityId && activities && activities.length > 0) {
+      const activity = activities.find(a => a._id === watchedActivityId);
 
       // Ajuster le type de session selon l'activité
       if (activity) {
         const currentSessionType = methods.getValues('sessionType');
 
-        if (!activity.halfDayAvailable && currentSessionType === 'half-day') {
+        if (!activity.half_day && currentSessionType === 'half-day') {
           methods.setValue('sessionType', 'full-day');
-        } else if (!activity.fullDayAvailable && currentSessionType === 'full-day') {
+        } else if (!activity.full_day && currentSessionType === 'full-day') {
           methods.setValue('sessionType', 'half-day');
-        } else if (activity.halfDayAvailable && activity.fullDayAvailable && !currentSessionType) {
+        } else if (activity.half_day && activity.full_day && !currentSessionType) {
           methods.setValue('sessionType', 'half-day');
         }
       }
     }
-  }, [watchedActivityId, transformedActivities, methods]);
+  }, [watchedActivityId, activities, methods]);
 
-  // 2. Surveiller le spot sélectionné
-  useEffect(() => {
-    if (watchedSpotId && transformedSpots.length > 0) {
-      const spot = transformedSpots.find(s => s.id === watchedSpotId);
-      setSelectedSpot(spot || null);
-    } else {
-      setSelectedSpot(null);
-    }
-  }, [watchedSpotId, transformedSpots]);
 
   // 3. Mettre à jour les spots disponibles et réinitialiser si nécessaire
   useEffect(() => {
-    setAvailableSpots(availableSpotsForActivity);
+    if (watchedActivityId && allSpots && allSpots.length > 0) {
+      const availableSpotsForActivity = allSpots.filter(spot =>
+        spot.practicedActivities.some(p => p.activityId === watchedActivityId)
+      );
+      setAvailableSpots(availableSpotsForActivity);
 
-    if (availableSpotsForActivity.length > 0) {
-      const currentSpotId = methods.getValues('spotId');
-      if (!availableSpotsForActivity.find(s => s.id === currentSpotId)) {
-        methods.setValue('spotId', '');
+      if (availableSpotsForActivity.length > 0) {
+        const currentSpotId = methods.getValues('spotId');
+        if (!availableSpotsForActivity.find(s => s._id === currentSpotId)) {
+          methods.setValue('spotId', '');
+        }
       }
     }
-  }, [availableSpotsForActivity, methods]);
+  }, [watchedActivityId, allSpots, methods]);
 
   // 4. Calculer l'heure de fin basée sur l'activité et le type de session
   useEffect(() => {
     if (selectedActivity && watchedStartTime && watchedSessionType) {
-      const endTime = calculateEndTime(watchedStartTime, selectedActivity.durationHalf, selectedActivity.durationFull, watchedSessionType);
+      const durationHalf = selectedActivity.duration.half ? parseFloat(selectedActivity.duration.half) : 4;
+      const durationFull = selectedActivity.duration.full ? parseFloat(selectedActivity.duration.full) : 8;
+      const endTime = calculateEndTime(watchedStartTime, durationHalf, durationFull, watchedSessionType);
       methods.setValue('endTime', endTime);
     }
   }, [selectedActivity, watchedStartTime, watchedSessionType, methods]);
 
   // 5. Traiter les paramètres d'URL pour pré-remplir le formulaire
   useEffect(() => {
-    if (urlParams && transformedActivities.length > 0 && transformedSpots.length > 0) {
+    if (urlParams && activities && activities.length > 0 && allSpots && allSpots.length > 0) {
       // Pré-remplir l'activité
       if (urlParams.activity) {
-        const activity = transformedActivities.find(a =>
+        const activity = activities.find(a =>
           a.name.toLowerCase().includes(urlParams.activity!.toLowerCase()) ||
-          a.id.toLowerCase().includes(urlParams.activity!.toLowerCase())
+          (a._id && a._id.toLowerCase().includes(urlParams.activity!.toLowerCase()))
         );
-        if (activity) {
-          methods.setValue('activityId', activity.id);
+        if (activity && activity._id) {
+          methods.setValue('activityId', activity._id);
         }
       }
 
@@ -178,16 +156,16 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
 
       // Pré-remplir le lieu (spot)
       if (urlParams.lieux) {
-        const spot = transformedSpots.find(s =>
+        const spot = allSpots.find(s =>
           s.name.toLowerCase().includes(urlParams.lieux!.toLowerCase()) ||
-          s.location.toLowerCase().includes(urlParams.lieux!.toLowerCase())
+          s.name.toLowerCase().includes(urlParams.lieux!.toLowerCase())
         );
         if (spot) {
-          methods.setValue('spotId', spot.id);
+          methods.setValue('spotId', spot._id);
         }
       }
     }
-  }, [urlParams, transformedActivities, transformedSpots, methods]);
+  }, [urlParams, activities, allSpots, methods]);
 
   // Validation par étape
   const validateCurrentStep = async () => {
@@ -254,8 +232,8 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
 
     const sessionType = data.sessionType as 'full-day' | 'half-day';
     const priceApplicable = sessionType === 'half-day'
-      ? selectedActivity.priceHalf
-      : selectedActivity.priceFull;
+      ? Number(selectedActivity.price_half_day.standard)
+      : Number(selectedActivity.price_full_day.standard);
 
     const participants = data.participants as Array<{ height: number; weight: number }>;
     const peopleList = participants.map(participant => ({
@@ -278,8 +256,8 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
         phone: data.clientPhone as string,
         people_list: peopleList,
         tarification: "standard",
-        price_applicable: priceApplicable,
-        price_total: priceApplicable * participants.length
+        price_applicable: Number(priceApplicable),
+        price_total: Number(priceApplicable) * participants.length
       },
       session: {
         status: "Pending",
@@ -290,10 +268,12 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
         activityName: selectedActivity.name,
         spot: data.spotId as string,
         spotName: selectedSpot.name,
-        placesMax: selectedActivity.maxParticipants,
+        placesMax: selectedActivity.max_OfPeople,
         placesReserved: participants.length,
         type_formule: sessionType === 'half-day' ? 'half_day' : 'full_day',
-        duration: sessionType === 'half-day' ? formatDurationString(selectedActivity.durationHalf) : formatDurationString(selectedActivity.durationFull)
+        duration: sessionType === 'half-day' 
+          ? (selectedActivity.duration.half || '?')
+          : (selectedActivity.duration.full || '?')
       }
     };
 
@@ -323,14 +303,12 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
       }
 
       toast.success('Réservation envoyée avec succès !', {
-        description: 'Nous vous confirmerons votre réservation dans les plus brefs délais.',
+        description: "Je t'enverrai un email de confirmation dans les plus brefs délais.",
         duration: 5000,
         icon: <CheckCircle className="w-4 h-4" />,
       });
 
       methods.reset();
-      setSelectedActivity(null);
-      setSelectedSpot(null);
       setAvailableSpots([]);
       setCurrentStep(1);
 
@@ -427,10 +405,10 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <label className="text-sm font-medium text-gray-700">Activité *</label>
-                              {selectedActivity && (
+                              {selectedActivity && onActivityInfoClick && (
                                 <button
                                   type="button"
-                                  onClick={() => setIsActivityModalOpen(true)}
+                                  onClick={() => onActivityInfoClick(selectedActivity)}
                                   className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
                                 >
                                   <Info className="w-4 h-4" />
@@ -441,7 +419,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                             <SelectInput
                               name="activityId"
                               label=""
-                              options={transformedActivities.map(activity => ({ value: activity.id, label: activity.name }))}
+                              options={activities?.map(activity => ({ value: activity._id || '', label: activity.name })) || []}
                               placeholder="Sélectionnez une activité"
                             />
                           </div>
@@ -449,10 +427,10 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <label className="text-sm font-medium text-gray-700">Lieu *</label>
-                              {selectedSpot && (
+                              {selectedSpot && onSpotInfoClick && (
                                 <button
                                   type="button"
-                                  onClick={() => setIsSpotModalOpen(true)}
+                                  onClick={() => onSpotInfoClick(selectedSpot)}
                                   className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
                                 >
                                   <Info className="w-4 h-4" />
@@ -463,7 +441,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                             <SelectInput
                               name="spotId"
                               label=""
-                              options={availableSpots.map(spot => ({ value: spot.id, label: spot.name }))}
+                              options={availableSpots.map(spot => ({ value: spot._id || '', label: spot.name }))}
                               placeholder={watchedActivityId ? "Sélectionnez un lieu" : "Sélectionnez d'abord une activité"}
                             />
                           </div>
@@ -608,8 +586,8 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
                     email: methods.watch('clientEmail') || '',
                     phone: methods.watch('clientPhone') || ''
                   }}
-                  activity={selectedActivity}
-                  spot={selectedSpot}
+                  activityId={methods.watch('activityId') || ''}
+                  spotId={methods.watch('spotId') || ''}
                   sessionType={methods.watch('sessionType') as 'full-day' | 'half-day'}
                   date={methods.watch('date') || ''}
                   startTime={methods.watch('startTime') || ''}
@@ -651,18 +629,7 @@ const ReservationForm = ({ urlParams }: ReservationFormProps) => {
       </div>
 
 
-      {/* Modales */}
-      <ActivityInfoModal
-        activity={selectedActivity}
-        isOpen={isActivityModalOpen}
-        onClose={() => setIsActivityModalOpen(false)}
-      />
-
-      <SpotInfoModal
-        spot={selectedSpot}
-        isOpen={isSpotModalOpen}
-        onClose={() => setIsSpotModalOpen(false)}
-      />
+      {/* Plus de modales locales, on utilise les modales centralisées de page.tsx */}
     </div>
   );
 };

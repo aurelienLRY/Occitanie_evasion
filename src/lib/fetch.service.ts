@@ -67,7 +67,22 @@ class FetchService {
       throw new Error(`Erreur lors de la requête POST: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
     }
   }
+
+  async patch<T, D = Record<string, unknown>>(url: string, data: D): Promise<ApiResponse<T>> {
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: this.getAuthHeaders(),
+        body: JSON.stringify(data),
+      });
+
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      throw new Error(`Erreur lors de la requête PATCH: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
+    }
+  }
 }
+
 
 export const fetchService = new FetchService();
 export default fetchService;
