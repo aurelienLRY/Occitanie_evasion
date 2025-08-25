@@ -9,6 +9,41 @@ interface IsBookingCardProps {
   onBookSessionClick: (session: ISession) => void;
 }
 
+// Mapping explicite des noms d'activités vers les noms de fichiers SVG
+const getActivityIconPath = (activityName: string): string => {
+  const normalizedName = activityName.toLowerCase().trim();
+  
+  // Mapping explicite pour éviter les problèmes de correspondance
+  const iconMapping: Record<string, string> = {
+    'canyoning': '_IconCanyoning.svg',
+    'escalade': '_IconEscalade.svg',
+    'spéléologie': '_IconSpeleo.svg',
+    'speleologie': '_IconSpeleo.svg',
+    'spéléo': '_IconSpeleo.svg',
+    'speleo': '_IconSpeleo.svg',
+    'via corda': '_IconViaCorda.svg',
+    'viacorda': '_IconViaCorda.svg',
+    'via-corda': '_IconViaCorda.svg'
+  };
+  
+  // Essayer d'abord le mapping exact
+  if (iconMapping[normalizedName]) {
+    return `/icon/${iconMapping[normalizedName]}`;
+  }
+  
+  // Fallback : essayer de trouver une correspondance partielle
+  for (const [key, value] of Object.entries(iconMapping)) {
+    if (normalizedName.includes(key) || key.includes(normalizedName)) {
+      return `/icon/${value}`;
+    }
+  }
+  
+  // Fallback par défaut
+  return '/icon/_IconCanyoning.svg';
+};
+
+
+
 const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBookingCardProps) => {
 
 
@@ -22,6 +57,9 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
 
 
     const isReduced = isReducedUtils(session);
+    
+    // Obtenir le chemin de l'icône
+    const iconPath = getActivityIconPath(session.activity.name);
 
     return (
         <div className='relative min-w-[350px] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group'>
@@ -48,14 +86,13 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
             )}
             
             <div className='flex gap-2 justify-between items-center bg-white rounded-lg px-4'>
-                <Image 
-                    src={`/icon/_Icon${session.activity.name.toLowerCase()}.svg`} 
-                    alt={session.activity.name} 
-                    width={100} 
-                    height={100}
-                    className='absolute left-20 w-1/2 h-full object-cover opacity-30 overflow-hidden group-hover:opacity-20 transition-all duration-300' 
-                />
-                
+                    <Image 
+                        src={iconPath} 
+                        alt={session.activity.name} 
+                        width={100} 
+                        height={100}
+                        className='absolute left-20 w-1/2 h-full object-cover opacity-30 overflow-hidden group-hover:opacity-20 transition-all duration-300'
+                    />
                 <div className='flex flex-col gap-1 px-12 py-2 w-full z-10'>
                     <h3 className='!text-3xl text-left'>{session.activity.name.trim()}</h3>
                     
