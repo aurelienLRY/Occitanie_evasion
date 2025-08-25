@@ -4,8 +4,11 @@ import { cn } from "@/lib/utils";
 import GoogleReviews from "@/components/ui/googleReviews";
 import CustomSection from "@/components/layout/Section";
 import { GOOGLE_REVIEWS_CONFIG } from "@/config/business-information";
+import { useIsMobile } from "@/hooks";
+
 
 const AvisSection = ({className}: {className?: string}) => {
+    const isMobile = useIsMobile();
     return (
         <CustomSection className={cn(" min-h-[80vh] w-full mx-auto   flex flex-col justify-center", className)}
         TopMarker={true}
@@ -22,11 +25,11 @@ const AvisSection = ({className}: {className?: string}) => {
                     featurableId={GOOGLE_REVIEWS_CONFIG.featurableId}
                     className="w-full"
                     autoPlay={true}
-                    autoPlayInterval={4000}
+                    autoPlayInterval={isMobile ? 2000 : 4000}
                     showDots={false}
                     showArrows={true}
                     showPlayPause={false}
-                    slidesToShow={3}
+                    slidesToShow={isMobile ? 1 : 3}
                     infinite={true}
                 />
             </div>

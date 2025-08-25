@@ -11,6 +11,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navBar";
+import Link from "next/link";
 import { useState } from "react";
 
 const NavbarComponent = () => {
@@ -62,7 +63,9 @@ const NavbarComponent = () => {
                 variant="primary"
                 className="w-full"
               >
-                Réserver
+                <Link href="/reservation">
+                  Réserver
+                </Link>
               </NavbarButton>
             </div>
           </MobileNavMenu>

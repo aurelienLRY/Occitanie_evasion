@@ -15,7 +15,7 @@ export default function Home() {
       <ServicesSection className=" mt-44" />
       <AboutSection className="max-w-6xl mx-auto lg:my-44 my-12 px-4" />
       <BookingSection className="px-4" />
-      <WhereSection className="px-4" />
+      <WhereSection className="px-4 py-12" />
       <AvisSection className="px-4 bg-black/10 dark:bg-white/10" />
       <ContactSection className="px-4 " />
     </>

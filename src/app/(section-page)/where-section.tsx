@@ -14,7 +14,7 @@ export default function WhereSection( { className }: { className?: string } ) {
     const { data: spots } = useSpots();
 
     return (
-        <section className={` max-w-7xl mx-auto lg:min-h-[800px] flex justify-center items-center   ${className}`}>
+        <section className={` max-w-7xl mx-auto min-h-[800px] flex justify-center items-center   ${className}`}>
             
             <div className="flex flex-col lg:flex-row items-center justify-center gap-6 ">
                 <div className="flex flex-col gap-4 lg:flex-1/3">
