@@ -4,9 +4,29 @@ import { ActivityFormulas, ActivitySpots } from "@/components/ui";
 import Image from "next/image";
 import Link from "next/link";
 import { Info, Star, Users } from "lucide-react";
+import CustomSection from "@/components/layout/Section";
+import { GalleryInsta } from "@/components/ui/gallery";
+import ContactSection from "@/app/(section-page)/contact-section";
+import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
+
+
 
 const EscaladePage = () => {
+
+    const gallery: GalleryInstaArray = [
+        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-4.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-1.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-2.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-3.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-4.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-degaine.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-securite.webp", alt: "Escalade" },
+        { url: "/images/escalade/Occitanie-evasion-escalade-cours-enfant.webp", alt: "Escalade" },
+    ];
+
+
     return (
+        <div className="flex flex-col gap-16 overflow-x-clip">
         <section className="flex flex-col gap-16 items-center">
             <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">
                 <Image src="/images/escalade/Occitanie-evasion-escalade-enfant-1.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
@@ -186,6 +206,17 @@ const EscaladePage = () => {
                 </div>
             </article>
         </section>
+
+
+        <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100  py-16" 
+            Markercolor="white"
+            TopMarker={true}
+            >
+                <h2 className="text-center">Des vidéos de ton expérience ?</h2>
+                <GalleryInsta gallery={gallery} className="px-16 py-12 " backgroundColor="gray-100" />
+            </CustomSection>
+        <ContactSection />
+        </div>
     );
 };
 

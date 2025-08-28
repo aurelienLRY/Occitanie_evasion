@@ -123,6 +123,7 @@ const markerIcon = (spot: ISpot) => {
     case "canyoning":return markerCanyoning;
     case "canyoning sportif":return markerCanyoning;
     case "spéléologie":return markerSpeleo;
+    case "speleologie":return markerSpeleo;
     case "spéléologie découverte":return markerSpeleo;
     case "spéléologie sportive":      return markerSpeleo;
     case "via corda":      return markerViaCorda;
