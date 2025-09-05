@@ -12,9 +12,13 @@ import ContactSection from "../../(section-page)/contact-section";
 
 const SpeleoPage = () => {
     const gallery: GalleryInstaArray = [
-        { url: "/images/speleo.jpg", alt: "Spéléologie" },
-        { url: "/images/pexels-pixabay-461593.jpg", alt: "Exploration souterraine" },
-        { url: "/images/pexels-pixabay-461593 front.png", alt: "Grotte et stalactites" },
+        { url: "/images/speleologie/speleo_1.webp", alt: "Spéléologie" },
+        { url: "/images/speleologie/speleo_2.webp", alt: "Exploration souterraine" },
+        { url: "/images/speleologie/speleo_3.webp", alt: "spéléologie anniversaire" },
+        { url: "/images/speleologie/speleo_4.webp", alt: "Grotte et stalactites" },
+        { url: "/images/speleologie/speleo_5.webp", alt: "Grotte et stalactites" },
+        { url: "/images/speleologie/speleo_6.webp", alt: "Spéléoniversaire , groupe d'enfant dans une grotte qui fête un anniversaire" },
+
     ];
 
     return (
@@ -61,18 +65,18 @@ const SpeleoPage = () => {
                     </div>
                     <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full">
                         <div className="w-full h-[800px]">
-                            <Image src="/images/speleo.jpg" alt="Spéléologie" fill className="object-cover" />
+                            <Image src="/images/speleologie/speleo_1.webp" alt="Spéléologie" fill className="object-cover" />
                         </div>
                         <div className="w-full h-[800px]">
-                            <Image src="/images/pexels-pixabay-461593.jpg" alt="Exploration souterraine" fill className="object-cover" />
+                            <Image src="/images/speleologie/speleo_2.webp" alt="Exploration souterraine" fill className="object-cover" />
                         </div>
                         <div className="w-full h-[800px]">
-                            <Image src="/images/pexels-pixabay-461593 front.png" alt="Grotte et stalactites" fill className="object-cover" />
+                            <Image src="/images/speleologie/speleo_3.webp" alt="Grotte et stalactites" fill className="object-cover" />
                         </div>
                     </Carousel>
                 </div>
 
-                <div className="w-full flex flex-col gap-6 px-16 items-center relative pb-16">
+                <div className="w-full flex flex-col gap-6  items-center relative pb-16">
                     <h2 className="text-center lg:text-left">Trois formules selon ton envie</h2>
                     <ActivityFormulas
                         activityName="Speleologie"
@@ -83,7 +87,7 @@ const SpeleoPage = () => {
                     />
 
                      {/* Spéléoniversaire */}
-                <article className="container mx-auto flex flex-col gap-12 px-16">
+                <article className="container mx-auto flex flex-col gap-12 px-4">
                     <div className="w-full bg-gradient-to-r from-primary/20 to-primary/10 p-8 rounded-lg border-l-4 border-primary">
                         <div className="flex items-start gap-4">
                             <Gift className="w-32 h-32 text-primary mt-1" />

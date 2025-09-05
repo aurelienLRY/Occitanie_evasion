@@ -5,17 +5,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: light-dark(#2A4093, #2A4093); /* Bleu*/
-  --color-secondary: light-dark(#cb4d16, #DD581D); /* Orange */
-  --color-accent: light-dark(#268951, #268951); /* Vert */
-  --color-dark: light-dark(#0e1a27, #0e1a27);
+  --color-primary: #2A4093; /* Bleu*/
+  --color-secondary: #cb4d16; /* Orange */
+  --color-accent: #268951; /* Vert */
+  --color-dark: #0e1a27;
   /* Variantes de couleurs */
-  --color-primary-light: light-dark(#6474ff, #4656e7);
-  --color-primary-dark: light-dark(#4252dd, #2434c5);
+  --color-primary-light: #6474ff;
+  --color-primary-dark: #4252dd;
 
   /* Couleurs de fond et texte */
-  --color-background: light-dark(#ffffff, #0e1a27);
-  --color-text: light-dark(#0e1a27, #ffffff);
+  --color-background: #ffffff;
+  --color-text: #0e1a27;
 }
 
 /* Ajouter des thèmes  */

@@ -10,6 +10,6 @@ export const isReduced = (session: ISession) => {
     const sessionDate = new Date(session.date);
     const diffInMs = sessionDate.getTime() - now.getTime();
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    return diffInDays >= 0 && diffInDays <= 3;
+    return diffInDays >= 0 && diffInDays <= 1;
   };
   
