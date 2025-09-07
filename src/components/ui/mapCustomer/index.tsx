@@ -12,7 +12,9 @@ import { useEffect } from "react";
 /* librairie leaflet */
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet-gesture-handling/dist/leaflet-gesture-handling.css";
 import { Icon, LatLngBounds } from "leaflet";
+import "leaflet-gesture-handling";
 
 /* Types */
 import { ISpot } from "@/types";
@@ -35,15 +37,30 @@ function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className
     return null;
   };
 
+  const GestureHandler = () => {
+    const map = useMap();
+    useEffect(() => {
+      // Activer le gesture handling
+      if ('gestureHandling' in map && typeof (map as { gestureHandling: { enable: () => void } }).gestureHandling === 'object') {
+        (map as { gestureHandling: { enable: () => void } }).gestureHandling.enable();
+      }
+    }, [map]);
+    return null;
+  };
+
 
 if (spots === null) return null;
   return (
+    <div className="w-full h-full">
+      
+    
     <MapContainer 
       center={[0, 0]} 
       zoom={9} 
-      className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`} 
+      className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`}
     >
       <SetViewComponent spots={spots} />
+      <GestureHandler />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {spots.map((spot: ISpot) => (
         <Marker
@@ -76,6 +93,7 @@ if (spots === null) return null;
         </Marker>
       ))}
     </MapContainer>
+    </div>
   );
 }
 
