@@ -11,8 +11,8 @@ export const HeroSection = ({ className }: { className?: string }) => {
   
    >
       <Image src="/images/Canyoning_Home.webp" alt="Occitanie Évasion"
-        width={8256}
-        height={5504}
+        width={2600}
+        height={1733}
         className=" object-cover object-center  max-h-[800px] " />
       <div className="relative z-10">
 
