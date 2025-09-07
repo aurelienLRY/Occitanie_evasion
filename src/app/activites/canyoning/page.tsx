@@ -139,8 +139,8 @@ const CanyoningPage = () => {
             Markercolor="white"
             TopMarker={true}
             >
-                <h2 className="text-center">Il ne nous manque que des vidéos de ton expérience !</h2>
-                <GalleryInsta gallery={gallery} className="px-16 py-12 " backgroundColor="gray-100" />
+                <h2 className="text-center ">Il ne nous manque que des vidéos de ton expérience !</h2>
+                <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
             </CustomSection>
 
             <ContactSection

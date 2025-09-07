@@ -16,14 +16,14 @@ const getActivityIconPath = (activityName: string): string => {
   // Mapping explicite pour éviter les problèmes de correspondance
   const iconMapping: Record<string, string> = {
     'canyoning': '_IconCanyoning.svg',
-    'escalade': '_IconEscalade.svg',
-    'spéléologie': '_IconSpeleo.svg',
-    'speleologie': '_IconSpeleo.svg',
-    'spéléo': '_IconSpeleo.svg',
-    'speleo': '_IconSpeleo.svg',
-    'via corda': '_IconViaCorda.svg',
-    'viacorda': '_IconViaCorda.svg',
-    'via-corda': '_IconViaCorda.svg'
+    'escalade': '_IconEscalade-simply.svg',
+    'spéléologie': '_IconSpeleo-simply.svg',
+    'speleologie': '_IconSpeleo-simply.svg',
+    'spéléo': '_IconSpeleo-simply.svg',
+    'speleo': '_IconSpeleo-simply.svg',
+    'via corda': '_IconViaCorda-simply.svg',
+    'viacorda': '_IconViaCorda-simply.svg',
+    'via-corda': '_IconViaCorda-simply.svg'
   };
   
   // Essayer d'abord le mapping exact
@@ -85,13 +85,13 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
                 </div>
             )}
             
-            <div className='flex gap-2 justify-between items-center bg-white rounded-lg px-4'>
+            <div className='flex gap-4 justify-between items-center bg-white rounded-lg px-4'>
                     <Image 
                         src={iconPath} 
                         alt={session.activity.name} 
-                        width={100} 
-                        height={100}
-                        className='absolute left-20 w-1/2 h-full object-cover opacity-30 overflow-hidden group-hover:opacity-20 transition-all duration-300'
+                        width={200} 
+                        height={200}
+                        className='absolute -right-5 top-1/2 -translate-y-1/2  h-full object-cover opacity-30 overflow-hidden group-hover:opacity-20 transition-all duration-300'
                     />
                 <div className='flex flex-col gap-1 px-12 py-2 w-full z-10'>
                     <h3 className='!text-3xl text-left'>{session.activity.name.trim()}</h3>
@@ -125,13 +125,15 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
                         : {session.placesMax - session.placesReserved} places restantes
                     </p>
                 </div>
+              
 
                 <button 
-                    className='bg-secondary text-white px-4 py-2 rounded-lg group-hover:scale-110 transition-all duration-300' 
+                    className='bg-secondary text-white px-6 mr-6 py-2 rounded-lg group-hover:scale-110 transition-all duration-300' 
                     onClick={handleBookSessionClick}
                 >
                     Participer
                 </button>
+         
             </div>
         </div>
     );

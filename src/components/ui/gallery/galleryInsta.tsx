@@ -11,7 +11,7 @@ export interface IGalleryInsta {
 
 export type GalleryInstaArray = IGalleryInsta[];
 
-const GalleryInsta = ({gallery, className, backgroundColor}: {gallery: GalleryInstaArray, className?: string, backgroundColor?: string}) => {
+const GalleryInsta = ({gallery, className, backgroundColor = 'white'}: {gallery: GalleryInstaArray, className?: string, backgroundColor?: string}) => {
     const isMobile = useIsMobile();
 
     const memoizedGallery = useMemo(() => {
