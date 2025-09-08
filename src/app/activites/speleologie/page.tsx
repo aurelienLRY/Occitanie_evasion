@@ -25,7 +25,7 @@ const SpeleoPage = () => {
         <div className="flex flex-col gap-16 overflow-x-clip">
             <section className="flex flex-col gap-8 items-center">
                 <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">
-                    <Image src="/images/speleo.jpg" alt="Spéléologie" fill className="object-cover" />
+                    <Image src="/images/speleologie/speleo_6.webp" alt="Spéléologie" fill className="object-cover" />
                     <div className="max-w-[500px] flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white">
                         <h1>Spéléologie</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Explore un monde souterrain incroyable !</h2>

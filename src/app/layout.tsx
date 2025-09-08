@@ -11,8 +11,18 @@ import { Toaster } from 'sonner';
 export const metadata: Metadata = {
   title: "Occitanie Évasion |Spécialisé dans l'encadrement et la découverte des sports de plein air ",
   description: "Évadez-vous en pleine nature au cœur de l'Occitanie",
-  keywords : "Canyoning, Escalade, Spéléologie, Via Corda ",
-  authors: [{ name: "Occitanie Évasion", url: "https://www.occitanie-evasion.fr" }],
+  keywords : "Canyoning, Escalade, Spéléologie, Via Corda , activités de plein air, Occitanie, Evasion",
+  authors: [{ name: "Occitanie Évasion", url: "https://www.occitanie-evasion.com" }],
+  openGraph: {
+    title: "Occitanie Évasion | Spécialisé dans l'encadrement et la découverte des sports de plein air ",
+    description: "Évadez-vous en pleine nature au cœur de l'Occitanie",
+    images: "/images/Og/home-OG.jpg",
+  },
+  twitter: {
+    title: "Occitanie Évasion | Spécialisé dans l'encadrement et la découverte des sports de plein air ",
+    description: "Évadez-vous en pleine nature au cœur de l'Occitanie",
+    images: "/images/Og/home-OG-Twitter.png",
+  },
 };
 
 const permanentMarker = Permanent_Marker({

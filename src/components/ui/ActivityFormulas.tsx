@@ -5,6 +5,7 @@ import { IActivity } from '@/types';
 import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
 import { useState } from 'react';
 import ReservationLink from './ReservationLink';
+import { useTooltipPosition } from '@/hooks/useTooltipPosition';
 
 interface ActivityFormulasProps {
     activityName: string;
@@ -20,6 +21,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     const [showACMInfoHalf, setShowACMInfoHalf] = useState(false);
     const [showReducedInfoFull, setShowReducedInfoFull] = useState(false);
     const [showACMInfoFull, setShowACMInfoFull] = useState(false);
+    const { registerButton, getTooltipClassName } = useTooltipPosition();
 
     if (isLoading) {
         return (
@@ -112,6 +114,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                         {reducedPriceConditions && (
                                             <div className="relative">
                                                 <button
+                                                    ref={(el) => registerButton('reduced-half', el)}
                                                     type="button"
                                                     className="w-4 h-4 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                                                     onMouseEnter={() => setShowReducedInfoHalf(true)}
@@ -133,12 +136,11 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                 {showReducedInfoHalf && (
                                                     <div 
                                                         id="reduced-info-half"
-                                                        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-blue-900 text-white text-xs rounded-lg shadow-lg z-10 whitespace-nowrap"
+                                                        className={getTooltipClassName('reduced-half')}
                                                         role="tooltip"
                                                         aria-hidden="false"
                                                     >
                                                         {reducedPriceConditions}
-                                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900" aria-hidden="true"></div>
                                                     </div>
                                                 )}
                                             </div>
@@ -155,6 +157,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                 {ACMPriceConditions && (
                                                     <div className="relative">
                                                         <button
+                                                            ref={(el) => registerButton('acm-half', el)}
                                                             type="button"
                                                             className="w-4 h-4 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                                                             onMouseEnter={() => setShowACMInfoHalf(true)}
@@ -176,12 +179,11 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                         {showACMInfoHalf && (
                                                             <div 
                                                                 id="acm-info-half"
-                                                                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-blue-900 text-white text-xs rounded-lg shadow-lg z-10 whitespace-nowrap"
+                                                                className={getTooltipClassName('acm-half')}
                                                                 role="tooltip"
                                                                 aria-hidden="false"
                                                             >
                                                                 {ACMPriceConditions}
-                                                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900" aria-hidden="true"></div>
                                                             </div>
                                                         )}
                                                     </div>
@@ -267,6 +269,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                             {reducedPriceConditions && (
                                                 <div className="relative">
                                                     <button
+                                                        ref={(el) => registerButton('reduced-full', el)}
                                                         type="button"
                                                         className="w-4 h-4 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                                                         onMouseEnter={() => setShowReducedInfoFull(true)}
@@ -288,12 +291,11 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                     {showReducedInfoFull && (
                                                         <div 
                                                             id="reduced-info-full"
-                                                            className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-blue-900 text-white text-xs rounded-lg shadow-lg z-10 whitespace-nowrap"
+                                                            className={getTooltipClassName('reduced-full')}
                                                             role="tooltip"
                                                             aria-hidden="false"
                                                         >
                                                             {reducedPriceConditions}
-                                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900" aria-hidden="true"></div>
                                                         </div>
                                                     )}
                                                 </div>
@@ -309,6 +311,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                     {ACMPriceConditions && (
                                                         <div className="relative">
                                                             <button
+                                                                ref={(el) => registerButton('acm-full', el)}
                                                                 type="button"
                                                                 className="w-4 h-4 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                                                                 onMouseEnter={() => setShowACMInfoFull(true)}
@@ -330,12 +333,11 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                                             {showACMInfoFull && (
                                                                 <div 
                                                                     id="acm-info-full"
-                                                                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-blue-900 text-white text-xs rounded-lg shadow-lg z-10 whitespace-nowrap"
+                                                                    className={getTooltipClassName('acm-full')}
                                                                     role="tooltip"
                                                                     aria-hidden="false"
                                                                 >
                                                                     {ACMPriceConditions}
-                                                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900" aria-hidden="true"></div>
                                                                 </div>
                                                             )}
                                                         </div>

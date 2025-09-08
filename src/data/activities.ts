@@ -26,7 +26,7 @@ const activities = [
     text: "Explorez les merveilles cachées du monde souterrain au coeur des nombreuses grottes du secteur.",
     links: [
       { href: "/reservation?activity=speleo", label: "Réserver", style: "secondary" },
-      { href: "/activites/speleo", label: "En savoir plus", style: "primary" }
+      { href: "/activites/speleologie", label: "En savoir plus", style: "primary" }
     ]
   },
   // {

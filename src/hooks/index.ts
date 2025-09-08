@@ -2,3 +2,4 @@ export * from './useScreenSize';
 export * from './useGoogleReviews';
 export * from './useQuery';
 export * from './useMobile';
+export * from './useTooltipPosition';
