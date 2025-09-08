@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Occitanie Évasion | Spécialisé dans l'encadrement et la découverte des sports de plein air ",
     description: "Évadez-vous en pleine nature au cœur de l'Occitanie",
-    images: "/images/Og/home-OG.jpg",
+    images: "/images/Og/Home-OG.jpg",
   },
   twitter: {
     title: "Occitanie Évasion | Spécialisé dans l'encadrement et la découverte des sports de plein air ",
     description: "Évadez-vous en pleine nature au cœur de l'Occitanie",
-    images: "/images/Og/home-OG-Twitter.png",
+    images: "/images/Og/Home-OG-Twitter.png",
   },
 };
 
