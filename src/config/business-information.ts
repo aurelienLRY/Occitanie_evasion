@@ -18,9 +18,9 @@ export const businessInformation = {
     phone: "0620562507",
     email: "contact@occitanie-evasion.com",
     address: {
-      street: "123 Rue de l'Aventure",
-      city: "Toulouse",
-      postalCode: "31000",
+      street: "11 RUE DES CATALANS",
+      city: "La Redorte",
+      postalCode: "11700",
       country: "France"
     }
   },
@@ -42,24 +42,23 @@ export const businessInformation = {
     description: "Découvrez nos activités de plein air en Occitanie : canyoning, escalade, spéléologie et via corda. Réservez votre aventure en pleine nature.",
     keywords: "canyoning, escalade, spéléologie, via corda, plein air, Occitanie, activités nature, aventure",
     author: "Occitanie Évasion",
-    ogImage: "/images/Canyoning_Home.jpg",
+    ogImage: "/images/Og/Home-OG.jpg",
     ogType: "website",
     twitterCard: "summary_large_image"
   },
   
   // Informations légales
   legal: {
-    siret: "12345678901234",
-    tva: "FR12345678901",
-    adresse: "123 Rue de l'Aventure, 31000 Toulouse, France"
+    siret: "91420520800012",
+    adresse: "11 RUE DES CATALANS, 11700 LA REDORTE France"
   },
   
   // Informations supplémentaires
   additional: {
     founded: "2020",
     activities: ["canyoning", "escalade", "spéléologie", "via corda"],
-    regions: ["Occitanie", "Pyrénées", "Toulouse"],
-    certifications: ["Moniteur diplômé", "Sécurité certifiée"]
+    regions: ["Occitanie", "Aude", "Tarn", "Hérault","Pyrénées-Orientales"],
+    certifications: ["Moniteur diplômé", "Enseignement de disciplines sportives et d'activités de loisirs"]
   }
 };
 
