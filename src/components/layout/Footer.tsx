@@ -68,7 +68,7 @@ const Footer = () => {
                             contact@occitanie-evasion.com
                         </Link>
                         <Link 
-                            href="tel:0669696969" 
+                            href="tel:0620562507" 
                             className={cn(FooterLinkClassName)}
                             aria-label="Appeler le 06 20 56 25 07"
                         >

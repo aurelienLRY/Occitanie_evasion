@@ -28,9 +28,9 @@ const EscaladePage = () => {
     return (
         <div className="flex flex-col gap-16 overflow-x-clip">
         <section className="flex flex-col gap-16 items-center">
-            <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">
+            <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">²
                 <Image src="/images/escalade/Occitanie-evasion-escalade-enfant-1.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
-                <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white">
+                <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white px-6 py-2 rounded-lg bg-black/20">
                     <h1>Escalade</h1>
                     <h2 className="!text-3xl lg:!text-4xl">Grimpe vers de nouveaux sommets !</h2>
                     <p className="text-lg">Accessible à tous à partir de 6 ans, l&apos;escalade en milieu naturel est un sport complet, tant sur le plan physique que mental.</p>
