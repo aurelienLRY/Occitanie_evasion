@@ -30,7 +30,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
             <div className="flex flex-col items-center justify-center w-full   lg:ml-12  lg:items-start p-4 lg:max-w-lg">
                 <div className="relative min-w-[300px]">
                     <Image src="/images/Home/Florent-session_escalade.webp" alt="About" width={300} height={300} className="rounded-lg object-cover object-center  aspect-square shadow-md shadow-black/50  " />
-                    <Image src="/images/Home/Florent-session_escalade.webp" alt="About" width={150} height={150}
+                    <Image src="/images/Home/Florent-session_bg.webp" alt="About" width={150} height={150}
                         className=" hidden lg:block rounded-lg object-cover object-center  aspect-square  absolute bottom-0 -left-10  translate-y-1/2 shadow-md shadow-black/50  " />
                 </div>
             </div>

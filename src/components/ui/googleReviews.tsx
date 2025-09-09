@@ -51,6 +51,7 @@ const GoogleReviews = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [reviews, setReviews] = useState<CustomReviewCard[]>([]);
+  const [apiReviews, setApiReviews] = useState<ReactGoogleReview[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   {/* 
@@ -251,25 +252,26 @@ const GoogleReviews = ({
     );
   };
 
-  // Gestionnaire pour les avis reçus de l'API
-  const handleReviewsReceived = (apiReviews: ReactGoogleReview[]) => {
-    // Convertir les avis de l'API au format local
-    const convertedReviews: CustomReviewCard[] = apiReviews.map((apiReview) => ({
-      reviewId: apiReview.reviewId,
-      reviewer: {
-        profilePhotoUrl: apiReview.reviewer?.profilePhotoUrl || '',
-        displayName: apiReview.reviewer?.displayName || 'Anonyme',
-        isAnonymous: apiReview.reviewer?.isAnonymous || false
-      },
-      starRating: apiReview.starRating || 5,
-      comment: apiReview.comment || '',
-      createTime: apiReview.createTime || null,
-      updateTime: apiReview.updateTime || null,
-      reviewReply: apiReview.reviewReply || null
-    }));
+  // Convertir les avis de l'API quand ils changent
+  useEffect(() => {
+    if (apiReviews.length > 0) {
+      const convertedReviews: CustomReviewCard[] = apiReviews.map((apiReview) => ({
+        reviewId: apiReview.reviewId,
+        reviewer: {
+          profilePhotoUrl: apiReview.reviewer?.profilePhotoUrl || '',
+          displayName: apiReview.reviewer?.displayName || 'Anonyme',
+          isAnonymous: apiReview.reviewer?.isAnonymous || false
+        },
+        starRating: apiReview.starRating || 5,
+        comment: apiReview.comment || '',
+        createTime: apiReview.createTime || null,
+        updateTime: apiReview.updateTime || null,
+        reviewReply: apiReview.reviewReply || null
+      }));
 
-    setReviews(convertedReviews);
-  };
+      setReviews(convertedReviews);
+    }
+  }, [apiReviews]);
 
   if (reviews.length === 0) {
     return (
@@ -278,18 +280,21 @@ const GoogleReviews = ({
           layout="custom"
           featurableId={featurableId}
           renderer={(apiReviews: ReactGoogleReview[]) => {
-            handleReviewsReceived(apiReviews);
-            return null; // Le renderer doit retourner un ReactNode
+            // Mettre à jour apiReviews de manière asynchrone
+            setTimeout(() => {
+              setApiReviews(apiReviews);
+            }, 0);
+            return <div style={{ display: 'none' }} />; // Retourner un élément invisible
           }}
           errorMessage={
-            <div className="text-center text-red-600 p-8">
-              <p>Erreur lors du chargement des avis Google</p>
-            </div>
+            <span className="text-center text-red-600 p-8">
+              Erreur lors du chargement des avis Google
+            </span>
           }
           loadingMessage={
-            <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            </div>
+            <span className="flex items-center justify-center h-64">
+              <span className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"/>
+            </span>
           }
           structuredData={true}
           brandName="Occitanie Évasion"
