@@ -10,10 +10,10 @@ export const HeroSection = ({ className }: { className?: string }) => {
     BottomMarker={true}
   
    >
-      <Image src="/images/Canyoning_Home.webp" alt="Occitanie Évasion"
+      <Image src="/images/Home/Canyoning_Home.webp" alt="Occitanie Évasion"
         width={1920}
         height={1280}
-        className=" object-cover object-center  max-h-[950px] " />
+        className=" object-cover object-center  max-h-[950px] w-full " />
       <div className="relative z-10">
 
         <div className="flex flex-col items-center justify-center bg-white   rounded-2xl

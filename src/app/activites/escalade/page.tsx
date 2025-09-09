@@ -14,14 +14,15 @@ import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
 const EscaladePage = () => {
 
     const gallery: GalleryInstaArray = [
-        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-4.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-1.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-2.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-3.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-enfant-4.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-degaine.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-securite.webp", alt: "Escalade" },
-        { url: "/images/escalade/Occitanie-evasion-escalade-cours-enfant.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-enfant-1.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-degaine.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-enfant-2.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-groupe.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-enfant-4.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-securite.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-cours-enfant.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-groupe-2.webp", alt: "Escalade" },
+        { url: "/images/escalade/gallery/Occitanie-evasion-escalade-enfant-3.webp", alt: "Escalade" },
     ];
 
 
@@ -29,7 +30,7 @@ const EscaladePage = () => {
         <div className="flex flex-col gap-16 overflow-x-clip">
         <section className="flex flex-col gap-16 items-center">
             <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">²
-                <Image src="/images/escalade/Occitanie-evasion-escalade-enfant-1.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
+                <Image src="/images/escalade/Occitanie-evasion-escalade-Hero.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
                 <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white px-6 py-2 rounded-lg bg-black/20">
                     <h1>Escalade</h1>
                     <h2 className="!text-3xl lg:!text-4xl">Grimpe vers de nouveaux sommets !</h2>
@@ -70,19 +71,19 @@ const EscaladePage = () => {
                 </div>
                 <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full">
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/Occitanie-evasion-escalade-cours-enfant.webp" alt="Cours d'escalade pour enfants" fill className="object-cover" />
+                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-cours-enfant.webp" alt="Cours d'escalade pour enfants" fill className="object-cover" />
                     </div>
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/Occitanie-evasion-escalade-enfant-3.webp" alt="Escalade en falaise" fill className="object-cover object-top" />
+                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-enfant-3.webp" alt="Escalade en falaise" fill className="object-cover object-top" />
                     </div>
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/Occitanie-evasion-escalade-securite.webp" alt="Sécurité en escalade" fill className="object-cover" />
+                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-securite.webp" alt="Sécurité en escalade" fill className="object-cover" />
                     </div>
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/Occitanie-evasion-escalade-enfant-4.webp" alt="Progression en escalade" fill className="object-cover" />
+                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-enfant-4.webp" alt="Progression en escalade" fill className="object-cover" />
                     </div>
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/Occitanie-evasion-escalade-degaine.webp" alt="Technique d'escalade" fill className="object-cover" />
+                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-degaine.webp" alt="Technique d'escalade" fill className="object-cover" />
                     </div>
                 </Carousel>
             </div>

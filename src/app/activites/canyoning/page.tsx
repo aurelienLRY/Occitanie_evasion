@@ -13,21 +13,18 @@ import ContactSection from "../../(section-page)/contact-section";
 
 const CanyoningPage = () => {
     const gallery: GalleryInstaArray = [
-        { url: "/images/carrousel-canyoning/IMG_2666.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
-        { url: "/images/carrousel-canyoning/IMG_6226.JPG", alt: "Canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-1.webp", alt: "Groupe qui pratique le canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-2.webp", alt: "Canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-3.webp", alt: "Groupe qui pratique le canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-4.webp", alt: "Groupe qui pratique le canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-5.webp", alt: "Groupe qui pratique le canyoning" },
+        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-6.webp", alt: "Groupe qui pratique le canyoning" },
     ];
     return (
         <div className="flex flex-col gap-16 overflow-x-clip">
             <section className=" flex flex-col gap-8 items-center">
                 <aside className="relative w-full h-full min-h-[800px]  overflow-x-clip mb-16">
-                    <Image src="/images/2han-hsing-tu-toKnZe9kebA-unsplash.jpg" alt="Canyoning" fill className=" object-cover" />
+                    <Image src="/images/Canyoning/canyoning-hero.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover" />
                     <div className=" max-w-[500px] w-90% min-w-[350px] flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Canyoning</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Envie de fraîcheur, de fun et de nature ?</h2>
@@ -70,10 +67,10 @@ const CanyoningPage = () => {
                     </div>
                     <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full ">
                         <div className="w-full h-[800px]">
-                            <Image src="/images/carrousel-canyoning/IMG_2666.JPG" alt="Canyoning" fill className=" object-cover" />
+                            <Image src="/images/Canyoning/carrousel/IMG_2666.webp" alt="Canyoning" fill className=" object-cover" />
                         </div>
                         <div className="w-full h-[800px]">
-                            <Image src="/images/carrousel-canyoning/IMG_6226.JPG" alt="Canyoning" fill className=" object-cover" />
+                            <Image src="/images/Canyoning/carrousel/IMG_6226.webp" alt="Canyoning" fill className=" object-cover" />
                         </div>
                     </Carousel>
                 </div>

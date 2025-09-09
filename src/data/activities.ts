@@ -1,6 +1,6 @@
 const activities = [
   {
-    image: "/images/carrousel-home/escalade-carrousel.webp",
+    image: "/images/Home/carrousel-home/escalade-carrousel.webp",
     alt: "personne qui pratique l'escalade",
     title: "Escalade",
     text: "Grimpez et prenez de la hauteur sur les magnifiques falaises de la région.",
@@ -10,7 +10,7 @@ const activities = [
     ]
   }, 
    {
-    image: "/images/carrousel-home/canyoning-carrousel.webp",
+    image: "/images/Home/carrousel-home/canyoning-carrousel.webp",
     alt: "personne qui pratique le canyoning",
     title: "Canyoning",
     text: "Sautez, glissez sur les toboggans naturels et nagez dans les eaux fraîches des gorges sauvages pour une aventure aquatique rafraîchissante et riche en sensations.",
@@ -20,7 +20,7 @@ const activities = [
     ]
   },
   {
-    image: "/images/carrousel-home/speleo-carrousel.webp",
+    image: "/images/Home/carrousel-home/speleo-carrousel.webp",
     alt: "personne qui pratique la spéléologie",
     title: "Spéléologie",
     text: "Explorez les merveilles cachées du monde souterrain au coeur des nombreuses grottes du secteur.",
