@@ -25,7 +25,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
 
 
     <div className={`
-      grid grid-cols-1 gap-2
+      grid grid-cols-1 gap-4
       sm:grid-cols-2
       lg:flex lg:flex-row lg:gap-0
       w-full min-h-[60vh] relative overflow-hidden 
@@ -41,7 +41,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
         <div
           key={idx}
           className="
-            relative overflow-hidden group
+            relative  group
             aspect-square
             rounded-xl
             flex-1
@@ -53,15 +53,16 @@ const BannerServices = ( { className }: { className?: string } ) => {
             min-w-[300px]
             hover:scale-105
             lg:hover:scale-100
+            lg:overflow-hidden
             
            
          
           "
         >
-           <MarkerLineSvg className={" lg:hidden w-[135%] h-10 absolute -top-6  left-1/2 -translate-x-1/2 text-background rotate-180   z-30 "}  preserveAspectRatio="none"/>
-           <MarkerLineSvg className={" lg:hidden w-[135%] h-10 absolute -bottom-6  left-1/2 -translate-x-1/2 text-background     z-30 "}  preserveAspectRatio="none"/>
-           <MarkerLineSvg className={" lg:hidden w-[135%] h-10 absolute top-1/2  right-0.5 translate-x-1/2 -translate-y-1/2 rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
-           <MarkerLineSvg className={" lg:hidden w-[135%] h-10 absolute top-1/2  left-0.5 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
+           <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute -top-8  left-1/2 -translate-x-1/2 text-background rotate-180   z-30 "}  preserveAspectRatio="none"/>
+           <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute -bottom-8  left-1/2 -translate-x-1/2 text-background     z-30 "}  preserveAspectRatio="none"/>
+           <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute top-1/2  right-0 translate-x-1/2 -translate-y-1/2 rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
+           <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute top-1/2  left-0 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
           <div className="relative w-full h-full">
             <Image 
               src={activity.image} 

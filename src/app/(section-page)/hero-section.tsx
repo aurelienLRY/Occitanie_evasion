@@ -3,6 +3,8 @@ import Image from "next/image";
 import CustomSection from "@/components/layout/Section";
 import { Suspense } from "react";
 
+import { useIsMobile } from "@/hooks";
+
 // Composant de fallback pour le chargement
 const HeroFallback = () => (
   <div className="w-full h-[950px] bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
@@ -13,6 +15,8 @@ const HeroFallback = () => (
 );
 
 export const HeroSection = ({ className }: { className?: string }) => {
+
+   const isMobile = useIsMobile();
   return (
     <CustomSection 
       className={`flex flex-col w-full relative ${className}`} 
@@ -22,16 +26,12 @@ export const HeroSection = ({ className }: { className?: string }) => {
     >
       <Suspense fallback={<HeroFallback />}>
         <Image 
-          src="/images/Home/Canyoning_Home.webp" 
+          src={isMobile ? "/images/Home/Canyoning_Home-Mobile.webp" : "/images/Home/Canyoning_Home-780px.webp"} 
           alt="Occitanie Évasion - Activités de plein air en Occitanie"
-          width={1920}
-          height={1280}
+          width={isMobile ? 1070 : 1920}
+          height={ 780}
           priority
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-          sizes="100vw"
-          className="object-cover object-center max-h-[950px] w-full" 
+          className="object-cover object-center w-full  " 
         />
       </Suspense>
       <div className="relative z-10">
@@ -43,7 +43,6 @@ export const HeroSection = ({ className }: { className?: string }) => {
        will-change-transform"
        style={{ 
          contain: 'layout style paint',
-         transform: 'translate(-50%, -50%)'
        }}>
        
         <Image 
@@ -59,22 +58,6 @@ export const HeroSection = ({ className }: { className?: string }) => {
            <h2 className="hidden" style={{fontSize: "clamp(1rem, 2vw, 1.5rem)"}}>Professionnel des activités nature en Occitanie ! </h2> 
         </div>
       </div>
-
-
-
-      {/* 
-      <RotatingText
-        texts={['Canyoning', 'Escalade', 'Spéléologie', 'Via Corda']}
-        mainClassName="px-2 sm:px-2 md:px-3   overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center text-8xl font-heaters"
-        staggerFrom={"last"}
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        exit={{ y: "-120%" }}
-        staggerDuration={0.025}
-        splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-        transition={{ type: "spring", damping: 30, stiffness: 400 }}
-        rotationInterval={3000}
-      />*/}
     </CustomSection>
   )
 }

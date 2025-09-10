@@ -167,29 +167,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <head>
-        {/* Preload des ressources critiques pour le LCP */}
-        <link
-          rel="preload"
-          href="/images/Home/Canyoning_Home.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link
-          rel="preload"
-          href="/logo.svg"
-          as="image"
-          type="image/svg+xml"
-        />
-        {/* Preload des polices critiques */}
-        <link
-          rel="preload"
-          href="/font/Heaters.otf"
-          as="font"
-          type="font/otf"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
