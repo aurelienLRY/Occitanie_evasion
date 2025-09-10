@@ -21,3 +21,4 @@ const useIsMobile = () => {
 };
 
 export { useIsMobile };
+useIsMobile.displayName = "useIsMobile";

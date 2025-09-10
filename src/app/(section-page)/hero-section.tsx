@@ -1,22 +1,15 @@
 
 import Image from "next/image";
 import CustomSection from "@/components/layout/Section";
-import { Suspense } from "react";
-
 import { useIsMobile } from "@/hooks";
 
-// Composant de fallback pour le chargement
-const HeroFallback = () => (
-  <div className="w-full h-[950px] bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-    <div className="animate-pulse">
-      <div className="w-32 h-32 bg-white/30 rounded-2xl"></div>
-    </div>
-  </div>
-);
+
 
 export const HeroSection = ({ className }: { className?: string }) => {
 
+  
    const isMobile = useIsMobile();
+
   return (
     <CustomSection 
       className={`flex flex-col w-full relative ${className}`} 
@@ -24,16 +17,26 @@ export const HeroSection = ({ className }: { className?: string }) => {
       aria-label="Occitanie Évasion"  
       BottomMarker={true}
     >
-      <Suspense fallback={<HeroFallback />}>
+    
+       {isMobile ? (   
         <Image 
-          src={isMobile ? "/images/Home/Canyoning_Home-Mobile.webp" : "/images/Home/Canyoning_Home-780px.webp"} 
+          src="/images/Home/Canyoning_Home-Mobile.webp" 
           alt="Occitanie Évasion - Activités de plein air en Occitanie"
-          width={isMobile ? 1070 : 1920}
-          height={ 780}
+          width={500}
+          height={365}
           priority
           className="object-cover object-center w-full  " 
-        />
-      </Suspense>
+        /> ) : (
+        <Image 
+          src="/images/Home/Canyoning_Home-780px.webp" 
+          alt="Occitanie Évasion - Activités de plein air en Occitanie"
+          width={1920}
+          height={780}
+          priority
+          className="object-cover object-center w-full  " 
+        /> )}
+
+
       <div className="relative z-10">
 
         <div className="flex flex-col items-center justify-center bg-white rounded-2xl
