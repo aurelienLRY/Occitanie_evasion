@@ -19,6 +19,7 @@ import "leaflet-gesture-handling";
 /* Types */
 import { ISpot } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Component to display a map with markers for each spot.
@@ -50,6 +51,7 @@ function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className
 
 
 if (spots === null) return null;
+ console.log(spots);
   return (
     <div className="w-full h-full">
       
@@ -87,6 +89,12 @@ if (spots === null) return null;
                 {spot.description && (
                   <div className="content text-sm overflow-y-auto p-[0.5em]">{spot.description}</div>
                 )}
+              </div>
+              <div className="w-full flex items-center justify-center">
+          
+
+
+                <button className="bg-primary text-white px-4 py-2 rounded-md">réserver TO DO</button>
               </div>
             </div>
           </Popup>
@@ -130,6 +138,38 @@ const markerIcon = (spot: ISpot) => {
   // handle if the array has multiple activities
   if (practicedActivities.length > 1) {
     return markerEscalade;
+  }
+  // otherwise, get the activity
+  const activity = practicedActivities[0].activityName.toLocaleLowerCase().trim();
+
+
+  switch (activity) {
+    case "escalade":      return markerEscalade;
+    case "randonée aquatique":return markerCanyoning;
+    case "canyoning":return markerCanyoning;
+    case "canyoning sportif":return markerCanyoning;
+    case "spéléologie":return markerSpeleo;
+    case "speleologie":return markerSpeleo;
+    case "spéléologie découverte":return markerSpeleo;
+    case "spéléologie sportive":      return markerSpeleo;
+    case "via corda":      return markerViaCorda;
+
+    default:
+      return markerEscalade;
+  }
+};
+
+
+/**
+ * Determines the marker icon based on the spot's practiced activities.
+ * @param spot - The spot to determine the marker icon for.
+ * @returns The marker icon for the spot.
+ */
+const BtnReservationbyActivity = (spot: ISpot) => {
+  const { practicedActivities } = spot;
+  // handle if the array has multiple activities
+  if (practicedActivities.length > 1) {
+    return <Link href={`/reservation?activity=${practicedActivities[0].activityName}`} className="bg-primary text-white px-4 py-2 rounded-md">réserver</Link>;
   }
   // otherwise, get the activity
   const activity = practicedActivities[0].activityName.toLocaleLowerCase().trim();

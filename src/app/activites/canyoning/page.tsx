@@ -52,7 +52,7 @@ const CanyoningPage = () => {
                         <div className="space-y-4 max-w-[850px] text-justify">
                             <h2>Canyoning,<span className="text-4xl">🤔</span> qu&apos;es aquò<span className="text-primary">?</span></h2>
                             <p><strong>Au programme :</strong> sauts, toboggans naturels, nage en eaux vives et marche aux pieds des falaises granitiques.</p>
-                            <p>C&apos;est une rando… mais dans l&apos;eau ! En combinaison néoprène, casque sur la tête et <strong>sourire aux lèvres, tu descends un cours d&apos;eau en mode aventure.</strong> Pas besoin d&apos;être un(e) champion(ne) : <strong>on avance ensemble, chacun à son rythme, dans la bonne humeur et en toute sécurité.</strong></p>
+                            <p>C&apos;est une rando… mais dans l&apos;eau ! En combinaison néoprène, casque sur la tête et <strong>sourire aux lèvres, tu descends un cours d&apos;eau en mode aventure.</strong>  <strong> On avance ensemble, chacun à son rythme, dans la bonne humeur et en toute sécurité.</strong></p>
                             <p>Un parcours aquatique et ludique à partir de <strong>10 ans</strong>.</p>
                         </div>
                     </div>
@@ -137,11 +137,11 @@ const CanyoningPage = () => {
                 </article>
             </section>
 
-            <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100  py-16" 
+            <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100 py-32" 
             Markercolor="white"
             TopMarker={true}
             >
-                <h2 className="text-center ">Il ne nous manque que des vidéos de ton expérience !</h2>
+                <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
                 <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
             </CustomSection>
 

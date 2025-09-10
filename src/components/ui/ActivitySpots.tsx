@@ -66,7 +66,7 @@ export const ActivitySpots = ({ activityName }: ActivitySpotsProps) => {
 
   return (
       <div className=" flex flex-col lg:flex-row gap-6  items-center ">
-        <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} className="w-full h-full max-w-[600px] mx-auto">
+        <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={true} showPlayPause={false} className="w-full h-full max-w-[600px] mx-auto">
           {activitySpots.map((spot: ISpot) => (
             <div key={spot._id} className=" rounded-lg  relative ">
               {spot.photo && (

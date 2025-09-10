@@ -52,7 +52,7 @@ const EscaladePage = () => {
                     <div className="max-w-[750px] flex flex-col gap-4 text-justify">
                         <h2><span className="text-4xl">🤔</span> Qu&apos;es aquò<span className="text-primary">?</span></h2>
                         <p>Tous les niveaux sont accessibles, du très facile au très technique (du 4 au 7ème degrés) vous devriez trouver votre bonheur.</p>
-                        <p>C&apos;est grimper sur des parois rocheuses en toute sécurité ! Baudrier, cordes, mousquetons… On t&apos;équipe de A à Z. Pas besoin d&apos;être un(e) champion(ne) : on commence par les bases, on progresse ensemble, chacun à son rythme.</p>
+                        <p>C&apos;est grimper sur des parois rocheuses en toute sécurité ! Baudrier, cordes, mousquetons… On t&apos;équipe de A à Z. On commence par les bases, on progresse ensemble, chacun à son rythme.</p>
                         <p>Accessible à partir de <strong>6 ans</strong>.</p>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ const EscaladePage = () => {
                 <ActivityFormulas
                     activityName="Escalade"
                     description_half="Découverte de l'escalade en milieu naturel avec apprentissage des techniques de base, découverte du matériel et premières sensations verticales. Idéal pour une première approche ou pour se perfectionner."
-                    description_full="Une journée complète d'escalade pour progresser et découvrir plusieurs sites. Alternance entre apprentissage technique, pratique et découverte de nouvelles voies. Parfait pour approfondir ses compétences."
+                    description_full="Une journée complète d'escalade pour progresser et découvrir plusieurs secteurs. Alternance entre apprentissage technique, pratique et découverte de nouvelles voies. Parfait pour approfondir ses compétences."
                     reducedPriceConditions="Tarif réduit pour les enfants jusqu'à 17 ans inclus et les groupes de minimum 7 personnes."
                     ACMPriceConditions="Tarif ACM : 8 enfants + 1 accompagnateur = 280€. Contactez-moi pour plus d'informations."
                 />

@@ -13,9 +13,11 @@ interface ActivityFormulasProps {
     ACMPriceConditions?: string; // Conditions pour le tarif ACM
     description_half?: string;
     description_full?: string;
+    title_half?: string;
+    title_full?: string;
 }
 
-export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPriceConditions, description_half, description_full }: ActivityFormulasProps) => {
+export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPriceConditions, description_half, description_full, title_half = "Demi-journée", title_full = "Journée complète" }: ActivityFormulasProps) => {
     const { data: activities, isLoading, error } = useActivities();
     const [showReducedInfoHalf, setShowReducedInfoHalf] = useState(false);
     const [showACMInfoHalf, setShowACMInfoHalf] = useState(false);
@@ -65,7 +67,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                             <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                                <Clock className="w-6 h-6 text-primary" /> 
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-2">Demi-journée</h3>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-2">{title_half}</h3>
                             <hr className='w-24 h-1 bg-primary mx-auto rounded-full mt-4' aria-hidden="true"/>
                         </header>
                         {description_half && (
@@ -220,7 +222,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                 <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                                     <Calendar className="w-8 h-8 text-primary" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-800 mb-2">Journée complète</h3>
+                                <h3 className="text-2xl font-bold text-gray-800 mb-2">{title_full}</h3>
                                 <hr className='w-24 h-1 bg-primary mx-auto rounded-full mt-4' aria-hidden="true"/>
                             </header>
                             {description_full && (

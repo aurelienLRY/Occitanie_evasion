@@ -79,6 +79,8 @@ const SpeleoPage = () => {
                 <div className="w-full flex flex-col gap-6  items-center relative pb-16">
                     <h2 className="text-center lg:text-left">Trois formules selon ton envie</h2>
                     <ActivityFormulas
+                    title_half="Parcours d&apos;initiation"
+                    title_full="Parcours sportif"
                         activityName="Speleologie"
                         description_half="Grotte d&apos;initiation avec un parcours adapté aux familles et aux personnes souhaitant s&apos;initier en détente. Parcours accessible aux enfants dès 6 ans, idéal pour une première approche de la spéléologie."
                         description_full="Parcours plus sportif avec présence de descentes en rappel et mains courantes. Une traversée qui consiste, au lieu de faire un aller-retour, à entrer d&apos;un côté et ressortir ailleurs. Pour les plus aventuriers !"

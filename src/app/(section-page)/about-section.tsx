@@ -6,7 +6,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
            
 
             <div className="flex flex-col max-w-4xl">
-                <h2 className="text-6xl lg:text-8xl text-center lg:text-start ">Qui suis-je<span className="text-secondary">?</span></h2>
+                <h2 className="!text-6xl lg:!text-8xl text-center lg:text-start ">Qui suis-je<span className="text-secondary">?</span></h2>
 
                 <p className=" text-justify mt-4">
                     Je m’appelle <span className="font-bold">Florent Soum </span>, et j’ai la chance d’exercer un métier qui me passionne depuis plus de 15 ans : <wbr />
@@ -19,7 +19,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
                 <p className=" text-justify ">
                     En 2022, j’ai créé <span className="font-bold">Occitanie Évasion </span> pour proposer des <span className="font-bold"> aventures à taille humaine</span>, où l’essentiel est dans le partage, la rencontre et les moments simples vécus en pleine nature.
                 </p>
-                <h3 className="mt-4 text-4xl lg:text-6xl text-center lg:text-start text-secondary mb-2">Mon objectif ?</h3>
+                <h3 className="mt-4 !text-4xl text-center lg:text-start text-secondary mb-2">Mon objectif ?</h3>
                 <p className=" text-justify ">
                     Vous offrir plus qu’une activité sportive : une parenthèse authentique, conviviale, respectueuse de chacun… et pleine de sourires !
                     <span className="text-secondary">😊</span>

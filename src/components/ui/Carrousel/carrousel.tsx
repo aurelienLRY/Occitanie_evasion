@@ -197,7 +197,7 @@ const Carousel = ({
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute -left-0 top-1/2 -translate-y-1/2  p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-100"
             disabled={!infinite && currentIndex === 0}
             aria-label="Slide précédent"
           >
@@ -206,7 +206,7 @@ const Carousel = ({
           
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-0 top-1/2 -translate-y-1/2  p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-100"
             disabled={!infinite && currentIndex >= maxIndex}
             aria-label="Slide suivant"
           >

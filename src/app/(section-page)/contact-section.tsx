@@ -11,7 +11,7 @@ const ContactSection = ({ className }: { className?: string }) => {
                 <div className="text-center">
                     <h2 className="text-4xl md:text-8xl font-bold mb-4">Besoin d&apos;un coup de main <span className="text-secondary">?</span></h2>
                     <p className=" text-lg md:text-xl  opacity-80 max-w-[800px] mx-auto">
-                        Contact moi directement par téléphone, par email ou via le formulaire ci-dessous. <br />Je suis là pour t&apos;aider à sauter… le pas 😉
+                        Contacte-moi directement par téléphone, par email ou via le formulaire ci-dessous. <br />Je suis là pour t&apos;aider à sauter… le pas 😉
                     </p>
                 </div>
                 <div className="flex flex-col items-center lg:flex-row gap-6 w-full ">
