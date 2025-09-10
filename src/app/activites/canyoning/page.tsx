@@ -97,7 +97,7 @@ const CanyoningPage = () => {
                         <ActivitySpots activityName="Canyoning" />
                     </div>
                 </div>
-
+   
 
 
 
