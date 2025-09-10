@@ -12,12 +12,12 @@ import ContactSection from "../../(section-page)/contact-section";
 
 const SpeleoPage = () => {
     const gallery: GalleryInstaArray = [
-        { url: "/images/Speleologie/gallery/speleo_1.webp", alt: "Spéléologie" },
-        { url: "/images/Speleologie/gallery/speleo_2.webp", alt: "Exploration souterraine" },
-        { url: "/images/Speleologie/gallery/speleo_3.webp", alt: "spéléologie anniversaire" },
-        { url: "/images/Speleologie/gallery/speleo_4.webp", alt: "Grotte et stalactites" },
-        { url: "/images/Speleologie/gallery/speleo_5.webp", alt: "Grotte et stalactites" },
-        { url: "/images/Speleologie/gallery/speleo_6.webp", alt: "Spéléoniversaire , groupe d'enfant dans une grotte qui fête un anniversaire" },
+        { url: "/images/speleologie/gallery/speleo_1.webp", alt: "Spéléologie" },
+        { url: "/images/speleologie/gallery/speleo_2.webp", alt: "Exploration souterraine" },
+        { url: "/images/speleologie/gallery/speleo_3.webp", alt: "spéléologie anniversaire" },
+        { url: "/images/speleologie/gallery/speleo_4.webp", alt: "Grotte et stalactites" },
+        { url: "/images/speleologie/gallery/speleo_5.webp", alt: "Grotte et stalactites" },
+        { url: "/images/speleologie/gallery/speleo_6.webp", alt: "Spéléoniversaire , groupe d'enfant dans une grotte qui fête un anniversaire" },
 
     ];
 
