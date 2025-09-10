@@ -101,7 +101,7 @@ const EscaladePage = () => {
             </div>
 
             {/* Spots */}
-            <div className="w-full flex flex-col gap-6 px-16 items-center justify-center bg-primary py-16 relative min-h-[800px]">
+            <div className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center justify-center bg-primary py-16 relative min-h-[800px]">
                 <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 <div className="container mx-auto max-w-[1200px] space-y-16">
