@@ -63,7 +63,6 @@ const ProfileCard = (props: Partial<ProfileCardProps> = {}) => {
         <article 
             className={cn("bg-white rounded-lg shadow-lg border border-gray-200 pt-20 relative mt-12 flex-1", className)}
             role="complementary"
-            aria-labelledby="profile-card-title"
         >
             {image && (
                 <div className="absolute -top-1 -translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center">

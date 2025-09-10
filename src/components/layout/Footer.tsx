@@ -137,7 +137,7 @@ const Footer = () => {
                     <ThemeSwitch />
                 </div> */}
 
-                <p className="text-white/50 text-sm text-center">
+                <p className="text-white/70 text-sm text-center">
                     © 2025 Occitanie Évasion. Tous droits réservés.
                 </p>
             </div>

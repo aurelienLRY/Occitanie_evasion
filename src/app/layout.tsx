@@ -103,11 +103,10 @@ export const metadata: Metadata = {
   
   // Métadonnées de vérification
   verification: {
-    google: "your-google-verification-code",
+    google: "bdFqKTq0UUhL4vLg6mSRdLGu9kgiVmNlbFg1dCDJKag",
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
-  
   // Métadonnées pour les applications mobiles
   appleWebApp: {
     capable: true,
