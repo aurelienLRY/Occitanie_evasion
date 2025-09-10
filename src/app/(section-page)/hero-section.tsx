@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks";
 
 export const HeroSection = ({ className }: { className?: string }) => {
 
-  
+
    const isMobile = useIsMobile();
 
   return (
