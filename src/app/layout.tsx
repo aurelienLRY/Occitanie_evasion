@@ -11,7 +11,7 @@ import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
-  metadataBase: new URL( process.env.NEXT_PUBLIC_URL!),
+  //metadataBase: new URL( process.env.NEXT_PUBLIC_URL!),
   
   // Métadonnées de base
   title: {

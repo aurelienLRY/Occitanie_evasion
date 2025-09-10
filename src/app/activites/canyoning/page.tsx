@@ -24,7 +24,12 @@ const CanyoningPage = () => {
         <div className="flex flex-col gap-16 overflow-x-clip">
             <section className=" flex flex-col gap-8 items-center">
                 <aside className="relative w-full h-full min-h-[800px]  overflow-x-clip mb-16">
-                    <Image src="/images/Canyoning/canyoning-hero.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover" />
+
+
+                    <Image src="/images/Canyoning/canyoning-hero.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover hidden md:block" priority/>
+                    <Image src="/images/Canyoning/canyoning-hero-mobile.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover md:hidden" priority/>
+
+
                     <div className=" max-w-[500px] w-90% min-w-[350px] flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Canyoning</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Envie de fraîcheur, de fun et de nature ?</h2>
@@ -84,7 +89,7 @@ const CanyoningPage = () => {
                         ACMPriceConditions="Tarif ACM : 8 enfants + 1 animateur max = 280€. Contactez-moi pour plus d'informations."
                     />
                 </div>
-                <div className="w-full flex flex-col gap-6 px-16 items-center bg-primary py-16 relative min-h-[800px]">
+                <div className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center bg-primary py-16 relative min-h-[800px]">
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <div className="container mx-auto max-w-[1200px] space-y-16">
