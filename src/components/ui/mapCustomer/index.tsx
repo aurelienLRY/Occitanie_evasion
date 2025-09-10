@@ -19,7 +19,6 @@ import "leaflet-gesture-handling";
 /* Types */
 import { ISpot } from "@/types";
 import Image from "next/image";
-import Link from "next/link";
 
 /**
  * Component to display a map with markers for each spot.
@@ -160,36 +159,6 @@ const markerIcon = (spot: ISpot) => {
 };
 
 
-/**
- * Determines the marker icon based on the spot's practiced activities.
- * @param spot - The spot to determine the marker icon for.
- * @returns The marker icon for the spot.
- */
-const BtnReservationbyActivity = (spot: ISpot) => {
-  const { practicedActivities } = spot;
-  // handle if the array has multiple activities
-  if (practicedActivities.length > 1) {
-    return <Link href={`/reservation?activity=${practicedActivities[0].activityName}`} className="bg-primary text-white px-4 py-2 rounded-md">réserver</Link>;
-  }
-  // otherwise, get the activity
-  const activity = practicedActivities[0].activityName.toLocaleLowerCase().trim();
-
-
-  switch (activity) {
-    case "escalade":      return markerEscalade;
-    case "randonée aquatique":return markerCanyoning;
-    case "canyoning":return markerCanyoning;
-    case "canyoning sportif":return markerCanyoning;
-    case "spéléologie":return markerSpeleo;
-    case "speleologie":return markerSpeleo;
-    case "spéléologie découverte":return markerSpeleo;
-    case "spéléologie sportive":      return markerSpeleo;
-    case "via corda":      return markerViaCorda;
-
-    default:
-      return markerEscalade;
-  }
-};
 /* Custom marker icons */
 const markerEscalade = new Icon({
   iconUrl: "/icon/_markerEscalade.svg",
