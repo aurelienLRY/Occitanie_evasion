@@ -11,7 +11,7 @@ import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || "http://localhost:3000"),
+  metadataBase: new URL( process.env.NEXT_PUBLIC_URL!),
   
   // Métadonnées de base
   title: {
@@ -61,12 +61,6 @@ export const metadata: Metadata = {
         height: 630,
         alt: businessInformation.image.alt,
       },
-      {
-        url: "/images/Og/Home-OG-Twitter.png",
-        width: 506,
-        height: 254 ,
-        alt: businessInformation.image.alt,
-      }
     ],
   },
   

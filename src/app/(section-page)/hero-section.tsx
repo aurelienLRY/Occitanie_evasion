@@ -15,7 +15,7 @@ export const HeroSection = ({ className }: { className?: string }) => {
         src="/images/Home/Canyoning_Home-Mobile.webp" 
         alt="Occitanie Évasion - Activités de plein air en Occitanie"
         width={500}
-        height={365}
+        height={333}
         priority
         className="object-cover object-center w-full md:hidden" 
         sizes="100vw"
