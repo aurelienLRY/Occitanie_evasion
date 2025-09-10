@@ -82,7 +82,7 @@ const SpeleoPage = () => {
                     title_half="Parcours d&apos;initiation"
                     title_full="Parcours sportif"
                         activityName="Speleologie"
-                        description_half="Grotte d&apos;initiation avec un parcours adapté aux familles et aux personnes souhaitant s&apos;initier en détente. Parcours accessible aux enfants dès 6 ans, idéal pour une première approche de la spéléologie."
+                        description_half="Grotte d&apos;initiation avec un parcours adapté aux familles et aux personnes souhaitant s&apos;initier en détente. Parcours accessible aux enfants dès 5 ans, idéal pour une première approche de la spéléologie."
                         description_full="Parcours plus sportif avec présence de descentes en rappel et mains courantes. Une traversée qui consiste, au lieu de faire un aller-retour, à entrer d&apos;un côté et ressortir ailleurs. Pour les plus aventuriers !"
                         reducedPriceConditions="Tarif réduit pour les enfants jusqu&apos;à 17 ans inclus et les groupes de minimum 5 personnes."
                         ACMPriceConditions="Tarif ACM : 5 enfants + 1 accompagnateur = 220€. Contactez-moi pour plus d&apos;informations."
@@ -140,10 +140,12 @@ const SpeleoPage = () => {
                             <ol className="font-semibold space-y-3">
                                 <li>⚖️ Poids maximum : <strong>115kg</strong></li>
                                 <li>💪 Être en forme physique générale</li>
-                                <li>🚫 Pas de claustrophobie</li>
-                                <li>🌑 Aimer l&apos;obscurité et les espaces confinés</li>
                                 <li>📝 Posséder une assurance pour la pratique d&apos;activités sportives</li>
-                                <li>🎯 Activité accessible dès <strong>6 ans</strong></li>
+                                <li>🎯 Activité accessible dès <strong>5 ans</strong></li>
+                                <li className="flex items-start gap-2">
+                             🚫
+                                <span>Ne pas avoir de contre-indication médicale à la pratique de la spéléologie</span>
+                            </li>
                             </ol>
                         </div>
                         <div className="space-y-2 bg-primary/10 p-4 rounded-lg">
@@ -153,7 +155,7 @@ const SpeleoPage = () => {
                             <ol className="font-semibold space-y-3">
                                 <li>⛑️ Casque avec éclairage</li>
                                 <li>🧥 Combinaison</li>
-                                <li>🪢 Baudrier, descendeur, longes, mousquetons (selon cavité)</li>
+                                <li>🪢 Baudrier, descendeur, longes, mousquetons aux normes CE (selon cavité)</li>
                                 <li>🎒 Sac à dos</li>
                                 <li>💪 Du dynamisme et de la bonne humeur</li>
                                 <li>👀 Un regard attentif sur la sécurité</li>
@@ -169,7 +171,7 @@ const SpeleoPage = () => {
                                 <li>🥤 Eau et encas</li>
                                 <li>👩‍🦱 Élastique à cheveux</li>
                                 <li>👕 Affaires de rechange</li>
-                                <li>📱 Pas de téléphone (milieu humide)</li>
+                                <li>📱 Pas de téléphone (je me charge des photos)</li>
                             </ol>
                         </div>
                     </div>

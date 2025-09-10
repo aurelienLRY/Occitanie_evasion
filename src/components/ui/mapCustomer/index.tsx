@@ -19,6 +19,8 @@ import "leaflet-gesture-handling";
 /* Types */
 import { ISpot } from "@/types";
 import Image from "next/image";
+import ReservationLink from "../ReservationLink";
+
 
 /**
  * Component to display a map with markers for each spot.
@@ -90,10 +92,7 @@ if (spots === null) return null;
                 )}
               </div>
               <div className="w-full flex items-center justify-center">
-          
-
-
-                <button className="bg-primary text-white px-4 py-2 rounded-md">réserver TO DO</button>
+                {ReservationbyActivity(spot)}
               </div>
             </div>
           </Popup>
@@ -157,6 +156,38 @@ const markerIcon = (spot: ISpot) => {
       return markerEscalade;
   }
 };
+
+const ReservationbyActivity = (spot: ISpot) => {
+  const { practicedActivities } = spot;
+  // handle if the array has multiple activities
+  if (practicedActivities.length > 1) {
+    return ;
+  }
+  // otherwise, get the activity
+  return (
+    <div className="w-full flex items-center justify-center">
+ { practicedActivities.map((activity) => {
+switch (activity.activityName) {
+    case "escalade":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "randonée aquatique":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "canyoning":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "canyoning sportif":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "spéléologie":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "speleologie":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "spéléologie découverte":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "spéléologie sportive":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+    case "via corda":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+
+    default:
+      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+}
+})}
+  </div>
+)
+}
+
+
+
 
 
 /* Custom marker icons */
