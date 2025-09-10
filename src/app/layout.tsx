@@ -11,7 +11,7 @@ import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
-  metadataBase: new URL("https://www.occitanie-evasion.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || "http://localhost:3000"),
   
   // Métadonnées de base
   title: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   keywords: businessInformation.seo.keywords,
   authors: [{ 
     name: businessInformation.seo.author, 
-    url: "https://www.occitanie-evasion.com" 
+    url: process.env.NEXT_PUBLIC_URL || "http://localhost:3000" 
   }],
   creator: businessInformation.seo.author,
   publisher: businessInformation.name,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://www.occitanie-evasion.com",
+    url: process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
     siteName: businessInformation.name,
     title: businessInformation.seo.title,
     description: businessInformation.seo.description,
@@ -95,9 +95,9 @@ export const metadata: Metadata = {
   
   // Métadonnées géographiques
   alternates: {
-    canonical: "https://www.occitanie-evasion.com",
+    canonical: process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
     languages: {
-      "fr-FR": "https://www.occitanie-evasion.com",
+      "fr-FR": process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
     },
   },
   

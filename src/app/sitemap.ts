@@ -11,5 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
     return [
         ...routesMap,
+        {
+            url: `${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/faq`,
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.5,
+        },
     ];
 }
