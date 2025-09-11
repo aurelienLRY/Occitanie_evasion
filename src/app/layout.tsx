@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 /*import "./globals.css";*/
-import { Permanent_Marker , Slackside_One , Nunito} from "next/font/google";
+import { Permanent_Marker, Slackside_One, Nunito } from "next/font/google";
 import "@/styles/globals.css"
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -8,11 +8,12 @@ import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { Toaster } from 'sonner';
 import { businessInformation } from "@/config/business-information";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
-  metadataBase: new URL( "https://www.occitanie-evasion.com"),
-  
+  metadataBase: new URL("https://www.occitanie-evasion.com"),
+
   // Métadonnées de base
   title: {
     default: businessInformation.seo.title,
@@ -20,17 +21,17 @@ export const metadata: Metadata = {
   },
   description: businessInformation.seo.description,
   keywords: businessInformation.seo.keywords,
-  authors: [{ 
-    name: businessInformation.seo.author, 
-    url: "https://www.occitanie-evasion.com" 
+  authors: [{
+    name: businessInformation.seo.author,
+    url: "https://www.occitanie-evasion.com"
   }],
   creator: businessInformation.seo.author,
   publisher: businessInformation.name,
-  
+
   // Informations de l'entreprise
   applicationName: businessInformation.name,
   category: "Sports et loisirs",
-  
+
   // Métadonnées de contact
   other: {
     "contact:phone_number": businessInformation.contact.phone,
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     "business:activities": businessInformation.additional.activities.join(", "),
     "business:regions": businessInformation.additional.regions.join(", "),
   },
-  
+
   // Open Graph
   openGraph: {
     type: "website",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Card
   twitter: {
     card: "summary_large_image",
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     description: businessInformation.seo.description,
     images: ["/images/Og/Home-OG-Twitter.png"],
   },
-  
+
   // Métadonnées pour les moteurs de recherche
   robots: {
     index: true,
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  
+
   // Métadonnées géographiques
   alternates: {
     canonical: "https://www.occitanie-evasion.com",
@@ -94,7 +95,7 @@ export const metadata: Metadata = {
       "fr-FR": "https://www.occitanie-evasion.com",
     },
   },
-  
+
   // Métadonnées de vérification
   verification: {
     google: "BDAUit3RcMGdlrafp0IlAJWFl8FFqNRJAMMHen9bgbg",
@@ -105,18 +106,18 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: businessInformation.name,
   },
-  
+
   // Métadonnées de format
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  
+
   // Métadonnées de sécurité
   referrer: "origin-when-cross-origin",
-  
-  
+
+
   // Métadonnées d'icônes
   icons: {
     icon: "/favicon.ico",
@@ -158,20 +159,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-593SZBKS" />
+
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
         <QueryProvider>
-         {/* <ThemeProvider> */}
-            <Header  className="absolute top-0 left-0 w-full"/>
-            <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
-            <Footer />
-            <Toaster 
-              position="bottom-right"
-              richColors
-              closeButton
-              duration={4000}
-            />
+          {/* <ThemeProvider> */}
+          <Header className="absolute top-0 left-0 w-full" />
+          <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
+          <Footer />
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            duration={4000}
+          />
           {/* </ThemeProvider> */}
         </QueryProvider>
       </body>
