@@ -8,7 +8,7 @@ import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { Toaster } from 'sonner';
 import { businessInformation } from "@/config/business-information";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager , GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
@@ -160,7 +160,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-593SZBKS" />
-
+      <GoogleAnalytics gaId="G-F55FK2K74W" />
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
