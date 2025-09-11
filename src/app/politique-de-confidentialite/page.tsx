@@ -39,16 +39,16 @@ const PolitiqueDeConfidentialite = () => {
                     <div className="space-y-4">
                         <h3 className="text-xl font-medium mb-3">2.1 Données collectées directement</h3>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li><strong>Données d'identité :</strong> nom, prénom</li>
+                            <li><strong>Données d&apos;identité :</strong> nom, prénom</li>
                             <li><strong>Données de contact :</strong> adresse email, numéro de téléphone</li>
-                            <li><strong>Données de réservation :</strong> dates, nombre de participants, type d'activité</li>
+                            <li><strong>Données de réservation :</strong> dates, nombre de participants, type d&apos;activité</li>
                             <li><strong>Données de communication :</strong> messages, demandes de renseignements</li>
                         </ul>
 
                         <h3 className="text-xl font-medium mb-3">2.2 Données collectées automatiquement</h3>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Données de navigation :</strong> pages visitées, durée de visite, source de trafic</li>
-                            <li><strong>Données techniques :</strong> adresse IP, type de navigateur, système d'exploitation</li>
+                            <li><strong>Données techniques :</strong> adresse IP, type de navigateur, système d&apos;exploitation</li>
                             <li><strong>Cookies :</strong> cookies de session, cookies analytiques, cookies de préférences</li>
                         </ul>
                     </div>
@@ -63,7 +63,7 @@ const PolitiqueDeConfidentialite = () => {
                             <p>Vos données sont utilisées pour :</p>
                             <ul className="list-disc pl-6 mt-2 space-y-1">
                                 <li>Traiter vos demandes de réservation</li>
-                                <li>Confirmer vos créneaux d'activité</li>
+                                <li>Confirmer vos créneaux d&apos;activité</li>
                                 <li>Vous contacter en cas de modification</li>
                                 <li>Gérer les annulations et remboursements</li>
                             </ul>
@@ -83,8 +83,8 @@ const PolitiqueDeConfidentialite = () => {
                             <h3 className="font-semibold mb-2">3.3 Analyse et amélioration du site</h3>
                             <p>Vos données sont utilisées pour :</p>
                             <ul className="list-disc pl-6 mt-2 space-y-1">
-                                <li>Analyser le trafic et l'utilisation du site</li>
-                                <li>Améliorer l'expérience utilisateur</li>
+                                <li>Analyser le trafic et l&apos;utilisation du site</li>
+                                <li>Améliorer l&apos;expérience utilisateur</li>
                                 <li>Optimiser les performances du site</li>
                             </ul>
                         </div>
@@ -98,7 +98,7 @@ const PolitiqueDeConfidentialite = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="bg-gray-50 p-4 rounded-lg">
                                 <h3 className="font-semibold mb-2">Exécution du contrat</h3>
-                                <p className="text-sm">Traitement des réservations et prestations d'activités</p>
+                                <p className="text-sm">Traitement des réservations et prestations d&apos;activités</p>
                             </div>
                             <div className="bg-gray-50 p-4 rounded-lg">
                                 <h3 className="font-semibold mb-2">Intérêt légitime</h3>
@@ -118,11 +118,11 @@ const PolitiqueDeConfidentialite = () => {
 
                 {/* Google Analytics */}
                 <section>
-                    <h2 className="text-2xl font-semibold mb-4">5. Google Analytics et outils d'analyse</h2>
+                    <h2 className="text-2xl font-semibold mb-4">5. Google Analytics et outils d&apos;analyse</h2>
                     <div className="space-y-4">
                         <p>
-                            Notre site utilise Google Analytics, un service d'analyse web fourni par Google Inc. 
-                            Google Analytics utilise des cookies pour analyser l'utilisation du site.
+                            Notre site utilise Google Analytics, un service d&apos;analyse web fourni par Google Inc. 
+                            Google Analytics utilise des cookies pour analyser l&apos;utilisation du site.
                         </p>
                         <div className="bg-orange-50 p-4 rounded-lg">
                             <h3 className="font-semibold mb-2">Données collectées par Google Analytics :</h3>
@@ -131,11 +131,11 @@ const PolitiqueDeConfidentialite = () => {
                                 <li>Source de trafic (moteur de recherche, site référent, etc.)</li>
                                 <li>Données démographiques générales (âge, sexe, intérêts)</li>
                                 <li>Données géographiques (pays, ville)</li>
-                                <li>Type d'appareil et navigateur utilisé</li>
+                                <li>Type d&apos;appareil et navigateur utilisé</li>
                             </ul>
                         </div>
                         <p>
-                            <strong>Anonymisation :</strong> Nous avons activé l'anonymisation des adresses IP. 
+                            <strong>Anonymisation :</strong> Nous avons activé l&apos;anonymisation des adresses IP. 
                             Vos données sont transmises à Google et peuvent être stockées sur des serveurs aux États-Unis.
                         </p>
                         <p>
@@ -157,7 +157,7 @@ const PolitiqueDeConfidentialite = () => {
                             <h3 className="font-semibold mb-2">Données collectées par reCAPTCHA :</h3>
                             <ul className="list-disc pl-6 space-y-1">
                                 <li>Adresse IP</li>
-                                <li>Informations sur le navigateur et l'appareil</li>
+                                <li>Informations sur le navigateur et l&apos;appareil</li>
                                 <li>Comportement de navigation (mouvements de souris, clics, etc.)</li>
                                 <li>Cookies et données de session</li>
                             </ul>
@@ -217,10 +217,10 @@ const PolitiqueDeConfidentialite = () => {
                         <p>Vos données personnelles peuvent être partagées avec :</p>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Personnel autorisé de {businessInformation.name}</strong> - pour traiter vos demandes</li>
-                            <li><strong>Google Analytics</strong> - pour l'analyse du trafic (données anonymisées)</li>
+                            <li><strong>Google Analytics</strong> - pour l&apos;analyse du trafic (données anonymisées)</li>
                             <li><strong>Google reCAPTCHA</strong> - pour la sécurité du site</li>
-                            <li><strong>Prestataires techniques</strong> - pour l'hébergement et la maintenance</li>
-                            <li><strong>Autorités compétentes</strong> - en cas d'obligation légale</li>
+                            <li><strong>Prestataires techniques</strong> - pour l&apos;hébergement et la maintenance</li>
+                            <li><strong>Autorités compétentes</strong> - en cas d&apos;obligation légale</li>
                         </ul>
                         <p className="text-sm text-gray-600">
                             Nous ne vendons jamais vos données personnelles à des tiers à des fins commerciales.
@@ -235,7 +235,7 @@ const PolitiqueDeConfidentialite = () => {
                         <p>Conformément au RGPD, vous disposez des droits suivants :</p>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="bg-blue-50 p-4 rounded-lg">
-                                <h3 className="font-semibold mb-2">Droit d'accès</h3>
+                                <h3 className="font-semibold mb-2">Droit d&apos;accès</h3>
                                 <p className="text-sm">Obtenir une copie de vos données personnelles</p>
                             </div>
                             <div className="bg-green-50 p-4 rounded-lg">
@@ -243,7 +243,7 @@ const PolitiqueDeConfidentialite = () => {
                                 <p className="text-sm">Corriger des données inexactes ou incomplètes</p>
                             </div>
                             <div className="bg-red-50 p-4 rounded-lg">
-                                <h3 className="font-semibold mb-2">Droit d'effacement</h3>
+                                <h3 className="font-semibold mb-2">Droit d&apos;effacement</h3>
                                 <p className="text-sm">Demander la suppression de vos données</p>
                             </div>
                             <div className="bg-yellow-50 p-4 rounded-lg">
@@ -255,7 +255,7 @@ const PolitiqueDeConfidentialite = () => {
                                 <p className="text-sm">Récupérer vos données dans un format structuré</p>
                             </div>
                             <div className="bg-orange-50 p-4 rounded-lg">
-                                <h3 className="font-semibold mb-2">Droit d'opposition</h3>
+                                <h3 className="font-semibold mb-2">Droit d&apos;opposition</h3>
                                 <p className="text-sm">Vous opposer au traitement de vos données</p>
                             </div>
                         </div>
@@ -263,7 +263,7 @@ const PolitiqueDeConfidentialite = () => {
                             <p className="font-semibold mb-2">Comment exercer vos droits :</p>
                             <p>Contactez-nous à : <strong>{businessInformation.contact.email}</strong></p>
                             <p className="text-sm mt-2">
-                                Nous vous répondrons dans un délai d'un mois. Vous pouvez également introduire 
+                                Nous vous répondrons dans un délai d&apos;un mois. Vous pouvez également introduire 
                                 une réclamation auprès de la CNIL si vous estimez que vos droits ne sont pas respectés.
                             </p>
                         </div>
@@ -340,7 +340,7 @@ const PolitiqueDeConfidentialite = () => {
                         <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                             <p className="text-sm">
                                 <strong>Autorité de contrôle :</strong> Vous pouvez également introduire une réclamation 
-                                auprès de la Commission Nationale de l'Informatique et des Libertés (CNIL) : 
+                                auprès de la Commission Nationale de l&apos;Informatique et des Libertés (CNIL) : 
                                 <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
                                     www.cnil.fr
                                 </a>

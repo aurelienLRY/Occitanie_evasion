@@ -16,7 +16,6 @@ const SpeleoPage = () => {
     // Refs pour les sections à animer
     const descriptionRef = useRef(null);
     const carouselRef = useRef(null);
-    const formulasRef = useRef(null);
     const spotsRef = useRef(null);
     const infoRef = useRef(null);
 
