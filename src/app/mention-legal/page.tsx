@@ -24,10 +24,17 @@ const MentionLegal = () => {
                     <h2 className="text-2xl font-semibold mb-4">2. Hébergement</h2>
                     <div className="bg-gray-50 p-6 rounded-lg">
                         <p className="mb-1">Le site est hébergé par :</p>
-                        <p className="mb-1">Vercel Inc.</p>
-                        <p className="mb-1">340 S Lemon Ave #4133</p>
-                        <p className="mb-1">Walnut, CA 91789, États-Unis</p>
-                        <p className="mb-1">Site web : https://vercel.com</p>
+                        <p className="mb-1 font-semibold">OVH SAS</p>
+                        <p className="mb-1">Au capital de 50 000 000 €</p>
+                        <p className="mb-1">RCS Lille Métropole 424 761 419 00045</p>
+                        <p className="mb-1">Code APE 2620Z</p>
+                        <p className="mb-1">N° TVA : FR 22 424 761 419</p>
+                        <p className="mb-1">Siège social : 2 rue Kellermann - 59100 Roubaix - France</p>
+                        <p className="mb-1">Site web : https://www.ovh.com</p>
+                        <p className="mb-1 text-sm text-gray-600 mt-2">
+                            OVH SAS est une filiale de la société OVH Groupe SA, société immatriculée au RCS de Lille 
+                            sous le numéro 537 407 926 sise 2, rue Kellermann, 59100 Roubaix.
+                        </p>
                     </div>
                 </section>
 

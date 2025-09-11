@@ -1,3 +1,4 @@
+"use client"
 import { MarkerLineSvg } from "@/components/ui/svg/MarkerLine.svg";
 import { Carousel } from "@/components/ui/Carrousel";
 import { ActivityFormulas, ActivitySpots } from "@/components/ui";
@@ -8,10 +9,74 @@ import CustomSection from "@/components/layout/Section";
 import { GalleryInsta } from "@/components/ui/gallery";
 import ContactSection from "@/app/(section-page)/contact-section";
 import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 
 
 const EscaladePage = () => {
+    // Refs pour les sections à animer
+    const descriptionRef = useRef(null);
+    const carouselRef = useRef(null);
+    const spotsRef = useRef(null);
+    const infoRef = useRef(null);
+
+    // Détection de visibilité pour chaque section
+    const descriptionInView = useInView(descriptionRef, { once: true, margin: "-100px" });
+    const carouselInView = useInView(carouselRef, { once: true, margin: "-100px" });
+    const spotsInView = useInView(spotsRef, { once: true, margin: "-100px" });
+    const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
+
+    // Variantes d'animation inspirées de la page home
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    // Animation pour les blocs de description (gauche et droite)
+    const leftBlockVariants = {
+        hidden: { opacity: 0, x: -50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const rightBlockVariants = {
+        hidden: { opacity: 0, x: 50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
 
     const gallery: GalleryInstaArray = [
         { url: "/images/escalade/gallery/Occitanie-evasion-escalade-enfant-1.webp", alt: "Escalade" },
@@ -40,35 +105,57 @@ const EscaladePage = () => {
             </aside>
 
             {/* Description principale */}
-            <article className="w-full flex flex-col gap-6 px-6 items-center">
-                <div className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]">
-                    <div className="max-w-[750px] flex flex-col gap-4 text-justify">
+            <motion.article 
+                ref={descriptionRef}
+                className="container mx-auto space-y-16 px-6"
+                variants={containerVariants}
+                initial="hidden"
+                animate={descriptionInView ? "visible" : "hidden"}
+            >
+                <motion.div 
+                    className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]"
+                    variants={leftBlockVariants}
+                >
+                    <div className="space-y-4 max-w-[850px] text-justify">
                         <h2>Défie la gravité et prends de la hauteur <span className="text-primary">!</span></h2>
                         <p>Je partagerai avec vous ma vision de la grimpe qui consiste d&apos;abord à s&apos;adapter à la nature, la comprendre et la respecter pour ensuite, en binôme, s&apos;encorder, s&apos;assurer et escalader jusqu&apos;au sommet de la voie et enfin admirer la vue incroyable avant de profiter de la descente.</p>
                         <p>Au programme : découverte du matériel spécifique et de son utilisation, apprentissage des techniques d&apos;assurage et bien sûr escalader et profiter des sensations en découvrant l&apos;activité ou en se perfectionnant.</p>
                     </div>
-                </div>
-                <div className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px] gap-6">
-                    <div className="max-w-[750px] flex flex-col gap-4 text-justify">
+                </motion.div>
+                
+                <motion.div 
+                    className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]"
+                    variants={rightBlockVariants}
+                >
+                    <div className="space-y-4 max-w-[850px] text-justify">
                         <h2><span className="text-4xl">🤔</span> Qu&apos;es aquò<span className="text-primary">?</span></h2>
                         <p>Tous les niveaux sont accessibles, du très facile au très technique (du 4 au 7ème degrés) vous devriez trouver votre bonheur.</p>
                         <p>C&apos;est grimper sur des parois rocheuses en toute sécurité ! Baudrier, cordes, mousquetons… On t&apos;équipe de A à Z. On commence par les bases, on progresse ensemble, chacun à son rythme.</p>
                         <p>Accessible à partir de <strong>6 ans</strong>.</p>
                     </div>
-                </div>
-            </article>
+                </motion.div>
+            </motion.article>
 
             {/* Carrousel */}
-            <div className="w-full flex flex-col gap-6 items-center min-h-[500px] relative">
-                <div className="absolute w-[90%] min-h-[200px] bottom-19 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:h-full lg:w-1/3 lg:top-0 lg:left-0 z-50">
-                    <div className="w-full h-full bg-white/30 p-4 rounded-lg flex flex-col justify-center px-12 gap-0">
-                        <p className="text-white/90 font-title text-2xl font-bold">Ils l&apos;ont fait !</p>
-                        <p className="text-white font-title text-6xl">Pourquoi pas toi <span className="text-primary">?</span></p>
-                        <Link href="/reservation?activity=escalade" className="text-white bg-primary/80 px-4 py-2 rounded-lg w-fit mt-6 hover:bg-primary transition-all duration-300">
+            <motion.div 
+                ref={carouselRef}
+                className="w-full flex flex-col gap-6  items-center min-h-[500px] relative"
+                variants={itemVariants}
+                initial="hidden"
+                animate={carouselInView ? "visible" : "hidden"}
+            >
+                <motion.div 
+                    className="absolute w-[90%] min-h-[200px]  bottom-19 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:h-full lg:w-1/3 lg:top-0 lg:left-0  z-50"
+                    variants={itemVariants}
+                >
+                    <div className="w-full h-full   bg-white/30 p-4 rounded-lg flex flex-col justify-center px-12 gap-0">
+                        <p className="text-white/90 py-4 font-title text-2xl lg:text-4xl font-bold ">Ils l&apos;ont fait !</p>
+                        <p className=" text-white font-title text-4xl lg:text-6xl  ">Pourquoi pas toi <span className="text-primary">?</span></p>
+                        <Link href="/reservation?activity=escalade" className="text-white  bg-primary/80 px-4 py-2 rounded-lg w-fit mt-6 hover:bg-primary transition-all duration-300">
                             Réserver
                         </Link>
                     </div>
-                </div>
+                </motion.div>
                 <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full">
                     <div className="w-full h-[800px]">
                         <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-cours-enfant.webp" alt="Cours d'escalade pour enfants" fill className="object-cover" />
@@ -90,10 +177,12 @@ const EscaladePage = () => {
                         <Image src="/images/escalade/carrousel/speleologie_occitanie-evasion_1920_14.webp" alt="Technique d'escalade" fill className="object-cover" />
                     </div>
                 </Carousel>
-            </div>
+            </motion.div>
 
             {/* Formules */}
-            <div className="w-full flex flex-col gap-6 items-center">
+            <div 
+                className="w-full flex flex-col gap-6  items-center"
+            >
                 <h2 className="text-center lg:text-left">Deux formules selon ton envie</h2>
                 <ActivityFormulas
                     activityName="Escalade"
@@ -105,120 +194,93 @@ const EscaladePage = () => {
             </div>
 
             {/* Spots */}
-            <div className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center justify-center bg-primary py-16 relative min-h-[800px]">
+            <motion.div 
+                ref={spotsRef}
+                className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center bg-primary py-16 relative min-h-[800px]"
+                variants={itemVariants}
+                initial="hidden"
+                animate={spotsInView ? "visible" : "hidden"}
+            >
                 <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 <div className="container mx-auto max-w-[1200px] space-y-16">
-                    <h2 className="text-white text-6xl font-bold text-center">Où je pratique l&apos;escalade ?</h2>
+                    <h2 className="text-white text-6xl font-bold text-center ">Où je pratique l&apos;escalade ?</h2>
                     <ActivitySpots activityName="Escalade" />
                 </div>
-            </div>
+            </motion.div>
 
             {/* Matériel et prérequis */}
-            <article className="container mx-auto flex flex-col gap-12 px-16">
-                <h2 className="text-primary text-center lg:text-left">Les infos pratiques</h2>
-                <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="space-y-4 bg-primary/10 p-6 rounded-lg">
-                        <h3 className="text-primary text-xl font-bold flex items-center gap-2">
-                            <Info className="w-5 h-5" />
-                            Prérequis
-                        </h3>
+            <motion.article 
+                ref={infoRef}
+                className="container mx-auto flex flex-col gap-12 px-16"
+                variants={containerVariants}
+                initial="hidden"
+                animate={infoInView ? "visible" : "hidden"}
+            >
+                <motion.h2 
+                    className="text-center"
+                    variants={itemVariants}
+                >
+                    les infos pratiques
+                </motion.h2>
+                
+                <motion.div 
+                    className=" w-full grid grid-cols-1 lg:grid-cols-3 gap-6"
+                    variants={containerVariants}
+                >
+                    <motion.div 
+                        className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                        variants={itemVariants}
+                    >
+                        <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Info className="mt-4" /> Prérequis : </h3>
                         <ol className="font-semibold space-y-3">
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">⚖️</span>
-                                <span>Poids maximum : <strong>115kg</strong></span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">📝</span>
-                                <span>Posséder une assurance pour la pratique d&apos;activités sportives (responsabilité civile)</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">🚫</span>
-                                <span>Ne pas avoir de contre-indication médicale à la pratique de l&apos;escalade</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">🎯</span>
-                                <span>Être motivé et avoir envie de découvrir l&apos;escalade</span>
-                            </li>
+                            <li>⚖️ Poids maximum : <strong>115kg</strong> </li>
+                            <li>📝 Posséder une assurance pour la pratique d&apos;activités sportives (responsabilité civile)</li>
+                            <li>🚫 Ne pas avoir de contre-indication médicale à la pratique de l&apos;escalade</li>
+                            <li>🎯 Être motivé et avoir envie de découvrir l&apos;escalade</li>
                         </ol>
-                    </div>
+                    </motion.div>
                     
-                    <div className="space-y-4 bg-primary/10 p-6 rounded-lg">
-                        <h3 className="text-primary text-xl font-bold flex items-center gap-2">
-                            <Star className="w-5 h-5" />
-                            Je fournis
-                        </h3>
-                        <ul className="font-semibold space-y-3">
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">⛑️</span>
-                                <span>Casques</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👟</span>
-                                <span>Baudriers & chaussons</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">🪢</span>
-                                <span>Cordes & équipements de sécurité</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">🔒</span>
-                                <span>Système d&apos;assurage</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">💪</span>
-                                <span>Du dynamisme et de la bonne humeur</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👀</span>
-                                <span>Un regard attentif sur la sécurité</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <motion.div 
+                        className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                        variants={itemVariants}
+                    >
+                        <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Star className="mt-4" /> Je fournis : </h3>
+                        <ol className="font-semibold space-y-3">
+                            <li>⛑️ Casques</li>
+                            <li>👟 Baudriers & chaussons</li>
+                            <li>🪢 Cordes & équipements de sécurité</li>
+                            <li>🔒 Système d&apos;assurage</li>
+                            <li>💪 Du dynamisme et de la bonne humeur</li>
+                            <li>👀 Un regard attentif sur la sécurité</li>
+                        </ol>
+                    </motion.div>
                     
-                    <div className="space-y-4 bg-primary/10 p-6 rounded-lg">
-                        <h3 className="text-primary text-xl font-bold flex items-start gap-2">
-                            <Users className="w-5 h-5 mt-1" />
-                            Tu dois prévoir
-                        </h3>
-                        <ul className="font-semibold space-y-3">
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👟</span>
-                                <span>Chaussures baskets ou randonnée</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👕</span>
-                                <span>Tenue sport adaptée</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">🥤</span>
-                                <span>Eau / Encas</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👩‍🦱</span>
-                                <span>Élastique à cheveux</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">☀️</span>
-                                <span>Crème solaire</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <span className="text-primary">👓</span>
-                                <span>Cordon à lunette</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <motion.div 
+                        className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                        variants={itemVariants}
+                    >
+                        <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Users className="mt-4" /> Tu dois prévoir : </h3>
+                        <ol className="font-semibold space-y-3">
+                            <li>👟 Chaussures baskets ou randonnée </li>
+                            <li>👕 Tenue sport adaptée</li>
+                            <li>🥤 Eau / Encas</li>
+                            <li>👩‍🦱 Élastique à cheveux</li>
+                            <li>☀️ Crème solaire</li>
+                            <li>👓 Cordon à lunette</li>
+                        </ol>
+                    </motion.div>
+                </motion.div>
+            </motion.article>
         </section>
 
 
-        <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100  py-32" 
+        <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100 py-32" 
             Markercolor="white"
             TopMarker={true}
             >
-                <h2 className="text-center">Chaque image raconte une aventure <span className="text-primary">!</span></h2>
-                <GalleryInsta gallery={gallery} className="px-16 py-12 " backgroundColor="gray-100" />
+                <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
+                <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
             </CustomSection>
         <ContactSection />
         </div>
