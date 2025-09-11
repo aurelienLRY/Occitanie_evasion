@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = {
-    // Base URL pour résoudre les images
-    metadataBase: new URL("https://www.occitanie-evasion.com"),
+
+
     
     // Métadonnées de base
     title: {
