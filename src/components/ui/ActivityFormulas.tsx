@@ -3,9 +3,10 @@
 import { useActivities } from '@/hooks/useQuery';
 import { IActivity } from '@/types';
 import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import ReservationLink from './ReservationLink';
 import { useTooltipPosition } from '@/hooks/useTooltipPosition';
+import { motion, useInView } from 'framer-motion';
 
 interface ActivityFormulasProps {
     activityName: string;
@@ -24,6 +25,48 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     const [showReducedInfoFull, setShowReducedInfoFull] = useState(false);
     const [showACMInfoFull, setShowACMInfoFull] = useState(false);
     const { registerButton, getTooltipClassName } = useTooltipPosition();
+
+    // Refs et détection de visibilité
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
+    // Variantes d'animation
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.3,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const leftCardVariants = {
+        hidden: { opacity: 0, x: -50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const rightCardVariants = {
+        hidden: { opacity: 0, x: 50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
 
     if (isLoading) {
         return (
@@ -57,11 +100,22 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     }
 
     return (
-        <section className="container mx-auto my-16 flex flex-col gap-8" aria-labelledby="formulas-title">
+        <section ref={containerRef} className="container mx-auto my-16 flex flex-col gap-8" aria-labelledby="formulas-title">
             <h2 id="formulas-title" className="sr-only">Formules disponibles pour {activityName}</h2>
-            <div className="flex flex-col lg:flex-row gap-8 mx-auto" role="list" aria-label="Formules d'activité">
+            <motion.div 
+                className="flex flex-col lg:flex-row gap-8 mx-auto" 
+                role="list" 
+                aria-label="Formules d'activité"
+                variants={containerVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+            >
                 {activity.half_day && (
-                    <article className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100" role="listitem">
+                    <motion.article 
+                        className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100" 
+                        role="listitem"
+                        variants={leftCardVariants}
+                    >
                         <div className='flex flex-col justify-between h-full'>
                         <header className="text-center mb-6">
                             <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
@@ -206,11 +260,15 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
 
                 
                         </div>
-                    </article>
+                    </motion.article>
                 )}
 
                 {activity.full_day && (
-                    <article className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100 relative" role="listitem">
+                    <motion.article 
+                        className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100 relative" 
+                        role="listitem"
+                        variants={rightCardVariants}
+                    >
                         <div className="absolute -top-3 -right-3 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold" aria-label="Formule populaire">
                             <Star className="w-4 h-4 inline mr-1" aria-hidden="true" />
                             Populaire
@@ -358,9 +416,9 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                                 Réserver journée complète
                             </ReservationLink>
                         </div>
-                    </article>
+                    </motion.article>
                 )}
-            </div>
+            </motion.div>
         </section>
     );
 }; 

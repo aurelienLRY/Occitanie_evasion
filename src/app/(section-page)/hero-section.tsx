@@ -51,8 +51,8 @@ export const HeroSection = ({ className }: { className?: string }) => {
             sizes="(max-width: 768px) 180px, (max-width: 1024px) 300px, 300px"
           />
      
-          <h1 className="hidden">Occitanie Évasion , spécialiste des activités nature en Occitanie ! </h1> 
-          <h2 className="hidden" style={{fontSize: "clamp(1rem, 2vw, 1.5rem)"}}>Professionnel des activités nature en Occitanie ! </h2> 
+          <h1 className="opacity-0 !text-sm absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Occitanie Évasion , spécialiste des activités nature en Occitanie ! </h1> 
+          <h2 className="opacity-0 !text-sm absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{fontSize: "clamp(1rem, 2vw, 1.5rem)"}}>Professionnel des activités nature en Occitanie ! </h2> 
         </div>
       </div>
     </CustomSection>

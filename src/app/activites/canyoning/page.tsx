@@ -9,9 +9,74 @@ import { GalleryInsta} from "@/components/ui/gallery";
 import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
 import CustomSection from "@/components/layout/Section";
 import ContactSection from "../../(section-page)/contact-section";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 
 const CanyoningPage = () => {
+    // Refs pour les sections à animer
+    const descriptionRef = useRef(null);
+    const carouselRef = useRef(null);
+    const spotsRef = useRef(null);
+    const infoRef = useRef(null);
+
+    // Détection de visibilité pour chaque section
+    const descriptionInView = useInView(descriptionRef, { once: true, margin: "-100px" });
+    const carouselInView = useInView(carouselRef, { once: true, margin: "-100px" });
+    const spotsInView = useInView(spotsRef, { once: true, margin: "-100px" });
+    const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
+
+    // Variantes d'animation inspirées de la page home
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    // Animation pour les blocs de description (gauche et droite)
+    const leftBlockVariants = {
+        hidden: { opacity: 0, x: -50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const rightBlockVariants = {
+        hidden: { opacity: 0, x: 50, y: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
+
     const gallery: GalleryInstaArray = [
         { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_8.webp", alt: "personne qui glisse dans une cascade" },
         { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_13.webp", alt: "photo des gorges du banquet" },
@@ -43,28 +108,50 @@ const CanyoningPage = () => {
                 </aside>
 
                 {/* description */}
-                <article className="container mx-auto space-y-16 px-6">
-                    <div className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]">
+                <motion.article 
+                    ref={descriptionRef}
+                    className="container mx-auto space-y-16 px-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={descriptionInView ? "visible" : "hidden"}
+                >
+                    <motion.div 
+                        className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]"
+                        variants={leftBlockVariants}
+                    >
                         <div className="space-y-4 max-w-[850px] text-justify">
                             <h2>Plonge dans l&apos;aventure sauvage <span className="text-primary">!</span></h2>
                             <p>Un moment d&apos;évasion sur le cours d&apos;eau de l&apos;Arn. Équipé d&apos;une combinaison néoprène et d&apos;un casque vous évoluez et progressez en sécurité, dans un environnement naturel remarquable façonné durant des milliers d&apos;années par le passage de l&apos;eau.</p>
                             <p>Le canyon du Banquet est idéal lorsque l&apos;on recherche <strong>sensations, rafraîchissement et découverte</strong>.</p>
                         </div>
-                    </div>
-                    <div className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]">
+                    </motion.div>
+                    
+                    <motion.div 
+                        className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]"
+                        variants={rightBlockVariants}
+                    >
                         <div className="space-y-4 max-w-[850px] text-justify">
                             <h2>Canyoning,<span className="text-4xl">🤔</span> qu&apos;es aquò<span className="text-primary">?</span></h2>
                             <p><strong>Au programme :</strong> sauts, toboggans naturels, nage en eaux vives et marche aux pieds des falaises granitiques.</p>
                             <p>C&apos;est une rando… mais dans l&apos;eau ! En combinaison néoprène, casque sur la tête et <strong>sourire aux lèvres, tu descends un cours d&apos;eau en mode aventure.</strong>  <strong> On avance ensemble, chacun à son rythme, dans la bonne humeur et en toute sécurité.</strong></p>
                             <p>Un parcours aquatique et ludique à partir de <strong>10 ans</strong>.</p>
                         </div>
-                    </div>
-                </article>
+                    </motion.div>
+                </motion.article>
 
 
                 {/* carrousel */}
-                <div className="w-full flex flex-col gap-6  items-center min-h-[500px] relative " >
-                    <div className="absolute w-[90%] min-h-[200px]  bottom-19 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:h-full lg:w-1/3 lg:top-0 lg:left-0  z-50">
+                <motion.div 
+                    ref={carouselRef}
+                    className="w-full flex flex-col gap-6  items-center min-h-[500px] relative"
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate={carouselInView ? "visible" : "hidden"}
+                >
+                    <motion.div 
+                        className="absolute w-[90%] min-h-[200px]  bottom-19 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:h-full lg:w-1/3 lg:top-0 lg:left-0  z-50"
+                        variants={itemVariants}
+                    >
                         <div className="w-full h-full   bg-white/30 p-4 rounded-lg flex flex-col justify-center px-12 gap-0">
                             <p className="text-white/90 py-4 font-title text-2xl lg:text-4xl font-bold ">Ils l&apos;ont fait !</p>
                             <p className=" text-white font-title text-4xl lg:text-6xl  ">Pourquoi pas toi <span className="text-primary">?</span></p>
@@ -72,7 +159,7 @@ const CanyoningPage = () => {
                                 Réserver
                             </ReservationLink>
                         </div>
-                    </div>
+                    </motion.div>
                     <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full ">
                         <div className="w-full h-[800px]">
                             <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_9.webp" alt="Canyoning" fill className=" object-cover" />
@@ -90,8 +177,10 @@ const CanyoningPage = () => {
                                 <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_23.webp" alt="Canyoning" fill className=" object-cover" />
                             </div>
                     </Carousel>
-                </div>
-                <div className="w-full flex flex-col gap-6  items-center  relative">
+                </motion.div>
+                <div 
+                    className="w-full flex flex-col gap-6  items-center  relative"
+                >
                     <h2 className="text-center lg:text-left">Deux formules selon ton envie</h2>
                     <ActivityFormulas
                         activityName="Canyoning"
@@ -101,32 +190,61 @@ const CanyoningPage = () => {
                         ACMPriceConditions="Tarif ACM : 8 enfants + 1 animateur max = 280€. Contactez-moi pour plus d'informations."
                     />
                 </div>
-                <div className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center bg-primary py-16 relative min-h-[800px]">
+
+                <motion.div 
+                    ref={spotsRef}
+                    className="w-full flex flex-col gap-6 px-4 lg:px-16 items-center bg-primary py-16 relative min-h-[800px]"
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate={spotsInView ? "visible" : "hidden"}
+                >
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <div className="container mx-auto max-w-[1200px] space-y-16">
                         <h2 className="text-white text-6xl font-bold text-center ">Où je pratique le canyoning ?</h2>
                         <ActivitySpots activityName="Canyoning" />
                     </div>
-                </div>
+                </motion.div>
    
 
 
 
-                <article className="container mx-auto flex flex-col gap-12 px-16 " >
-                    <h2 className="text-center">les infos pratiques</h2>
-                    <div className=" w-full grid grid-cols-1 lg:grid-cols-3 gap-6 ">
-                        <div className=" space-y-2 bg-primary/10 p-4 rounded-lg">
+                <motion.article 
+                    ref={infoRef}
+                    className="container mx-auto flex flex-col gap-12 px-16"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={infoInView ? "visible" : "hidden"}
+                >
+                    <motion.h2 
+                        className="text-center"
+                        variants={itemVariants}
+                    >
+                        les infos pratiques
+                    </motion.h2>
+                    
+                    <motion.div 
+                        className=" w-full grid grid-cols-1 lg:grid-cols-3 gap-6"
+                        variants={containerVariants}
+                    >
+                        <motion.div 
+                            className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                            variants={itemVariants}
+                        >
                             <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Info className="mt-4" /> Prérequis : </h3>
                             <ol className="font-semibold space-y-3">
-                                <li>🐬 Tu sais nager 25 m et aimer avoir la tête sous l’eau; </li>
+                                <li>🐬 Tu sais nager 25 m et aimer avoir la tête sous l&apos;eau; </li>
                                 <li>💪 Tu es en forme (marcher, nager, grimper un peu); </li>
                                 <li>📝 Posséder une assurance pour la pratique d&apos;activités sportives (responsabilité civile)</li>
                                 <li>🚫 Ne pas avoir de contre-indication médicale à la pratique du canyoning ou de douleurs pouvant vous empêcher d&apos;évoluer dans le canyon et de remonter en fin d&apos;activité</li>
                                 <li>😏 Les sauts restent optionnels; </li>
                             </ol>
-                        </div>
-                        <div className=" space-y-2 bg-primary/10 p-4 rounded-lg">
+                        </motion.div>
+                        
+                        <motion.div 
+                            className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                            variants={itemVariants}
+                        >
                             <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Star className="mt-4" /> Je fournis : </h3>
                             <ol className="font-semibold space-y-3">
                                 <li>🧥 Combinaisons de canyon néoprène &  Chaussettes néoprène</li>
@@ -135,8 +253,12 @@ const CanyoningPage = () => {
                                 <li>💪 Du dynamisme et de la bonne humeur</li>
                                 <li>👀 Un regard attentif sur la sécurité</li>
                             </ol>
-                        </div>
-                        <div className=" space-y-2 bg-primary/10 p-4 rounded-lg">
+                        </motion.div>
+                        
+                        <motion.div 
+                            className=" space-y-2 bg-primary/10 p-4 rounded-lg"
+                            variants={itemVariants}
+                        >
                             <h3 className="text-primary text-xl font-bold flex items-center gap-2"><Users className="mt-4" /> Tu dois prévoir : </h3>
                             <ol className="font-semibold space-y-3">
                                 <li>👙 Maillot de bain , serviette et crème solaire </li>
@@ -144,18 +266,20 @@ const CanyoningPage = () => {
                                 <li>🥤 De l&apos;eau et un petit en-cas , pique-nique(si formule journée)</li>
                                 <li>👟 Une paire de chaussures de marche ou baskets en bon état (milieu glissant et escarpé)</li>
                             </ol>
-                        </div>
-                    </div>
-                </article>
+                        </motion.div>
+                    </motion.div>
+                </motion.article>
             </section>
 
-            <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100 py-32" 
-            Markercolor="white"
-            TopMarker={true}
-            >
-                <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
-                <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
-            </CustomSection>
+          
+                <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100 py-32" 
+                Markercolor="white"
+                TopMarker={true}
+                >
+                    <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
+                    <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
+                </CustomSection>
+           
 
             <ContactSection
             
