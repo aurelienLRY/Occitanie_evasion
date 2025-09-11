@@ -12,13 +12,16 @@ import ContactSection from "../../(section-page)/contact-section";
 
 const SpeleoPage = () => {
     const gallery: GalleryInstaArray = [
-        { url: "/images/speleologie/gallery/speleo_1.webp", alt: "Spéléologie" },
-        { url: "/images/speleologie/gallery/speleo_2.webp", alt: "Exploration souterraine" },
-        { url: "/images/speleologie/gallery/speleo_3.webp", alt: "spéléologie anniversaire" },
-        { url: "/images/speleologie/gallery/speleo_4.webp", alt: "Grotte et stalactites" },
-        { url: "/images/speleologie/gallery/speleo_5.webp", alt: "Grotte et stalactites" },
-        { url: "/images/speleologie/gallery/speleo_6.webp", alt: "Spéléoniversaire , groupe d'enfant dans une grotte qui fête un anniversaire" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_11.webp", alt: "Spéléologie , rivière dans une grotte" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_19.webp", alt: "Spéléologie , stalactites dans une grotte" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_49.webp", alt: "spéléologie , descente en rappel" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_25.webp", alt: "Spéléologie , explication de la spéléologie aux enfants lors d'un spéléoniversaire" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_61.webp", alt: "Spéléologie , groupe d'adultes" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_38.webp", alt: "Spéléologie franchisement technique dans une grotte" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_21.webp", alt: "Spéléologie , Florent se prépare à la descente en rappel" },
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_15.webp", alt: "Spéléologie , groupe d'adultes devant une rivière souterraine" },
 
+        { url: "/images/speleologie/gallery/speleologie_occitanie-evasion_35.webp", alt: "Spéléologie , adulte en progression dans une grotte" },
     ];
 
     return (
@@ -29,7 +32,7 @@ const SpeleoPage = () => {
                     <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Spéléologie</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Explore un monde souterrain incroyable !</h2>
-                        <p className="text-lg">Découvre les merveilles que la nature a façonnées durant des millions d&apos;années dans un milieu majestueux et fragile.</p>
+                        <h3 className="!text-lg font-paragraphe">Découvre les merveilles que la nature a façonnées durant des millions d&apos;années dans un milieu majestueux et fragile.</h3>
                     </div>
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 </aside>
@@ -39,14 +42,14 @@ const SpeleoPage = () => {
                     <div className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]">
                         <div className="space-y-4 max-w-[850px] text-justify">
                                                     <h2>Plonge dans l&apos;univers mystérieux des grottes <span className="text-primary">!</span></h2>
-                        <p>Je t&apos;invite à la découverte d&apos;un monde souterrain incroyable que la nature a façonné durant des millions d&apos;années. Un milieu souvent méconnu, majestueux et extrêmement fragile à la fois.</p>
-                        <p>Viens vivre une expérience hors du temps, en symbiose avec la formation des roches, la création des grottes, l&apos;apparition des concrétions (stalactites, stalagmites, draperies…).</p>
+                        <p> <strong>Je t&apos;invite à la découverte d&apos;un monde souterrain incroyable </strong> que la nature a façonné durant des millions d&apos;années. Un milieu souvent méconnu, majestueux et extrêmement fragile à la fois.</p>
+                        <p> <strong> Viens vivre une expérience hors du temps,</strong> en symbiose avec la formation des roches, la création des grottes, l&apos;apparition des concrétions (stalactites, stalagmites, draperies…).</p>
                         </div>
                     </div>
                     <div className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]">
                         <div className="space-y-4 max-w-[850px] text-justify">
                                                     <h2>Spéléologie,<span className="text-4xl">🤔</span> qu&apos;es aquò<span className="text-primary">?</span></h2>
-                        <p>Je t&apos;accompagnerai au cœur de ce milieu magique, afin de le comprendre, de l&apos;admirer et de le respecter. Équipé d&apos;un casque avec éclairage, d&apos;une combinaison, d&apos;un baudrier (selon les cavités), partons ensemble à la découverte de ce monde caché.</p>
+                        <p> <strong>Je t&apos;accompagnerai au cœur de ce milieu magique,</strong> afin de le comprendre, de l&apos;admirer et de le respecter. Équipé d&apos;un casque avec éclairage, d&apos;une combinaison, d&apos;un baudrier (selon les cavités), <strong>partons ensemble à la découverte de ce monde caché.</strong></p>
                         <p>La sélection des cavités que je te propose est adaptée à tes différentes envies. <strong>Pas besoin d&apos;être un(e) explorateur(trice) : on découvre ensemble, chacun à son rythme.</strong></p>
                         </div>
                     </div>
@@ -65,13 +68,19 @@ const SpeleoPage = () => {
                     </div>
                     <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full">
                         <div className="w-full h-[800px]">
-                            <Image src="/images/speleologie/carrousel/speleo_1.webp" alt="Spéléologie" fill className="object-cover" />
+                            <Image src="/images/speleologie/carrousel/speleologie_occitanie-evasion_1920_15.webp" alt="groupe d'adultes devant une rivière souterraine" fill className="object-cover" />
                         </div>
                         <div className="w-full h-[800px]">
-                            <Image src="/images/speleologie/carrousel/speleo_2.webp" alt="Exploration souterraine" fill className="object-cover" />
+                            <Image src="/images/speleologie/carrousel/speleologie_occitanie-evasion_1920_27.webp" alt="Florent explique la spéléologie aux enfants lors d'un spéléoniversaire" fill className="object-cover" />
                         </div>
                         <div className="w-full h-[800px]">
-                            <Image src="/images/speleologie/carrousel/speleo_3.webp" alt="Grotte et stalactites" fill className="object-cover" />
+                            <Image src="/images/speleologie/carrousel/speleologie_occitanie-evasion_1920_31.webp" alt="enfants qui évoluent dans une grotte lors d'un spéléoniversaire" fill className="object-cover" />
+                        </div>
+                        <div className="w-full h-[800px]">
+                            <Image src="/images/speleologie/carrousel/speleologie_occitanie-evasion_1920_58.webp" alt="groupe d'adultes qui évoluent dans une grotte" fill className="object-cover" />
+                        </div>
+                        <div className="w-full h-[800px]">
+                            <Image src="/images/speleologie/carrousel/speleologie_occitanie-evasion_1920_32.webp" alt="Enfant qui observe des stalactites dans une grotte" fill className="object-cover" />
                         </div>
                     </Carousel>
                 </div>
@@ -178,11 +187,11 @@ const SpeleoPage = () => {
                 </article>
             </section>
 
-            <CustomSection className="flex flex-col items-center justify-center w-full bg-gray-100 py-16" 
+            <CustomSection className="flex flex-col items-center justify-center w-full bg-gray-100 py-32"
                 Markercolor="white"
                 TopMarker={true}
             >
-                <h2 className="text-center">Des photos de ton exploration souterraine ?</h2>
+                <h2 className="text-center">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
                 <GalleryInsta gallery={gallery} className="px-16 py-12" backgroundColor="gray-100" />
             </CustomSection>
 

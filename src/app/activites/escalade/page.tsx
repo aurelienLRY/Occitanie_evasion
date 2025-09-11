@@ -73,9 +73,7 @@ const EscaladePage = () => {
                     <div className="w-full h-[800px]">
                         <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-cours-enfant.webp" alt="Cours d'escalade pour enfants" fill className="object-cover" />
                     </div>
-                    <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-enfant-3.webp" alt="Escalade en falaise" fill className="object-cover object-top" />
-                    </div>
+            
                     <div className="w-full h-[800px]">
                         <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-securite.webp" alt="Sécurité en escalade" fill className="object-cover" />
                     </div>
@@ -83,7 +81,13 @@ const EscaladePage = () => {
                         <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-enfant-4.webp" alt="Progression en escalade" fill className="object-cover" />
                     </div>
                     <div className="w-full h-[800px]">
-                        <Image src="/images/escalade/carrousel/Occitanie-evasion-escalade-degaine.webp" alt="Technique d'escalade" fill className="object-cover" />
+                        <Image src="/images/escalade/carrousel/speleologie_occitanie-evasion_1920_11.webp" alt="Technique d'escalade" fill className="object-cover" />
+                    </div>
+                    <div className="w-full h-[800px]">
+                        <Image src="/images/escalade/carrousel/speleologie_occitanie-evasion_1920_16.webp" alt="Technique d'escalade" fill className="object-cover" />
+                    </div>
+                    <div className="w-full h-[800px]">
+                        <Image src="/images/escalade/carrousel/speleologie_occitanie-evasion_1920_14.webp" alt="Technique d'escalade" fill className="object-cover" />
                     </div>
                 </Carousel>
             </div>
@@ -209,11 +213,11 @@ const EscaladePage = () => {
         </section>
 
 
-        <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100  py-16" 
+        <CustomSection className="flex flex-col  items-center justify-center w-full bg-gray-100  py-32" 
             Markercolor="white"
             TopMarker={true}
             >
-                <h2 className="text-center">Des vidéos de ton expérience ?</h2>
+                <h2 className="text-center">Chaque image raconte une aventure <span className="text-primary">!</span></h2>
                 <GalleryInsta gallery={gallery} className="px-16 py-12 " backgroundColor="gray-100" />
             </CustomSection>
         <ContactSection />

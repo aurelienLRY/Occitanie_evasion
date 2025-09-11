@@ -52,16 +52,10 @@ export const metadata: Metadata = {
         description: "Découvrez l'aventure du canyoning dans les plus beaux canyons de l'Aude et de l'Hérault. Des descentes spectaculaires en toute sécurité avec nos guides diplômés.",
         images: [
             {
-                url: "/images/Canyoning_Home.webp",
+                url: "/images/Og/Og-Canyoning.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Canyoning en Occitanie - Occitanie Évasion",
-            },
-            {
-                url: "/images/Og/Home-OG-Twitter.png",
-                width: 506,
-                height: 254,
-                alt: businessInformation.image.alt,
             }
         ],
     },
@@ -73,7 +67,7 @@ export const metadata: Metadata = {
         creator: "@occitanie_evasion",
         title: `Canyoning - ${businessInformation.name}`,
         description: "Découvrez l'aventure du canyoning dans les plus beaux canyons de l'Aude et de l'Hérault. Des descentes spectaculaires en toute sécurité avec nos guides diplômés.",
-        images: ["/images/Canyoning_Home.webp"],
+        images: ["/images/Og/Og-twitter-Canyoning.jpg"],
     },
     
     // Métadonnées pour les moteurs de recherche
@@ -88,7 +82,6 @@ export const metadata: Metadata = {
             "max-snippet": -1,
         },
     },
-    
     // Métadonnées géographiques
     alternates: {
         canonical: "https://www.occitanie-evasion.com/activites/canyoning",
@@ -97,46 +90,8 @@ export const metadata: Metadata = {
         },
     },
     
-    // Métadonnées de vérification
-    verification: {
-        google: "your-google-verification-code",
-        yandex: "your-yandex-verification-code",
-        yahoo: "your-yahoo-verification-code",
-    },
-    
-    // Métadonnées pour les applications mobiles
-    appleWebApp: {
-        capable: true,
-        statusBarStyle: "default",
-        title: businessInformation.name,
-    },
-    
-    // Métadonnées de format
-    formatDetection: {
-        email: false,
-        address: false,
-        telephone: false,
-    },
-    
-    // Métadonnées de sécurité
-    referrer: "origin-when-cross-origin",
-    
-    // Métadonnées d'icônes
-    icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon.ico",
-        apple: "/favicon.ico",
-    },
+  
 };
-
-// Configuration du viewport avec themeColor
-export const viewport = {
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-        { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    ],
-};
-
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>

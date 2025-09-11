@@ -13,12 +13,15 @@ import ContactSection from "../../(section-page)/contact-section";
 
 const CanyoningPage = () => {
     const gallery: GalleryInstaArray = [
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-1.webp", alt: "Groupe qui pratique le canyoning" },
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-2.webp", alt: "Canyoning" },
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-3.webp", alt: "Groupe qui pratique le canyoning" },
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-4.webp", alt: "Groupe qui pratique le canyoning" },
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-5.webp", alt: "Groupe qui pratique le canyoning" },
-        { url: "/images/Canyoning/gallery/Canyoning-occitanie_evasion-6.webp", alt: "Groupe qui pratique le canyoning" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_8.webp", alt: "personne qui glisse dans une cascade" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_13.webp", alt: "photo des gorges du banquet" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_22.webp", alt: "personne qui réalise un saut dans une cascade" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_18.webp", alt: "personne qui réalise glisse dans un toboggan naturel" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_12.webp", alt: "personne qui réalise un saut " },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_19.webp", alt: "photo d'une des cascades du canyon du banquet" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_28.webp", alt: "personne en pause le long d'un cours d'eau" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_34.webp", alt: "femme qui saute dans un cours d'eau" },
+        { url: "/images/Canyoning/gallery/canyoning_occitanie-evasion_27.webp", alt: "vue d'ensemble des gorges du banquet" },
     ];
     return (
         <div className="flex flex-col gap-16 overflow-x-clip">
@@ -33,7 +36,7 @@ const CanyoningPage = () => {
                     <div className=" max-w-[500px] w-90% min-w-[350px] flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Canyoning</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Envie de fraîcheur, de fun et de nature ?</h2>
-                        <p className="text-lg">Une randonnée aquatique à 10 min de Mazamet au cœur des gorges sauvages du Banquet</p>
+                        <h3 className="!text-lg font-paragraphe">Une randonnée aquatique à 10 min de Mazamet au cœur des gorges sauvages du Banquet</h3>
 
                     </div>
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
@@ -72,11 +75,20 @@ const CanyoningPage = () => {
                     </div>
                     <Carousel slidesToShow={1} autoPlay={true} showDots={true} showArrows={false} showPlayPause={false} markerLineSvg={true} markerLineSvgColor="white" className="w-full h-full ">
                         <div className="w-full h-[800px]">
-                            <Image src="/images/Canyoning/carrousel/IMG_2666.webp" alt="Canyoning" fill className=" object-cover" />
+                            <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_9.webp" alt="Canyoning" fill className=" object-cover" />
                         </div>
-                        <div className="w-full h-[800px]">
-                            <Image src="/images/Canyoning/carrousel/IMG_6226.webp" alt="Canyoning" fill className=" object-cover" />
-                        </div>
+                            <div className="w-full h-[800px]">
+                                <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_21.webp" alt="Canyoning" fill className=" object-cover" />
+                            </div>
+                            <div className="w-full h-[800px]">
+                                <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_31.webp" alt="Canyoning" fill className=" object-cover" />
+                            </div>
+                            <div className="w-full h-[800px]">
+                                <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_26.webp" alt="Canyoning" fill className=" object-cover" />
+                            </div>
+                            <div className="w-full h-[800px]">
+                                <Image src="/images/Canyoning/carrousel/canyoning_occitanie-evasion_1920_23.webp" alt="Canyoning" fill className=" object-cover" />
+                            </div>
                     </Carousel>
                 </div>
                 <div className="w-full flex flex-col gap-6  items-center  relative">

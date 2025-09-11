@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { businessInformation } from "@/config/business-information";
 
-export const metadata: Metadata = {
-    // Base URL pour résoudre les images
-    metadataBase: new URL("https://www.occitanie-evasion.com"),
-    
-    // Métadonnées de base
+export const metadata: Metadata = { 
     title: {
         template: `%s | ${businessInformation.name}`,
         default: `Spéléologie - ${businessInformation.name}`,
@@ -53,16 +49,10 @@ export const metadata: Metadata = {
         description: "Explorez les grottes et cavités souterraines de l'Occitanie. Découvrez un monde souterrain fascinant avec nos guides spéléologues expérimentés.",
         images: [
             {
-                url: "/images/speleo.jpg",
+                url: "/images/Og/Og-Speleologie.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Spéléologie en Occitanie - Occitanie Évasion",
-            },
-            {
-                url: "/images/Og/Home-OG-Twitter.png",
-                width: 506,
-                height: 254,
-                alt: businessInformation.image.alt,
             }
         ],
     },
@@ -74,7 +64,7 @@ export const metadata: Metadata = {
         creator: "@occitanie_evasion",
         title: `Spéléologie - ${businessInformation.name}`,
         description: "Explorez les grottes et cavités souterraines de l'Occitanie. Découvrez un monde souterrain fascinant avec nos guides spéléologues expérimentés.",
-        images: ["/images/speleo.jpg"],
+        images: ["/images/Og/Og-twitter-Speleologie.jpg"],
     },
     
     // Métadonnées pour les moteurs de recherche
@@ -97,46 +87,9 @@ export const metadata: Metadata = {
             "fr-FR": "https://www.occitanie-evasion.com/activites/speleologie",
         },
     },
-    
-    // Métadonnées de vérification
-    verification: {
-        google: "your-google-verification-code",
-        yandex: "your-yandex-verification-code",
-        yahoo: "your-yahoo-verification-code",
-    },
-    
-    // Métadonnées pour les applications mobiles
-    appleWebApp: {
-        capable: true,
-        statusBarStyle: "default",
-        title: businessInformation.name,
-    },
-    
-    // Métadonnées de format
-    formatDetection: {
-        email: false,
-        address: false,
-        telephone: false,
-    },
-    
-    // Métadonnées de sécurité
-    referrer: "origin-when-cross-origin",
-    
-    // Métadonnées d'icônes
-    icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon.ico",
-        apple: "/favicon.ico",
-    },
 };
 
-// Configuration du viewport avec themeColor
-export const viewport = {
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-        { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    ],
-};
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (

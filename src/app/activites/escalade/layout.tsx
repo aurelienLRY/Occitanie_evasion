@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = {
-    // Base URL pour résoudre les images
-    metadataBase: new URL("https://www.occitanie-evasion.com"),
+ 
     
-    // Métadonnées de base
     title: {
         template: `%s | ${businessInformation.name}`,
         default: `Escalade - ${businessInformation.name}`,
@@ -53,16 +51,10 @@ export const metadata: Metadata = {
         description: "Découvrez l'escalade en Occitanie sur les plus beaux sites naturels. Initiation, perfectionnement et escalade sportive avec nos moniteurs diplômés d'État.",
         images: [
             {
-                url: "/images/escalade-scroll.webp",
+                url: "/images/Og/Og-Escalade.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Escalade en Occitanie - Occitanie Évasion",
-            },
-            {
-                url: "/images/Og/Home-OG-Twitter.png",
-                width: 506,
-                height: 254,
-                alt: businessInformation.image.alt,
             }
         ],
     },
@@ -74,7 +66,7 @@ export const metadata: Metadata = {
         creator: "@occitanie_evasion",
         title: `Escalade - ${businessInformation.name}`,
         description: "Découvrez l'escalade en Occitanie sur les plus beaux sites naturels. Initiation, perfectionnement et escalade sportive avec nos moniteurs diplômés d'État.",
-        images: ["/images/escalade-scroll.webp"],
+        images: ["/images/Og/Og-twitter-Escalade.jpg"],
     },
     
     // Métadonnées pour les moteurs de recherche
@@ -97,46 +89,9 @@ export const metadata: Metadata = {
             "fr-FR": "https://www.occitanie-evasion.com/activites/escalade",
         },
     },
-    
-    // Métadonnées de vérification
-    verification: {
-        google: "your-google-verification-code",
-        yandex: "your-yandex-verification-code",
-        yahoo: "your-yahoo-verification-code",
-    },
-    
-    // Métadonnées pour les applications mobiles
-    appleWebApp: {
-        capable: true,
-        statusBarStyle: "default",
-        title: businessInformation.name,
-    },
-    
-    // Métadonnées de format
-    formatDetection: {
-        email: false,
-        address: false,
-        telephone: false,
-    },
-    
-    // Métadonnées de sécurité
-    referrer: "origin-when-cross-origin",
-    
-    // Métadonnées d'icônes
-    icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon.ico",
-        apple: "/favicon.ico",
-    },
 };
 
-// Configuration du viewport avec themeColor
-export const viewport = {
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-        { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    ],
-};
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (

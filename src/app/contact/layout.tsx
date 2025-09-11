@@ -51,12 +51,6 @@ export const metadata = {
                 width: 1200,
                 height: 630,
                 alt: businessInformation.image.alt,
-            },
-            {
-                url: "/images/Og/Home-OG-Twitter.png",
-                width: 506,
-                height: 254,
-                alt: businessInformation.image.alt,
             }
         ],
     },
@@ -92,45 +86,13 @@ export const metadata = {
         },
     },
     
-    // Métadonnées de vérification
-    verification: {
-        google: "your-google-verification-code",
-        yandex: "your-yandex-verification-code",
-        yahoo: "your-yahoo-verification-code",
-    },
+ 
     
-    // Métadonnées pour les applications mobiles
-    appleWebApp: {
-        capable: true,
-        statusBarStyle: "default",
-        title: businessInformation.name,
-    },
+
     
-    // Métadonnées de format
-    formatDetection: {
-        email: false,
-        address: false,
-        telephone: false,
-    },
-    
-    // Métadonnées de sécurité
-    referrer: "origin-when-cross-origin",
-    
-    // Métadonnées d'icônes
-    icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon.ico",
-        apple: "/favicon.ico",
-    },
+
 };
 
-// Configuration du viewport avec themeColor
-export const viewport = {
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-        { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    ],
-};
 
 const ContactLayout = ({ children }: { children: React.ReactNode }) => {
     return (
