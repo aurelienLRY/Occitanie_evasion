@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 /*import "./globals.css";*/
-import { Permanent_Marker , Slackside_One , Nunito} from "next/font/google";
+import { Permanent_Marker, Slackside_One, Nunito } from "next/font/google";
 import "@/styles/globals.css"
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -8,11 +8,12 @@ import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { Toaster } from 'sonner';
 import { businessInformation } from "@/config/business-information";
+import { GoogleTagManager , GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
-  //metadataBase: new URL( process.env.NEXT_PUBLIC_URL!),
-  
+  metadataBase: new URL("https://www.occitanie-evasion.com"),
+
   // Métadonnées de base
   title: {
     default: businessInformation.seo.title,
@@ -20,17 +21,17 @@ export const metadata: Metadata = {
   },
   description: businessInformation.seo.description,
   keywords: businessInformation.seo.keywords,
-  authors: [{ 
-    name: businessInformation.seo.author, 
-    url: process.env.NEXT_PUBLIC_URL || "http://localhost:3000" 
+  authors: [{
+    name: businessInformation.seo.author,
+    url: "https://www.occitanie-evasion.com"
   }],
   creator: businessInformation.seo.author,
   publisher: businessInformation.name,
-  
+
   // Informations de l'entreprise
   applicationName: businessInformation.name,
   category: "Sports et loisirs",
-  
+
   // Métadonnées de contact
   other: {
     "contact:phone_number": businessInformation.contact.phone,
@@ -45,12 +46,12 @@ export const metadata: Metadata = {
     "business:activities": businessInformation.additional.activities.join(", "),
     "business:regions": businessInformation.additional.regions.join(", "),
   },
-  
+
   // Open Graph
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
+    url: "https://www.occitanie-evasion.com",
     siteName: businessInformation.name,
     title: businessInformation.seo.title,
     description: businessInformation.seo.description,
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Card
   twitter: {
     card: "summary_large_image",
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     description: businessInformation.seo.description,
     images: ["/images/Og/Home-OG-Twitter.png"],
   },
-  
+
   // Métadonnées pour les moteurs de recherche
   robots: {
     index: true,
@@ -86,20 +87,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  
+
   // Métadonnées géographiques
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
+    canonical: "https://www.occitanie-evasion.com",
     languages: {
-      "fr-FR": process.env.NEXT_PUBLIC_URL || "http://localhost:3000",
+      "fr-FR": "https://www.occitanie-evasion.com",
     },
   },
-  
+
   // Métadonnées de vérification
   verification: {
-    google: "bdFqKTq0UUhL4vLg6mSRdLGu9kgiVmNlbFg1dCDJKag",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
+    google: "BDAUit3RcMGdlrafp0IlAJWFl8FFqNRJAMMHen9bgbg",
   },
   // Métadonnées pour les applications mobiles
   appleWebApp: {
@@ -107,18 +106,18 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: businessInformation.name,
   },
-  
+
   // Métadonnées de format
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  
+
   // Métadonnées de sécurité
   referrer: "origin-when-cross-origin",
-  
-  
+
+
   // Métadonnées d'icônes
   icons: {
     icon: "/favicon.ico",
@@ -160,20 +159,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-593SZBKS" />
+      <GoogleAnalytics gaId="G-F55FK2K74W" />
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
         <QueryProvider>
-         {/* <ThemeProvider> */}
-            <Header  className="absolute top-0 left-0 w-full"/>
-            <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
-            <Footer />
-            <Toaster 
-              position="bottom-right"
-              richColors
-              closeButton
-              duration={4000}
-            />
+          {/* <ThemeProvider> */}
+          <Header className="absolute top-0 left-0 w-full" />
+          <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
+          <Footer />
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            duration={4000}
+          />
           {/* </ThemeProvider> */}
         </QueryProvider>
       </body>
