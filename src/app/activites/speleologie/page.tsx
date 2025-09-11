@@ -233,7 +233,7 @@ const SpeleoPage = () => {
                     <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <div className="container mx-auto max-w-[1200px] space-y-16">
                         <h2 className="text-white text-6xl font-bold text-center ">Où je pratique la spéléologie ?</h2>
-                        <ActivitySpots activityName="Speleologie" />
+                        <ActivitySpots activityName="Spéléologie" />
                     </div>
                 </motion.div>
 
