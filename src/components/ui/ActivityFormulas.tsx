@@ -3,10 +3,10 @@
 import { useActivities } from '@/hooks/useQuery';
 import { IActivity } from '@/types';
 import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import ReservationLink from './ReservationLink';
 import { useTooltipPosition } from '@/hooks/useTooltipPosition';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface ActivityFormulasProps {
     activityName: string;
@@ -26,22 +26,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     const [showACMInfoFull, setShowACMInfoFull] = useState(false);
     const { registerButton, getTooltipClassName } = useTooltipPosition();
 
-    // Refs et détection de visibilité
-    const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: true, margin: "-100px" });
-
-    // Variantes d'animation
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.1
-            }
-        }
-    };
-
+    // Variantes d'animation pour les cartes
     const leftCardVariants = {
         hidden: { opacity: 0, x: -50, y: 20 },
         visible: {
@@ -49,7 +34,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
             x: 0,
             y: 0,
             transition: {
-                duration: 0.7,
+                duration: 0.6,
                 ease: "easeOut"
             }
         }
@@ -62,7 +47,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
             x: 0,
             y: 0,
             transition: {
-                duration: 0.7,
+                duration: 0.6,
                 ease: "easeOut"
             }
         }
@@ -100,15 +85,12 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
     }
 
     return (
-        <section ref={containerRef} className="container mx-auto my-16 flex flex-col gap-8" aria-labelledby="formulas-title">
+        <section className="container mx-auto my-16 flex flex-col gap-8" aria-labelledby="formulas-title">
             <h2 id="formulas-title" className="sr-only">Formules disponibles pour {activityName}</h2>
-            <motion.div 
+            <div 
                 className="flex flex-col lg:flex-row gap-8 mx-auto" 
                 role="list" 
                 aria-label="Formules d'activité"
-                variants={containerVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
             >
                 {activity.half_day && (
                     <motion.article 
@@ -418,7 +400,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
                         </div>
                     </motion.article>
                 )}
-            </motion.div>
+            </div>
         </section>
     );
 }; 
