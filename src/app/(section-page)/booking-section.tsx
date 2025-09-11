@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import CustomSection from "@/components/layout/Section";
+import RotatingText from "@/components/ui/rotating-text";
 
  const BookingSection = ( { className }: { className?: string } ) => {
     return (
@@ -8,6 +9,9 @@ import CustomSection from "@/components/layout/Section";
         TopMarker={true} BottomMarker={true} Markercolor="secondary"
         >
             <div className="flex flex-col items-center justify-center">
+                <RotatingText
+                mainClassName="text-6xl lg:text-8xl text-center font-title"
+                texts={["Canyoning", "Escalade", "Spéléologie", "Via corda"]} />
             <h2 className="text-4xl lg:text-6xl text-center">Tu sais déjà ce que tu veux ? <br /> Réserve ta sortie en quelques clics !</h2>
             
             </div>

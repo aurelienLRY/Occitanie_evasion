@@ -26,7 +26,7 @@ import ReservationLink from "../ReservationLink";
  * Component to display a map with markers for each spot.
  * @param spots - The spots to be displayed on the map.
  */
-function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className?: string }) {
+function MapCustomer({ spots, className }: { spots: ISpot[] | null, className?: string }) {
 
   const SetViewComponent = ({ spots }: { spots: ISpot[] }) => {
     const map = useMap();
@@ -51,54 +51,59 @@ function MapCustomer({ spots , className }: { spots: ISpot[ ] | null , className
   };
 
 
-if (spots === null) return null;
- console.log(spots);
+  if (spots === null) return null;
+  console.log(spots);
   return (
     <div className="w-full h-full">
-      
-    
-    <MapContainer 
-      center={[0, 0]} 
-      zoom={9} 
-      className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`}
-    >
-      <SetViewComponent spots={spots} />
-      <GestureHandler />
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {spots.map((spot: ISpot) => (
-        <Marker
-          key={spot._id}
-          position={convertGpsCoordinates(spot.gpsCoordinates)}
-          icon={markerIcon(spot)}
-        >
-          <Popup interactive>
-            <div className="w-full min-w-[300px] min-h-fit rounded-[1em] overflow-hidden flex flex-col items-center justify-center">
-              {spot.photo && (
+
+
+      <MapContainer
+        center={[0, 0]}
+        zoom={9}
+        className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`}
+      >
+        <SetViewComponent spots={spots} />
+        <GestureHandler />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {spots.map((spot: ISpot) => (
+          <Marker
+            key={spot._id}
+            position={convertGpsCoordinates(spot.gpsCoordinates)}
+            icon={markerIcon(spot)}
+          >
+            <Popup interactive>
+              <div className="w-full min-w-[300px] min-h-fit rounded-[1em] overflow-hidden flex flex-col items-center justify-center">
+                {spot.photo && (
                   <picture className=" overflow-hidden">
                     <Image
                       src={spot.photo}
                       alt={`Photo de ${spot.name}`}
-                  
+
                       className="rounded-t-[1em]  object-cover"
                       width={350}
                       height={150}
                     />
                   </picture>
-              )}
-              <div className="tooltip-body w-full h-min max-w-[300px] flex flex-col items-center justify-center gap-[0.5em] whitespace-pre-wrap break-words overflow-wrap-break-word max-h-[200px]">
-                <h3 className="font-title text-2xl">{spot.name}</h3>
-                {spot.description && (
-                  <div className="content text-sm overflow-y-auto p-[0.5em]">{spot.description}</div>
                 )}
+                <div className="tooltip-body w-full h-min max-w-[300px] flex flex-col items-center justify-center gap-[0.5em] whitespace-pre-wrap break-words overflow-wrap-break-word max-h-[200px]">
+                  <h3 className="font-title text-2xl">{spot.name}</h3>
+                  {spot.description && (
+                    <div className="content text-sm overflow-y-auto p-[0.5em] flex flex-col items-center justify-center gap-[0.5em]">
+                      {spot.description}
+
+                      <div className="w-full flex items-center justify-center">
+                        {ReservationbyActivity(spot)}
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+
               </div>
-              <div className="w-full flex items-center justify-center">
-                {ReservationbyActivity(spot)}
-              </div>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
     </div>
   );
 }
@@ -142,15 +147,15 @@ const markerIcon = (spot: ISpot) => {
 
 
   switch (activity) {
-    case "escalade":      return markerEscalade;
-    case "randonée aquatique":return markerCanyoning;
-    case "canyoning":return markerCanyoning;
-    case "canyoning sportif":return markerCanyoning;
-    case "spéléologie":return markerSpeleo;
-    case "speleologie":return markerSpeleo;
-    case "spéléologie découverte":return markerSpeleo;
-    case "spéléologie sportive":      return markerSpeleo;
-    case "via corda":      return markerViaCorda;
+    case "escalade": return markerEscalade;
+    case "randonée aquatique": return markerCanyoning;
+    case "canyoning": return markerCanyoning;
+    case "canyoning sportif": return markerCanyoning;
+    case "spéléologie": return markerSpeleo;
+    case "speleologie": return markerSpeleo;
+    case "spéléologie découverte": return markerSpeleo;
+    case "spéléologie sportive": return markerSpeleo;
+    case "via corda": return markerViaCorda;
 
     default:
       return markerEscalade;
@@ -161,29 +166,29 @@ const ReservationbyActivity = (spot: ISpot) => {
   const { practicedActivities } = spot;
   // handle if the array has multiple activities
   if (practicedActivities.length > 1) {
-    return ;
+    return;
   }
   // otherwise, get the activity
   return (
     <div className="w-full flex items-center justify-center">
- { practicedActivities.map((activity) => {
-switch (activity.activityName) {
-    case "escalade":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "randonée aquatique":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "canyoning":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "canyoning sportif":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "spéléologie":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "speleologie":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "spéléologie découverte":return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "spéléologie sportive":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-    case "via corda":      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+      {practicedActivities.map((activity) => {
+        switch (activity.activityName.toLocaleLowerCase().trim()) {
+          case "escalade": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "randonée aquatique": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "canyoning": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "canyoning sportif": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "spéléologie": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "speleologie": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "spéléologie découverte": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "spéléologie sportive": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+          case "via corda": return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary! !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
 
-    default:
-      return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
-}
-})}
-  </div>
-)
+          default:
+            return <ReservationLink activity={activity.activityName} lieux={spot.name} className="bg-primary !text-white px-4 py-2 rounded-md">réserver</ReservationLink>;
+        }
+      })}
+    </div>
+  )
 }
 
 
