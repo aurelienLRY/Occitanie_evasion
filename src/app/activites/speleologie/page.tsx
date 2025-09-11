@@ -22,6 +22,7 @@ const SpeleoPage = () => {
     // Détection de visibilité pour chaque section
     const descriptionInView = useInView(descriptionRef, { once: true, margin: "-100px" });
     const carouselInView = useInView(carouselRef, { once: true, margin: "-100px" });
+    const formulasInView = useInView(formulasRef, { once: true, margin: "-100px" });
     const spotsInView = useInView(spotsRef, { once: true, margin: "-100px" });
     const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
 
@@ -172,8 +173,12 @@ const SpeleoPage = () => {
                     </Carousel>
                 </motion.div>
 
-                <div 
+                <motion.div 
+                    ref={formulasRef}
                     className="w-full flex flex-col gap-6  items-center relative pb-16"
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate={formulasInView ? "visible" : "hidden"}
                 >
                     <h2 className="text-center lg:text-left">Trois formules selon ton envie</h2>
                     <ActivityFormulas
@@ -214,7 +219,7 @@ const SpeleoPage = () => {
                         </div>
                     </div>
                 </article>
-                </div>
+                </motion.div>
 
                 <motion.div 
                     ref={spotsRef}

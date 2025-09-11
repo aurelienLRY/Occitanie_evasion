@@ -18,12 +18,14 @@ const EscaladePage = () => {
     // Refs pour les sections à animer
     const descriptionRef = useRef(null);
     const carouselRef = useRef(null);
+    const formulasRef = useRef(null);
     const spotsRef = useRef(null);
     const infoRef = useRef(null);
 
     // Détection de visibilité pour chaque section
     const descriptionInView = useInView(descriptionRef, { once: true, margin: "-100px" });
     const carouselInView = useInView(carouselRef, { once: true, margin: "-100px" });
+    const formulasInView = useInView(formulasRef, { once: true, margin: "-100px" });
     const spotsInView = useInView(spotsRef, { once: true, margin: "-100px" });
     const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
 
@@ -180,8 +182,12 @@ const EscaladePage = () => {
             </motion.div>
 
             {/* Formules */}
-            <div 
+            <motion.div 
+                ref={formulasRef}
                 className="w-full flex flex-col gap-6  items-center"
+                variants={itemVariants}
+                initial="hidden"
+                animate={formulasInView ? "visible" : "hidden"}
             >
                 <h2 className="text-center lg:text-left">Deux formules selon ton envie</h2>
                 <ActivityFormulas
@@ -191,7 +197,7 @@ const EscaladePage = () => {
                     reducedPriceConditions="Tarif réduit pour les enfants jusqu'à 17 ans inclus et les groupes de minimum 7 personnes."
                     ACMPriceConditions="Tarif ACM : 8 enfants + 1 accompagnateur = 280€. Contactez-moi pour plus d'informations."
                 />
-            </div>
+            </motion.div>
 
             {/* Spots */}
             <motion.div 
