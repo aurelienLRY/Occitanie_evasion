@@ -54,7 +54,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
             lg:rounded-none
             min-w-[300px]
             hover:scale-105
-            lg:hover:scale-10
+            lg:hover:scale-100
             lg:overflow-hidden
             
            
