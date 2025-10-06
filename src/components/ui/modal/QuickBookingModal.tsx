@@ -26,8 +26,8 @@ const quickBookingSchema = yup.object({
   clientPhone: yup.string().required('Le téléphone est requis'),
   participants: yup.array().of(
     yup.object({
-      height: yup.number().min(100, 'Taille minimale 100cm').max(250, 'Taille maximale 250cm').required('Taille requise'),
-      weight: yup.number().min(20, 'Poids minimal 20kg').max(200, 'Poids maximal 200kg').required('Poids requis')
+      height: yup.number().max(250, 'Taille maximale 250cm').required('Taille requise'),
+      weight: yup.number().max(200, 'Poids maximal 200kg').required('Poids requis')
     })
   ).min(1, 'Au moins un participant est requis').required(),
   specialRequests: yup.string().optional()
@@ -363,6 +363,7 @@ const QuickBookingModal = React.memo(({ session, isOpen, onClose }: QuickBooking
                           <div className='flex flex-col text-left'>
                             <p className="text-xl font-title">Pourquoi j&apos;ai besoin de vos tailles et poids <span className='text-secondary'>?</span></p>
                             <p className="text-xs text-gray-500">Ces informations sont nécessaires pour la préparation de l&apos;activité. Rien de plus désagréable qu&apos;une combinaison trop petite, ou de plus dangereux qu&apos;un baudrier trop grand !</p>
+                            <p className="text-xs text-gray-500">Tu n&apos;as pas les informations, pas de panique, indique zéro sur les champs et nous verrons avec toi plus tard. </p>
                           </div>
                         </div>
                       </div>
