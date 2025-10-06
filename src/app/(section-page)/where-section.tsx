@@ -104,7 +104,7 @@ export default function WhereSection( { className }: { className?: string } ) {
                 </motion.div>
                 
                 <motion.div 
-                    className="flex  lg:flex-1/2 w-full relative"
+                    className="flex  lg:flex-1/2 relative w-full"
                     variants={mapVariants}
                 >
                     {spots && <MapCustomer spots={spots as ISpot[]} />}

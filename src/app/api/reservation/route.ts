@@ -129,6 +129,8 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const booking: IAddCustomerBooking = await request.json();
+    console.log("booking >>>>>>>>>>>>");
+    console.log(booking);
 
     // Validation des données
     if (!booking.customer || !booking.session) {
@@ -151,13 +153,13 @@ export async function PATCH(request: NextRequest) {
 
         <div style="text-align: center; padding: 20px;">
         <h3>
-          ${booking.customer.last_name} ${booking.customer.first_names} vient de rejoindre la session ${activityName} du ${new Date(booking.session.date).toLocaleDateString('fr-FR')} à ${booking.session.startTime}
+          ${booking.customer.last_name} ${booking.customer.first_names} vient de rejoindre la session ${activityName} du ${new Date(booking.session.date).toLocaleDateString('fr-FR', {timeZone: 'Europe/Paris'})} à ${booking.session.startTime}
         </h3>
         <h3>
           Pour voir les détails de la session, connecte-toi <a href="${process.env.BACKOFFICE_URL}" style="color: #007bff;">ici</a> .
         </h3>
         </div>
-        
+
         
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="color: #007bff; margin-top: 0;">Informations Client</h3>
@@ -171,7 +173,7 @@ export async function PATCH(request: NextRequest) {
           <h3 style="color: #333; margin-top: 0;">Rappel de la Session</h3>
           <p><strong>Activité :</strong> ${activityName}</p>
           <p><strong>Lieu :</strong> ${spotName}</p>
-          <p><strong>Date :</strong> ${new Date(booking.session.date).toLocaleDateString('fr-FR')}</p>
+          <p><strong>Date :</strong> ${new Date(booking.session.date).toLocaleDateString('fr-FR', {timeZone: 'Europe/Paris'})}</p>
           <p><strong>Heure de début :</strong> ${booking.session.startTime}</p>
           <p><strong>Heure de fin :</strong> ${booking.session.endTime}</p>
           <p><strong>Type de session :</strong> ${booking.session.type_formule === 'half_day' ? 'Demi-journée' : 'Journée complète'}</p>

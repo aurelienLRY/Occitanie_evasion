@@ -100,7 +100,7 @@ const CanyoningPage = () => {
                     <Image src="/images/Canyoning/canyoning-hero-mobile.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover md:hidden" priority/>
 
 
-                    <div className=" max-w-[500px] w-90% min-w-[350px] flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
+                    <div className=" max-w-[500px] w-[95%]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Canyoning</h1>
                         <h2 className="!text-3xl lg:!text-4xl">Envie de fraîcheur, de fun et de nature ?</h2>
                         <h3 className="!text-lg font-paragraphe">Une randonnée aquatique à 10 min de Mazamet au cœur des gorges sauvages du Banquet</h3>
@@ -118,7 +118,7 @@ const CanyoningPage = () => {
                     animate={descriptionInView ? "visible" : "hidden"}
                 >
                     <motion.div 
-                        className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]"
+                        className="flex items-center justify-start w-full max-w-[80vw] "
                         variants={leftBlockVariants}
                     >
                         <div className="space-y-4 max-w-[850px] text-justify">
@@ -129,10 +129,10 @@ const CanyoningPage = () => {
                     </motion.div>
                     
                     <motion.div 
-                        className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]"
+                        className="flex items-center justify-end w-full max-w-[80vw] "
                         variants={rightBlockVariants}
                     >
-                        <div className="space-y-4 max-w-[850px] text-justify">
+                        <div className="space-y-4 max-w-[850px]text-justify">
                             <h2>Canyoning,<span className="text-4xl">🤔</span> qu&apos;es aquò<span className="text-primary">?</span></h2>
                             <p><strong>Au programme :</strong> sauts, toboggans naturels, nage en eaux vives et marche aux pieds des falaises granitiques.</p>
                             <p>C&apos;est une rando… mais dans l&apos;eau ! En combinaison néoprène, casque sur la tête et <strong>sourire aux lèvres, tu descends un cours d&apos;eau en mode aventure.</strong>  <strong> On avance ensemble, chacun à son rythme, dans la bonne humeur et en toute sécurité.</strong></p>
@@ -217,7 +217,7 @@ const CanyoningPage = () => {
 
                 <motion.article 
                     ref={infoRef}
-                    className="container mx-auto flex flex-col gap-12 px-16"
+                    className="container mx-auto flex flex-col gap-6 lg:gap-12 px-4 lg:px-16"
                     variants={containerVariants}
                     initial="hidden"
                     animate={infoInView ? "visible" : "hidden"}
@@ -283,7 +283,7 @@ const CanyoningPage = () => {
                 TopMarker={true}
                 >
                     <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
-                    <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
+                    <GalleryInsta gallery={gallery} className="lg:px-16 px-4 py-12 text-gray-100" backgroundColor="gray-100" />
                 </CustomSection>
            
 

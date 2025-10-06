@@ -94,7 +94,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
             >
                 {activity.half_day && (
                     <motion.article 
-                        className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100" 
+                        className="bg-white min-h-full  rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 py-8 px-4  max-w-sm border border-gray-100" 
                         role="listitem"
                         variants={leftCardVariants}
                     >
@@ -247,7 +247,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
 
                 {activity.full_day && (
                     <motion.article 
-                        className="bg-white min-h-full min-w-[350px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100 relative" 
+                        className="bg-white min-h-full  rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 max-w-sm border border-gray-100 relative" 
                         role="listitem"
                         variants={rightCardVariants}
                     >

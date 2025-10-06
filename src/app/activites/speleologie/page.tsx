@@ -113,18 +113,18 @@ const SpeleoPage = () => {
                     animate={descriptionInView ? "visible" : "hidden"}
                 >
                     <motion.div 
-                        className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]"
+                        className="flex items-center justify-start w-full max-w-[80vw] "
                         variants={leftBlockVariants}
                     >
                         <div className="space-y-4 max-w-[850px] text-justify">
-                            <h2>Plonge dans l&apos;univers mystérieux des grottes <span className="text-primary">!</span></h2>
+                            <h2 className="text-left md:text-justify">Plonge dans l&apos;univers mystérieux des grottes <span className="text-primary">!</span></h2>
                             <p> <strong>Je t&apos;invite à la découverte d&apos;un monde souterrain incroyable </strong> que la nature a façonné durant des millions d&apos;années. Un milieu souvent méconnu, majestueux et extrêmement fragile à la fois.</p>
                             <p> <strong> Viens vivre une expérience hors du temps,</strong> en symbiose avec la formation des roches, la création des grottes, l&apos;apparition des concrétions (stalactites, stalagmites, draperies…).</p>
                         </div>
                     </motion.div>
                     
                     <motion.div 
-                        className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]"
+                        className="flex items-center justify-end w-full max-w-[80vw] "
                         variants={rightBlockVariants}
                     >
                         <div className="space-y-4 max-w-[850px] text-justify">
@@ -193,12 +193,12 @@ const SpeleoPage = () => {
                     />
 
                      {/* Spéléoniversaire */}
-                <article className="container mx-auto flex flex-col gap-12 px-4">
-                    <div className="w-full bg-gradient-to-r from-primary/20 to-primary/10 p-8 rounded-lg border-l-4 border-primary">
-                        <div className="flex items-start gap-4">
+                <article className="container mx-auto flex flex-col gap-12 md:px-4">
+                    <div className="w-full bg-gradient-to-r from-primary/20 to-primary/10 p-4 md:p-8 rounded-lg border-l-4 border-primary">
+                        <div className="flex flex-col md:flex-row justify-center md:justify-start items-center md:items-start gap-4">
                             <Gift className="w-32 h-32 text-primary mt-1" />
                             <div className="space-y-4">
-                                <h2 className="text-primary text-3xl font-bold">Spéléoniversaire : un anniversaire inoubliable sous terre !</h2>
+                                <h2 className="text-primary text-3xl font-bold">Spéléoniversaire: un anniversaire inoubliable sous terre !</h2>
                                 <p className="text-lg">Offre à ton enfant une aventure unique pour son anniversaire : une exploration souterraine ludique et magique au cœur d&apos;une véritable grotte !</p>
                                 <p>Équipés comme de vrais petits spéléologues (casque avec éclairage, combinaison), les enfants partent à la découverte d&apos;un monde mystérieux, entre stalactites, passages secrets et recoins fascinants. Mais attention, l&apos;exploration ne se fait pas sans surprises ! En chemin, ils devront relever des défis, résoudre des énigmes, et participer à des jeux d&apos;équipe pour percer les secrets de la cavité.</p>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
@@ -242,7 +242,7 @@ const SpeleoPage = () => {
                 {/* Infos pratiques */}
                 <motion.article 
                     ref={infoRef}
-                    className="container mx-auto flex flex-col gap-12 px-16"
+                    className="container mx-auto flex flex-col gap-12 md:px-16 px-4"
                     variants={containerVariants}
                     initial="hidden"
                     animate={infoInView ? "visible" : "hidden"}
@@ -310,7 +310,7 @@ const SpeleoPage = () => {
                 TopMarker={true}
             >
                 <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
-                <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
+                <GalleryInsta gallery={gallery} className="lg:px-16 px-4 py-12 text-gray-100" backgroundColor="gray-100" />
             </CustomSection>
 
             <ContactSection />

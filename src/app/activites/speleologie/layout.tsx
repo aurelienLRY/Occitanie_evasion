@@ -4,10 +4,10 @@ import { businessInformation } from "@/config/business-information";
 export const metadata: Metadata = { 
     title: {
         template: `%s | ${businessInformation.name}`,
-        default: `Spéléologie - ${businessInformation.name}`,
+        default: `Spéléologie dans l'Aude`,
     },
     description: "Explorez les grottes et cavités souterraines de l'Occitanie. Découvrez un monde souterrain fascinant avec nos guides spéléologues expérimentés.",
-    keywords: `${businessInformation.seo.keywords}, spéléologie, grotte, cavité, souterrain, exploration, stalactites, stalagmites, Occitanie, Pyrénées, aventure`,
+    keywords: `${businessInformation.seo.keywords},initiation spéléologie, pratiquer la spéléologie, visitez Gouffre Géant de Cabrespine , spéléo, spéléo Occitanie, sortie spéléologie aude, spéléo Pyrénées, exploration, aventure sous terre`,
     authors: [{ 
         name: businessInformation.seo.author, 
         url: "https://www.occitanie-evasion.com" 

@@ -62,7 +62,7 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
     const iconPath = getActivityIconPath(session.activity.name);
 
     return (
-        <div className='relative min-w-[350px] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group'>
+        <div className='relative  shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group'>
             {isReduced && (
                 <div className="">
                     <div className="relative">
@@ -85,7 +85,7 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
                 </div>
             )}
             
-            <div className='flex gap-4 justify-between items-center bg-white rounded-lg px-4'>
+            <div className='p-4 flex flex-col sm:flex-row gap-4 justify-between items-center bg-white rounded-lg px-4'>
                     <Image 
                         src={iconPath} 
                         alt={session.activity.name} 
@@ -93,7 +93,7 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
                         height={200}
                         className='absolute -right-5 top-1/2 -translate-y-1/2  h-full object-cover opacity-30 overflow-hidden group-hover:opacity-20 transition-all duration-300'
                     />
-                <div className='flex flex-col gap-1 px-12 py-2 w-full z-10'>
+                <div className='flex flex-col gap-1 px-4  py-2 w-full z-10'>
                     <h3 className='!text-3xl text-left'>{session.activity.name.trim()}</h3>
                     
                     {/* Lieu cliquable avec bouton info */}
@@ -128,7 +128,7 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
               
 
                 <button 
-                    className='bg-secondary text-white px-6 mr-6 py-2 rounded-lg group-hover:scale-110 transition-all duration-300' 
+                    className='bg-secondary text-white px-6 mr-6 py-2 rounded-lg group-hover:scale-110 transition-all duration-300 z-30' 
                     onClick={handleBookSessionClick}
                 >
                     Participer
