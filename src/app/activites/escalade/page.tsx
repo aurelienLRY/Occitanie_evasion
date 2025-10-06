@@ -98,7 +98,7 @@ const EscaladePage = () => {
         <section className="flex flex-col gap-16 items-center">
             <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">²
                 <Image src="/images/escalade/Occitanie-evasion-escalade-Hero.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
-                <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white px-6 py-2 rounded-lg bg-black/20">
+                <div className="max-w-[500px] w-[95%]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white px-6 py-2 rounded-lg bg-black/20">
                     <h1>Escalade</h1>
                     <h2 className="!text-3xl lg:!text-4xl">Grimpe vers de nouveaux sommets !</h2>
                     <p className="text-lg">Accessible à tous à partir de 6 ans, l&apos;escalade en milieu naturel est un sport complet, tant sur le plan physique que mental.</p>
@@ -115,7 +115,7 @@ const EscaladePage = () => {
                 animate={descriptionInView ? "visible" : "hidden"}
             >
                 <motion.div 
-                    className="flex items-center justify-start w-full max-w-[80vw] min-w-[350px]"
+                    className="flex items-center justify-start w-full max-w-[80vw] "
                     variants={leftBlockVariants}
                 >
                     <div className="space-y-4 max-w-[850px] text-justify">
@@ -126,7 +126,7 @@ const EscaladePage = () => {
                 </motion.div>
                 
                 <motion.div 
-                    className="flex items-center justify-end w-full max-w-[80vw] min-w-[350px]"
+                    className="flex items-center justify-end w-full max-w-[80vw] "
                     variants={rightBlockVariants}
                 >
                     <div className="space-y-4 max-w-[850px] text-justify">
@@ -218,7 +218,7 @@ const EscaladePage = () => {
             {/* Matériel et prérequis */}
             <motion.article 
                 ref={infoRef}
-                className="container mx-auto flex flex-col gap-12 px-16"
+                className="container mx-auto flex flex-col gap-6 lg:gap-12 px-4 lg:px-16"
                 variants={containerVariants}
                 initial="hidden"
                 animate={infoInView ? "visible" : "hidden"}
@@ -286,7 +286,7 @@ const EscaladePage = () => {
             TopMarker={true}
             >
                 <h2 className="text-center ">Chaque image raconte une aventure <span className="text-secondary">!</span></h2>
-                <GalleryInsta gallery={gallery} className="px-16 py-12 text-gray-100" backgroundColor="gray-100" />
+                <GalleryInsta gallery={gallery} className="lg:px-16 px-4 py-12 text-gray-100" backgroundColor="gray-100" />
             </CustomSection>
         <ContactSection />
         </div>
