@@ -490,6 +490,7 @@ const ReservationForm = ({ urlParams, onActivityInfoClick, onSpotInfoClick }: Re
                             <div className='flex flex-col text-left'>
                               <p className="text-xl font-title  ">Pourquoi j&apos;ai besoin de vos tailles et poids <span className='text-secondary'>?</span> </p>
                               <p className="text-xs  text-gray-500">Ces informations sont nécessaires pour la préparation de l&apos;activité. Rien de plus désagréable qu&apos;une combinaison trop petite , ou de plus dangereux qu&apos;un baudrier trop grand ! </p>
+                              <p className="text-xs  text-gray-500">Tu n&apos;as pas les informations, pas de panique, indique zéro  </p>
                             </div>
                           </div>
                         </div>

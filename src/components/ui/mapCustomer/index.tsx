@@ -60,7 +60,7 @@ function MapCustomer({ spots, className }: { spots: ISpot[] | null, className?: 
       <MapContainer
         center={[0, 0]}
         zoom={9}
-        className={`box-border rounded-l-[0.8em] min-w-[350px] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`}
+        className={`box-border rounded-l-[0.8em] min-h-[450px] h-[60%] w-full shadow-lg relative ${className}`}
       >
         <SetViewComponent spots={spots} />
         <GestureHandler />

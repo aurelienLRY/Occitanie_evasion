@@ -25,13 +25,14 @@ const BannerServices = ( { className }: { className?: string } ) => {
 
 
     <div className={`
+     
       grid grid-cols-1 gap-4
       sm:grid-cols-2
       lg:flex lg:flex-row lg:gap-0
-      w-full min-h-[60vh] relative overflow-hidden 
+       min-h-[60vh] relative overflow-hidden
       lg:bg-black
       px-4 lg:px-0
-   
+      w-full
       ${className}
     `}>
       <MarkerLineSvg className={"hidden lg:block w-[135vw] h-10 absolute -top-6  left-1/2 -translate-x-1/2 text-background  rotate-180   z-30 "}  preserveAspectRatio="none"/>
@@ -41,6 +42,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
         <div
           key={idx}
           className="
+         
             relative  group
             aspect-square
             rounded-xl
@@ -52,7 +54,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
             lg:rounded-none
             min-w-[300px]
             hover:scale-105
-            lg:hover:scale-100
+            lg:hover:scale-10
             lg:overflow-hidden
             
            
@@ -63,7 +65,7 @@ const BannerServices = ( { className }: { className?: string } ) => {
            <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute -bottom-8  left-1/2 -translate-x-1/2 text-background     z-30 "}  preserveAspectRatio="none"/>
            <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute top-1/2  right-0 translate-x-1/2 -translate-y-1/2 rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
            <MarkerLineSvg className={" lg:hidden w-[145%] h-16 absolute top-1/2  left-0 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-background     z-30 "}  preserveAspectRatio="none"/>
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full ">
             <Image 
               src={activity.image} 
               alt={activity.alt} 
@@ -77,16 +79,16 @@ const BannerServices = ( { className }: { className?: string } ) => {
             </div>
           </div>
           <div className="absolute top-[10%] lg:top-[30%] left-[5%] lg:group-hover:left-[25%] transition-all duration-500  min-w-min w-[80%] lg:w-[60%] max-w-max    flex flex-col gap-2 overflow-hidden z-10 px-4 lg:px-0 ">
-            <h3 className="!text-6xl lg:!text-7xl break-words font-bold text-white mb-2 drop-shadow-lg leading-none ">
+            <h3 className="!text-4xl md:!text-6xl lg:!text-7xl break-words font-bold text-white mb-2 drop-shadow-lg leading-none ">
               {activity.title}
             </h3>
-            <p className={`text-white text-lg text-justify ${BannerTextAnimation} `}>
+            <p className={`text-white text-sm md:text-base   lg:text-lg lg:text-justify ${BannerTextAnimation} `}>
               {activity.text}
             </p>
-            <div className={`flex flex-row gap-2 ${BannerTextAnimation} `}>
+            <div className={`flex flex-wrap gap-1 ${BannerTextAnimation} `}>
                 {activity.links.map((link: ActivityLink, idx: number) => (
                     <Link href={link.href} key={idx} className={`${link.style === "primary" ? 
-                    " border border-white hover:bg-white hover:text-black hover:border-primary text-white transition-all duration-300" : "bg-secondary text-white"} px-4 py-2 rounded-md transition-all duration-300`}>
+                    " border border-white hover:bg-white hover:text-black hover:border-primary text-white  transition-all duration-300" : "bg-secondary text-white"} px-2 py-1 text-sm md:text-base md:px-4 md:py-2 rounded-md transition-all duration-300`}>
                         {link.label}
                     </Link>
                 ))}
