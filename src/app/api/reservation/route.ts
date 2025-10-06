@@ -215,7 +215,7 @@ export async function PATCH(request: NextRequest) {
     // Configuration de l'email de notification à l'administrateur
     const mailOptions = {
       from: process.env.SMTP_EMAIL,
-      to: process.env.NODE_ENV === 'development' ? 'leroyaurelien11@gmail.com' : process.env.SMTP_EMAIL, // Email de l'administrateur (même que l'expéditeur)
+      to: 'leroyaurelien11@gmail.com', // Email de l'administrateur (même que l'expéditeur)
       subject: `Nouvelle réservation - ${booking.customer.last_name} ${booking.customer.first_names}`,
       html: emailHtml,
     };
