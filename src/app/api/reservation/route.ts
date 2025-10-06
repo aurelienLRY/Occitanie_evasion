@@ -129,6 +129,8 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const booking: IAddCustomerBooking = await request.json();
+    console.log("booking >>>>>>>>>>>>");
+    console.log(booking);
 
     // Validation des données
     if (!booking.customer || !booking.session) {
@@ -151,11 +153,23 @@ export async function PATCH(request: NextRequest) {
 
         <div style="text-align: center; padding: 20px;">
         <h3>
-          ${booking.customer.last_name} ${booking.customer.first_names} vient de rejoindre la session ${activityName} du ${new Date(booking.session.date)} à ${booking.session.startTime}
+          ${booking.customer.last_name} ${booking.customer.first_names} vient de rejoindre la session ${activityName} du ${new Date(booking.session.date).toLocaleDateString('fr-FR', {timeZone: 'Europe/Paris'})} à ${booking.session.startTime}
         </h3>
         <h3>
           Pour voir les détails de la session, connecte-toi <a href="${process.env.BACKOFFICE_URL}" style="color: #007bff;">ici</a> .
         </h3>
+        </div>
+
+        <div style="text-align: center; padding: 20px;">
+
+        essai des dates
+        <ul>
+          <li>${new Date(booking.session.date).toString()}</li>
+          <li>${new Date(booking.session.date).toLocaleDateString('fr-FR', {timeZone: 'UTC'})}</li>
+          <li>${new Date(booking.session.date).toISOString()}</li>
+          <li>${new Date(booking.session.date).toLocaleDateString('fr-FR')}</li>
+          <li>${new Date(booking.session.date).toLocaleDateString('fr-FR', {timeZone: 'Europe/Paris'})}</li>
+          </ul>
         </div>
         
         
