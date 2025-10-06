@@ -128,7 +128,7 @@ const IsBookingCard = ({ session, onSpotInfoClick, onBookSessionClick }: IsBooki
               
 
                 <button 
-                    className='bg-secondary text-white px-6 mr-6 py-2 rounded-lg group-hover:scale-110 transition-all duration-300' 
+                    className='bg-secondary text-white px-6 mr-6 py-2 rounded-lg group-hover:scale-110 transition-all duration-300 z-30' 
                     onClick={handleBookSessionClick}
                 >
                     Participer
