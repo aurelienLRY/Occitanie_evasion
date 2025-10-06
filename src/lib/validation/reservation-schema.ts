@@ -4,11 +4,9 @@ import * as yup from 'yup';
 const participantSchema = yup.object({
   height: yup.number()
     .required('La taille est requise')
-    .min(100, 'La taille doit être d\'au moins 100 cm')
     .max(250, 'La taille ne peut pas dépasser 250 cm'),
   weight: yup.number()
     .required('Le poids est requis')
-    .min(20, 'Le poids doit être d\'au moins 20 kg')
     .max(200, 'Le poids ne peut pas dépasser 200 kg'),
 });
 
@@ -52,7 +50,6 @@ export const reservationSchema = yup.object({
   participants: yup.array()
     .of(participantSchema)
     .min(1, 'Au moins un participant est requis')
-    .max(10, 'Maximum 10 participants')
     .required('Les participants sont requis'),
   
   // Informations supplémentaires
