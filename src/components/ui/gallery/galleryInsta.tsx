@@ -3,7 +3,7 @@ import PictureCard  from "@/components/ui/card/picture.Card";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { memo, useMemo, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 
 export interface IGalleryInsta {
     url: string;
@@ -44,7 +44,7 @@ const GalleryInsta = ({gallery, className, backgroundColor = 'white'}: {gallery:
             scale: 1,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

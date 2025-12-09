@@ -6,7 +6,7 @@ import { Clock, Users, Euro, Calendar, Star, Info } from 'lucide-react';
 import { useState } from 'react';
 import ReservationLink from './ReservationLink';
 import { useTooltipPosition } from '@/hooks/useTooltipPosition';
-import { motion } from 'framer-motion';
+import { easeOut, motion } from 'framer-motion';
 
 interface ActivityFormulasProps {
     activityName: string;
@@ -35,7 +35,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -48,7 +48,7 @@ export const ActivityFormulas = ({ activityName, reducedPriceConditions, ACMPric
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

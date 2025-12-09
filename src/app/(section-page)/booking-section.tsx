@@ -2,7 +2,7 @@
 import Link from "next/link";
 import CustomSection from "@/components/layout/Section";
 import RotatingText from "@/components/ui/rotating-text";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
  const BookingSection = ( { className }: { className?: string } ) => {
@@ -29,7 +29,7 @@ import { useRef } from "react";
             scale: 1,
             transition: {
                 duration: 0.8,
-                ease: "easeOut"
+                ease: easeOut,
             }
         }
     };
@@ -42,7 +42,7 @@ import { useRef } from "react";
             rotateX: 0,
             transition: {
                 duration: 1,
-                ease: "easeOut"
+                ease: easeOut,
             }
         }
     };
@@ -55,7 +55,7 @@ import { useRef } from "react";
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut",
+                ease: easeOut,
                 delay: 0.5
             }
         }
@@ -69,7 +69,7 @@ import { useRef } from "react";
             rotate: 0,
             transition: {
                 duration: 0.8,
-                ease: "easeOut",
+                ease: easeOut,
                 delay: 0.4
             }
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { easeInOut, easeOut, motion } from 'framer-motion';
 import { Star, Quote, User } from 'lucide-react';
 import Image from 'next/image';
 
@@ -59,7 +59,7 @@ const GoogleAvisCard = ({ review, index = 0, className = "" }: GoogleAvisCardPro
       transition: {
         duration: 0.5,
         delay: index * 0.1,
-        ease: "easeOut"
+        ease: easeOut
       }
     },
     hover: {
@@ -67,7 +67,7 @@ const GoogleAvisCard = ({ review, index = 0, className = "" }: GoogleAvisCardPro
       scale: 1.02,
       transition: {
         duration: 0.2,
-        ease: "easeInOut"
+        ease: easeInOut
       }
     }
   };
