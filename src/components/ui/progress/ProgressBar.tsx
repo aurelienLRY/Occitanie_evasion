@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 
 interface ProgressBarProps {
   currentStep: number;
@@ -25,7 +25,7 @@ const ProgressBar = ({ currentStep, totalSteps, className = '' }: ProgressBarPro
           className="bg-secondary h-1 rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: easeInOut }}
         />
       </div>
       

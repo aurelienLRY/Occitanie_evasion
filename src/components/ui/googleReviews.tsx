@@ -2,7 +2,7 @@
 
 import { ReactGoogleReviews, ReactGoogleReview } from "react-google-reviews";
 import "react-google-reviews/dist/index.css";
-import { motion } from 'framer-motion';
+import { easeInOut, easeOut, motion } from 'framer-motion';
 import { Star, Quote, User, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -173,10 +173,10 @@ const GoogleReviews = ({
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: {
+          transition: {
           duration: 0.5,
           delay: index * 0.1,
-          ease: "easeOut"
+          ease: easeOut
         }
       },
       hover: {
@@ -184,7 +184,7 @@ const GoogleReviews = ({
         scale: 1.02,
         transition: {
           duration: 0.2,
-          ease: "easeInOut"
+          ease: easeInOut
         }
       }
     };
@@ -398,7 +398,7 @@ const GoogleReviews = ({
                 transition={{
                   duration: 0.3,
                   delay: originalIndex * 0.1,
-                  ease: "easeOut"
+                  ease: easeOut
                 }}
               >
                 <CustomReviewCard

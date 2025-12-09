@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut, easeOut } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import GoogleAvisCard from '@/components/ui/card/googleAvis.Card';
 import { GoogleReview } from '@/types';
@@ -176,7 +176,7 @@ const GoogleAvisCarousel = ({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: easeInOut }}
           >
             {visibleSlides.map(({ review, index, originalIndex }) => (
               <motion.div
@@ -186,7 +186,7 @@ const GoogleAvisCarousel = ({
                 transition={{ 
                   duration: 0.3, 
                   delay: originalIndex * 0.1,
-                  ease: "easeOut"
+                  ease: easeOut
                 }}
               >
                 <GoogleAvisCard
@@ -228,7 +228,7 @@ const GoogleAvisCarousel = ({
               animate={{ width: isPlaying && !isHovered ? "100%" : "0%" }}
               transition={{ 
                 duration: autoPlayInterval / 1000, 
-                ease: "linear",
+                ease: easeInOut,
                 repeat: isPlaying && !isHovered ? Infinity : 0
               }}
             />

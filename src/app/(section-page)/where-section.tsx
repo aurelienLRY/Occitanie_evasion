@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {useSpots} from "@/hooks/useQuery"
 import { ISpot } from "@/types";
 import MapSkeleton from "@/components/ui/mapCustomer/mapSkeleton";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export default function WhereSection( { className }: { className?: string } ) {
@@ -37,7 +37,7 @@ export default function WhereSection( { className }: { className?: string } ) {
             y: 0,
             transition: {
                 duration: 0.7,
-                ease: "easeOut"
+                ease: easeOut,
             }
         }
     };
@@ -50,7 +50,7 @@ export default function WhereSection( { className }: { className?: string } ) {
             x: 0,
             transition: {
                 duration: 1,
-                ease: "easeOut",
+                ease: easeOut,
                 delay: 0.3
             }
         }
@@ -64,7 +64,7 @@ export default function WhereSection( { className }: { className?: string } ) {
             rotateX: 0,
             transition: {
                 duration: 0.8,
-                ease: "easeOut"
+                ease: easeOut,
             }
         }
     };

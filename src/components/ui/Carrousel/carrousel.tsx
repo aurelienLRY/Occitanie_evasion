@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, ReactNode, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut, easeOut } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import { MarkerLineSvg } from '@/components/ui/svg/MarkerLine.svg';
 
@@ -227,7 +227,7 @@ const Carousel = ({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: easeInOut }}
           >
             {visibleSlides.map(({ slide, index, originalIndex }) => (
               <motion.div
@@ -238,7 +238,7 @@ const Carousel = ({
                 transition={{ 
                   duration: 0.3, 
                   delay: originalIndex * 0.1,
-                  ease: "easeOut"
+                  ease: easeOut
                 }}
               >
                 {slide}
@@ -276,7 +276,7 @@ const Carousel = ({
               animate={{ width: isPlaying && !isHovered ? "100%" : "0%" }}
               transition={{ 
                 duration: autoPlayInterval / 1000, 
-                ease: "linear",
+                ease: easeInOut,
                 repeat: isPlaying && !isHovered ? Infinity : 0
               }}
             />

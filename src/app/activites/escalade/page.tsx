@@ -9,7 +9,7 @@ import CustomSection from "@/components/layout/Section";
 import { GalleryInsta } from "@/components/ui/gallery";
 import ContactSection from "@/app/(section-page)/contact-section";
 import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 
@@ -48,7 +48,7 @@ const EscaladePage = () => {
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -62,7 +62,7 @@ const EscaladePage = () => {
             y: 0,
             transition: {
                 duration: 0.7,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -75,7 +75,7 @@ const EscaladePage = () => {
             y: 0,
             transition: {
                 duration: 0.7,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

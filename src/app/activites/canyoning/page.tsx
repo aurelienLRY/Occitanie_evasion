@@ -9,7 +9,7 @@ import { GalleryInsta} from "@/components/ui/gallery";
 import { GalleryInstaArray } from "@/components/ui/gallery/galleryInsta";
 import CustomSection from "@/components/layout/Section";
 import ContactSection from "../../(section-page)/contact-section";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 
@@ -47,7 +47,7 @@ const CanyoningPage = () => {
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -61,7 +61,7 @@ const CanyoningPage = () => {
             y: 0,
             transition: {
                 duration: 0.7,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -74,7 +74,7 @@ const CanyoningPage = () => {
             y: 0,
             transition: {
                 duration: 0.7,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

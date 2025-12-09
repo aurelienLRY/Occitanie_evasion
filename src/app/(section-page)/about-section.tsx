@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export const AboutSection = ( { className }: { className?: string } ) => {
@@ -25,7 +25,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -38,7 +38,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
             rotate: 0,
             transition: {
                 duration: 0.8,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };
@@ -53,7 +53,7 @@ export const AboutSection = ( { className }: { className?: string } ) => {
             transition: {
                 duration: 0.8,
                 delay: 0.3,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

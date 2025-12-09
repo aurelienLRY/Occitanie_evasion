@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { easeInOut, easeOut, motion } from 'framer-motion';
 
 const MapSkeleton = () => {
   return (
@@ -9,7 +9,7 @@ const MapSkeleton = () => {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ 
         duration: 0.5, 
-        ease: "easeInOut",
+        ease: easeInOut,
         type: "spring",
         stiffness: 100,
         damping: 15
@@ -25,7 +25,7 @@ const MapSkeleton = () => {
         transition={{ 
           duration: 2, 
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: easeInOut
         }}
       />
       <motion.div 
@@ -37,7 +37,7 @@ const MapSkeleton = () => {
         transition={{ 
           duration: 2.5, 
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: easeInOut,
           delay: 0.3
         }}
       />
@@ -50,7 +50,7 @@ const MapSkeleton = () => {
         transition={{ 
           duration: 2.2, 
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: easeInOut,
           delay: 0.6
         }}
       />
@@ -63,7 +63,7 @@ const MapSkeleton = () => {
         transition={{ 
           duration: 2.8, 
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: easeInOut,
           delay: 0.9
         }}
       />
@@ -84,7 +84,7 @@ const MapSkeleton = () => {
         transition={{ 
           duration: 0.8, 
           delay: 0.3,
-          ease: "easeOut"
+          ease: easeOut
         }}
       >
         Recherche de Florent en cours
@@ -106,7 +106,7 @@ const MapSkeleton = () => {
               duration: 1.5,
               repeat: Infinity,
               delay: i * 0.2,
-              ease: "easeInOut"
+              ease: easeInOut
             }}
           >
             .
