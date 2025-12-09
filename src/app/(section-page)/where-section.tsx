@@ -78,7 +78,7 @@ export default function WhereSection( { className }: { className?: string } ) {
                 animate={isInView ? "visible" : "hidden"}
             >
                 <motion.div 
-                    className="flex flex-col gap-4 lg:flex-1/3"
+                    className="flex flex-col gap-4 lg:flex-1/2  max-w-lg"
                     variants={containerVariants}
                 >
                     <motion.h2 
@@ -104,7 +104,7 @@ export default function WhereSection( { className }: { className?: string } ) {
                 </motion.div>
                 
                 <motion.div 
-                    className="flex  lg:flex-1/2 relative w-full"
+                    className="flex flex-1  relative w-full"
                     variants={mapVariants}
                 >
                     {spots && <MapCustomer spots={spots as ISpot[]} />}
