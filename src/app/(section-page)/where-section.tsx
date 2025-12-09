@@ -70,9 +70,9 @@ export default function WhereSection( { className }: { className?: string } ) {
     };
 
     return (
-        <section ref={ref} className={` max-w-7xl mx-auto min-h-[800px] flex justify-center items-center   ${className}`}>
+        <section ref={ref} className={` w-full min-h-[800px] flex justify-center items-center   ${className}`}>
             <motion.div 
-                className="flex flex-col lg:flex-row items-center justify-center gap-6"
+                className="flex flex-col lg:flex-row items-center justify-center gap-6 container mx-auto"
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
