@@ -2,6 +2,7 @@
 import { MarkerLineSvg } from "@/components/ui/svg/MarkerLine.svg";
 import { Carousel } from "@/components/ui/Carrousel";
 import { ActivityFormulas, ActivitySpots } from "@/components/ui";
+import { ActivityProductSchema } from "@/components/layout/ActivitySchema";
 import Image from "next/image";
 import { Info, Star, Users } from "lucide-react";
 import ReservationLink from "@/components/ui/ReservationLink";
@@ -92,6 +93,7 @@ const CanyoningPage = () => {
     ];
     return (
         <div className="flex flex-col gap-16 overflow-x-clip">
+            <ActivityProductSchema activityName="Canyoning" />
             <section className=" flex flex-col gap-8 items-center">
                 <aside className="relative w-full h-full min-h-[800px]  overflow-x-clip mb-16">
 
