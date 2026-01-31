@@ -4,10 +4,10 @@ import { businessInformation } from "@/config/business-information";
 export const metadata: Metadata = { 
     title: {
         template: `%s | ${businessInformation.name}`,
-        default: `Spéléologie dans l'Aude`,
+        default: `Spéléologie dans l'Aude - Cabrespine et Montagne Noire`,
     },
-    description: "Explorez les grottes et cavités souterraines de l'Occitanie. Découvrez un monde souterrain fascinant avec nos guides spéléologues expérimentés.",
-    keywords: `${businessInformation.seo.keywords},initiation spéléologie, pratiquer la spéléologie, visitez Gouffre Géant de Cabrespine , spéléo, spéléo Occitanie, sortie spéléologie aude, spéléo Pyrénées, exploration, aventure sous terre`,
+    description: "Explorez les grottes de l'Aude et de la Montagne Noire : initiation spéléo à Cabrespine et parcours sportifs. Aventure souterraine en Occitanie avec nos guides.",
+    keywords: `${businessInformation.seo.keywords}, spéléologie Aude, spéléo Cabrespine, grotte Montagne Noire, initiation spéléo Occitanie, visite grotte Aude, activité souterraine Mazamet`,
     authors: [{ 
         name: businessInformation.seo.author, 
         url: "https://www.occitanie-evasion.com" 
