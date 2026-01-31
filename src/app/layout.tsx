@@ -4,6 +4,7 @@ import { Permanent_Marker, Slackside_One, Nunito } from "next/font/google";
 import "@/styles/globals.css"
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { Schema } from "@/components/layout/Schema";
 /*import ThemeProvider from "../components/providers/ThemeProvider";*/
 import QueryProvider from "@/components/providers/QueryProvider";
 import { CookieBanner } from "@/components/ui/CookieBanner";
@@ -17,11 +18,11 @@ export const metadata: Metadata = {
 
   // Métadonnées de base
   title: {
-    default: businessInformation.seo.title,
+    default: "Occitanie Évasion - Canyoning, Escalade et Spéléologie en Occitanie",
     template: `%s | ${businessInformation.name}`
   },
-  description: businessInformation.seo.description,
-  keywords: businessInformation.seo.keywords,
+  description: "Vivez l'aventure avec Occitanie Évasion : canyoning à Mazamet, escalade dans l'Aude et spéléologie en Montagne Noire. Activités de plein air encadrées par un guide diplômé.",
+  keywords: "canyoning Mazamet, escalade Aude, spéléologie Cabrespine, via corda Occitanie, activités plein air Tarn, canyoning Gorges du Banquet, Florent Soum",
   authors: [{
     name: businessInformation.seo.author,
     url: "https://www.occitanie-evasion.com"
@@ -163,6 +164,7 @@ export default function RootLayout({
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
+        <Schema />
         <QueryProvider>
           <AnalyticsConsent />
           {/* <ThemeProvider> */}

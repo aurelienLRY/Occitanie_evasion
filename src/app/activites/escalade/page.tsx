@@ -99,9 +99,9 @@ const EscaladePage = () => {
             <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">²
                 <Image src="/images/escalade/Occitanie-evasion-escalade-Hero.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
                 <div className="max-w-[500px] w-[95%]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white px-6 py-2 rounded-lg bg-black/20">
-                    <h1>Escalade</h1>
-                    <h2 className="!text-3xl lg:!text-4xl">Grimpe vers de nouveaux sommets !</h2>
-                    <p className="text-lg">Accessible à tous à partir de 6 ans, l&apos;escalade en milieu naturel est un sport complet, tant sur le plan physique que mental.</p>
+                    <h1>Escalade en Occitanie</h1>
+                    <h2 className="!text-3xl lg:!text-4xl">Grimpez sur les plus belles falaises de l&apos;Aude et de l&apos;Hérault !</h2>
+                    <p className="text-lg">Accessible à tous dès 6 ans, l&apos;escalade en milieu naturel est un sport complet alliant physique et mental au cœur de la nature.</p>
                 </div>
                 <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
             </aside>

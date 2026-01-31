@@ -6,10 +6,10 @@ export const metadata: Metadata = {
     
     title: {
         template: `%s | ${businessInformation.name}`,
-        default: `Escalade - ${businessInformation.name}`,
+        default: `Escalade en Occitanie - Aude et Hérault`,
     },
-    description: "Découvrez l'escalade en Occitanie sur les plus beaux sites naturels. Initiation, perfectionnement et escalade sportive avec nos moniteurs diplômés d'État.",
-    keywords: `${businessInformation.seo.keywords}, escalade, grimpe, falaise, bloc, voie, initiation, perfectionnement, moniteur, sécurité, Occitanie, Pyrénées`,
+    description: "Initiation et perfectionnement à l'escalade en milieu naturel dans l'Aude et l'Hérault. Grimpez sur les plus belles falaises d'Occitanie avec un moniteur diplômé.",
+    keywords: `${businessInformation.seo.keywords}, escalade Aude, escalade Hérault, cours escalade Occitanie, initiation escalade falaise, grimpe Languedoc, moniteur escalade Aude`,
     authors: [{ 
         name: businessInformation.seo.author, 
         url: "https://www.occitanie-evasion.com" 

@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     // Métadonnées de base
     title: {
         template: `%s | ${businessInformation.name}`,
-        default: `Canyoning - ${businessInformation.name}`,
+        default: `Canyoning à Mazamet - Gorges du Banquet`,
     },
-    description: "Découvrez l'aventure du canyoning dans les plus beaux canyons de l'Aude et de l'Hérault. Des descentes spectaculaires en toute sécurité avec nos guides diplômés.",
-    keywords: `${businessInformation.seo.keywords}, canyoning, canyons, descente, toboggans, sauts, rappels, Aude, Hérault, Pyrénées, aventure, eau vive`,
+    description: "Découvrez le canyoning à Mazamet au cœur des gorges du Banquet dans le Tarn. Sauts, toboggans et aventure en eau vive avec nos guides diplômés en Occitanie.",
+    keywords: `${businessInformation.seo.keywords}, canyoning Mazamet, canyoning Tarn, gorges du Banquet, randonnée aquatique Tarn, activité plein air Mazamet, canyoning Occitanie`,
     authors: [{ 
         name: businessInformation.seo.author, 
         url: "https://www.occitanie-evasion.com" 
