@@ -52,7 +52,6 @@ function MapCustomer({ spots, className }: { spots: ISpot[] | null, className?: 
 
 
   if (spots === null) return null;
-  console.log(spots);
   return (
     <div className="w-full h-full">
 

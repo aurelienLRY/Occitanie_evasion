@@ -185,7 +185,7 @@ const SpeleoPage = () => {
                     <ActivityFormulas
                     title_half="Parcours d&apos;initiation"
                     title_full="Parcours sportif"
-                        activityName="Speleologie"
+                        activityName="Spéléologie"
                         description_half="Grotte d&apos;initiation avec un parcours adapté aux familles et aux personnes souhaitant s&apos;initier en détente. Parcours accessible aux enfants dès 5 ans, idéal pour une première approche de la spéléologie."
                         description_full="Parcours plus sportif avec présence de descentes en rappel et mains courantes. Une traversée qui consiste, au lieu de faire un aller-retour, à entrer d&apos;un côté et ressortir ailleurs. Pour les plus aventuriers !"
                         reducedPriceConditions="Tarif réduit pour les enfants jusqu&apos;à 17 ans inclus et les groupes de minimum 5 personnes."
@@ -233,7 +233,7 @@ const SpeleoPage = () => {
                     <MarkerLineSvg className="absolute -top-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                     <div className="container mx-auto max-w-[1200px] space-y-16">
                         <h2 className="text-white text-6xl font-bold text-center ">Où je pratique la spéléologie ?</h2>
-                        <ActivitySpots activityName="Speleologie" />
+                        <ActivitySpots activityName="Spéléologie" />
                     </div>
                 </motion.div>
 

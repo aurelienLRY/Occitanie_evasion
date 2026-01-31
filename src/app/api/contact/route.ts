@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validation côté serveur
-    if (!name || !email || !phone || !subject || !message) {
+    if (!name || !email || !phone  || !message) {
       return NextResponse.json(
         { message: 'Tous les champs sont requis' },
         { status: 400 }
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.SMTP_EMAIL ,
       to: process.env.SMTP_EMAIL ,
-      subject: ` Nouveau message de contact - ${subject}`,
+      subject: ` Nouveau message de contact de ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
@@ -106,7 +106,6 @@ export async function POST(request: NextRequest) {
             <p><strong>Nom :</strong> ${name}</p>
             <p><strong>Email :</strong> ${email}</p>
             <p><strong>Téléphone :</strong> ${phone}</p>
-            <p><strong>Sujet :</strong> ${subject}</p>
           </div>
           
           <div style="background-color: #fff; padding: 20px; border: 1px solid #dee2e6; border-radius: 8px;">
