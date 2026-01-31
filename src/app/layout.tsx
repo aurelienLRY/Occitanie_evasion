@@ -6,9 +6,10 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 /*import ThemeProvider from "../components/providers/ThemeProvider";*/
 import QueryProvider from "@/components/providers/QueryProvider";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 import { Toaster } from 'sonner';
 import { businessInformation } from "@/config/business-information";
-import { GoogleTagManager , GoogleAnalytics } from '@next/third-parties/google'
+import { AnalyticsConsent } from "@/components/providers/AnalyticsConsent";
 
 export const metadata: Metadata = {
   // Base URL pour résoudre les images
@@ -159,16 +160,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <GoogleTagManager gtmId="GTM-593SZBKS" />
-      <GoogleAnalytics gaId="G-F55FK2K74W" />
       <body
         className={`  ${permanentMarker.variable} ${slacksideOne.variable} ${nunito.variable} antialiased `}
       >
         <QueryProvider>
+          <AnalyticsConsent />
           {/* <ThemeProvider> */}
           <Header className="absolute top-0 left-0 w-full" />
           <main className=" flex flex-col  min-h-[calc(100vh-187px)] relative " >{children}</main>
           <Footer />
+          <CookieBanner />
           <Toaster
             position="bottom-right"
             richColors
