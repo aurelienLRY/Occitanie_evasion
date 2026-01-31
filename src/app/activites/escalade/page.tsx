@@ -2,6 +2,7 @@
 import { MarkerLineSvg } from "@/components/ui/svg/MarkerLine.svg";
 import { Carousel } from "@/components/ui/Carrousel";
 import { ActivityFormulas, ActivitySpots } from "@/components/ui";
+import { ActivityProductSchema } from "@/components/layout/ActivitySchema";
 import Image from "next/image";
 import Link from "next/link";
 import { Info, Star, Users } from "lucide-react";
@@ -95,6 +96,7 @@ const EscaladePage = () => {
 
     return (
         <div className="flex flex-col gap-16 overflow-x-clip">
+        <ActivityProductSchema activityName="Escalade" />
         <section className="flex flex-col gap-16 items-center">
             <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">²
                 <Image src="/images/escalade/Occitanie-evasion-escalade-Hero.webp" alt="Escalade en milieu naturel" fill className="object-cover" />
