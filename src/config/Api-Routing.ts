@@ -5,6 +5,7 @@ const API_ROUTES = {
     SPOTS: `${API_BASE_URL}/spots`,
     ACTIVE_SESSIONS: `${API_BASE_URL}/sessions`,
     BOOKING: `${API_BASE_URL}/booking`,
+    SESSION_PHOTOS: `${API_BASE_URL}/session-photos`,
 } as const;
 
 export type ApiRoute = typeof API_ROUTES[keyof typeof API_ROUTES];

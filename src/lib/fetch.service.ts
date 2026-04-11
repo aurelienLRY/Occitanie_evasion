@@ -26,12 +26,15 @@ class FetchService {
 
   private async handleResponse<T>(response: Response): Promise<ApiResponse<T>> {
     if (!response.ok) {
-      const errorData: ApiError = await response.json().catch(() => ({
-        message: 'Une erreur est survenue',
-        status: response.status
-      }));
-      
-      throw new Error(errorData.message || `Erreur ${response.status}`);
+      const errorData = (await response.json().catch(() => ({}))) as ApiError & {
+        error?: string;
+      };
+
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `Erreur ${response.status}`
+      );
     }
 
     const data = await response.json();

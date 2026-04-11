@@ -69,4 +69,32 @@ export interface ISession {
   type_formule: "half_day" | "full_day";
   duration?: string;
   __v: number;
-} 
+}
+
+/** Photo partagée via Easylis (endpoint session-photos) */
+export interface ISessionPhoto {
+  _id: string;
+  fileUrl: string;
+  fileName: string;
+  uploadedAt: string;
+}
+
+export interface ISessionPhotosMeta {
+  sessionId: string;
+  count: number;
+}
+
+export interface ISessionPhotosApiSuccess {
+  success: true;
+  data: ISessionPhoto[];
+  meta: ISessionPhotosMeta;
+}
+
+export interface ISessionPhotosApiError {
+  success: false;
+  error: string;
+}
+
+export type ISessionPhotosApiResponse =
+  | ISessionPhotosApiSuccess
+  | ISessionPhotosApiError;

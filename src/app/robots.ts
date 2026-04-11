@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/private/",
+      disallow: ["/private/", "/remember"],
     },
     sitemap: `${
       process.env.NEXT_PUBLIC_URL || "http://localhost:3000"
