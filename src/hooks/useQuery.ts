@@ -2,7 +2,16 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchService } from '@/lib/fetch.service';
 import API_ROUTES from '@/config/Api-Routing';
-import { IActivity, ISpot, ISession, IBooking, ApiResponse, IAddCustomerBooking } from '@/types';
+import {
+  IActivity,
+  ISpot,
+  ISession,
+  IBooking,
+  ApiResponse,
+  IAddCustomerBooking,
+} from '@/types';
+import type { ISessionPhotosApiSuccess } from '@/types/api.types';
+import { parseSessionPhotosResponse } from '@/lib/parseSessionPhotosResponse';
 
 /**
  * Configuration par défaut pour les queries
@@ -136,6 +145,39 @@ export const useActiveSessions = () => {
       retry: sessionQueryConfig.retry,
     }
   );
+};
+
+/**
+ * Photos d'une session (Easylis) — meme base URL / Bearer que les autres routes external.
+ * Reponse attendue : { success, data, meta } (pas le meme unwrap que useApiQuery).
+ */
+export const useSessionPhotos = (sessionId: string | null, token: string | null) => {
+  const sid = sessionId?.trim() ?? '';
+  const tok = token?.trim() ?? '';
+  const enabled = Boolean(sid && tok);
+
+  const url = (() => {
+    if (!enabled) return '';
+    const u = new URL(API_ROUTES.SESSION_PHOTOS);
+    u.searchParams.set('sessionId', sid);
+    u.searchParams.set('token', tok);
+    return u.toString();
+  })();
+
+  return useQuery({
+    queryKey: ['session-photos', sid, tok],
+    queryFn: async (): Promise<ISessionPhotosApiSuccess> => {
+      const { data: raw } = await fetchService.get<unknown>(url);
+      return parseSessionPhotosResponse(raw, sid);
+    },
+    enabled,
+    staleTime: 0,
+    gcTime: sessionQueryConfig.gcTime,
+    retry: sessionQueryConfig.retry,
+    retryDelay: sessionQueryConfig.retryDelay,
+    refetchOnWindowFocus: sessionQueryConfig.refetchOnWindowFocus,
+    refetchOnMount: true,
+  });
 };
 
 /**
