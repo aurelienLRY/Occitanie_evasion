@@ -41,7 +41,7 @@ const RememberPhotosPage = async ({ params, searchParams }: PageProps) => {
   }
 
   return (
-    <section className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <section className="min-h-screen ">
       <RememberPhotosClient sessionId={sessionId} token={token.trim()} />
     </section>
   );

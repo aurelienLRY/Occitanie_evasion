@@ -10,6 +10,9 @@ import { cn } from "@/lib/utils";
 import { useSessionPhotos } from "@/hooks/useQuery";
 import type { ISessionPhoto } from "@/types/api.types";
 
+const GOOGLE_REVIEW_URL =
+  "https://g.page/r/CTH5G0zEDlSyEBM/review" as const;
+
 type RememberPhotosClientProps = {
   sessionId: string;
   token: string;
@@ -115,7 +118,7 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
         const p = selectedPhotos[0];
         const blob = await fetchPhotoBlob(p.fileUrl);
         triggerBlobDownload(blob, filenameForPhoto(p, blob));
-        toast.success("Photo telechargee.");
+        toast.success("Photo t�l�charg�e.");
       } else {
         const results = await Promise.all(
           selectedPhotos.map(async (p) => {
@@ -138,7 +141,7 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
     } catch (e) {
       console.error(e);
       toast.error(
-        "Téléchargement impossible (réseau ou sécurité du navigateur). Essayez d ouvrir chaque photo dans un nouvel onglet."
+        "Téléchargement impossible (réseau ou sécurité du navigateur). Essayez d'ouvrir chaque photo dans un nouvel onglet."
       );
     } finally {
       downloadBusyRef.current = false;
@@ -164,7 +167,9 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
           Photos indisponibles pour le moment
         </h1>
         <p className="font-paragraphe text-center text-lg opacity-85 max-w-xl mx-auto">
-          {error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer plus tard."}
+          {error instanceof Error
+            ? error.message
+            : "Une erreur est survenue. Veuillez réessayer plus tard."}
         </p>
       </CustomSection>
     );
@@ -177,24 +182,53 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
   const { meta } = data;
 
   return (
-    <div className="min-h-[70vh] w-full flex  justify-center items-center ">
+    <div className="min-h-[70vh] w-full flex justify-center items-center">
       <CustomSection className="w-full max-w-lg md:max-w-2xl mx-auto mt-16 md:mt-20 px-1 md:px-2">
         <header className="text-center mb-4 md:mb-6 px-2">
           <h1 className="!text-4xl md:!text-6xl font-bold">
-            Souvenirs <span className="text-secondary">photos</span>
+            Vos souvenirs en <span className="text-secondary">photos</span>
           </h1>
           {meta.count > 0 && (
             <p className="font-paragraphe text-sm opacity-70 mt-4">
               {meta.count} photo{meta.count > 1 ? "s" : ""}
-              {" - "}touchez pour sélectionner, puis télécharger
+              {" touchez pour sélectionner, puis télécharger"}
             </p>
           )}
         </header>
 
-        {photos.length === 0 ? (
-          <p className="font-paragraphe text-center text-neutral-600 max-w-md mx-auto px-4">
-            Aucune photo pour le moment. Revenez plus tard ou réutilisez le lien reçu par e-mail.
+        <div
+          className="  max-w-4xl mx-auto mb-6 md:mb-8 space-y-3 leading-relaxed text-left rounded-xl p-4"
+          role="region"
+          aria-label="Message de remerciement et informations"
+        >
+          <p>
+            {
+              "Un grand merci d'avoir partagé ce moment avec moi et j'espère que ces images vous replongeront avec le sourire dans l'aventure."
+            }
           </p>
+          <p>
+            {"Si vous en avez envie, un petit "}
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary font-medium underline underline-offset-2 hover:opacity-90"
+            >
+              avis sur Google
+            </a>
+            {
+              " m'aide vraiment pour le référencement, et surtout à permettre aux autres personnes de mieux savoir à quoi s'attendre : c'est de la transparence pour tout le monde, et je vous en serait très reconnaissant."
+            }
+          </p>
+          <p className="text-neutral-500 dark:text-neutral-500 text-xs md:text-sm">
+            <strong className="text-neutral-700 dark:text-neutral-300">A savoir :</strong>
+            {
+              " ces photos restent accessibles sur cette page pendant environ trois mois (politique de conservation). Pensez à les télécharger avant qu'elles ne disparaissent."
+            }
+          </p>
+        </div>
+        {photos.length === 0 ? (
+          <p className="font-paragraphe text-center text-neutral-600 max-w-md mx-auto px-4">Aucune photo pour le moment. Revenez plus tard ou réutilisez le lien reçu par e-mail.</p>
         ) : (
           <div
             className="grid grid-cols-3 gap-[2px] bg-neutral-200 dark:bg-neutral-800 rounded-sm overflow-hidden border border-neutral-200 dark:border-neutral-800"
@@ -203,7 +237,11 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
             {photos.map((photo) => {
               const isSel = selected.has(photo._id);
               return (
-                <div key={photo._id} className="relative aspect-square bg-neutral-100" role="listitem">
+                <div
+                  key={photo._id}
+                  className="relative aspect-square bg-neutral-100"
+                  role="listitem"
+                >
                   <button
                     type="button"
                     onClick={() => toggle(photo._id)}
@@ -286,7 +324,7 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
                   <Download className="size-4 shrink-0" />
                 )}
                 {downloading
-                  ? "Preparation..."
+                  ? "Préparation en cours..."
                   : selected.size <= 1
                     ? "Télécharger"
                     : "Télécharger en ZIP"}
