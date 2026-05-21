@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -54,8 +54,24 @@ function triggerBlobDownload(blob: Blob, filename: string) {
   URL.revokeObjectURL(url);
 }
 
-async function fetchPhotoBlob(url: string): Promise<Blob> {
-  const res = await fetch(url, { mode: "cors", credentials: "omit" });
+function rememberPhotoDownloadUrl(
+  sessionId: string,
+  token: string,
+  photoId: string
+): string {
+  const u = new URL("/api/remember/photos/download", window.location.origin);
+  u.searchParams.set("sessionId", sessionId);
+  u.searchParams.set("token", token);
+  u.searchParams.set("photoId", photoId);
+  return u.toString();
+}
+
+async function fetchPhotoBlob(
+  sessionId: string,
+  token: string,
+  photoId: string
+): Promise<Blob> {
+  const res = await fetch(rememberPhotoDownloadUrl(sessionId, token, photoId));
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.blob();
 }
@@ -116,13 +132,13 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
     try {
       if (selectedPhotos.length === 1) {
         const p = selectedPhotos[0];
-        const blob = await fetchPhotoBlob(p.fileUrl);
+        const blob = await fetchPhotoBlob(sessionId, token, p._id);
         triggerBlobDownload(blob, filenameForPhoto(p, blob));
-        toast.success("Photo t�l�charg�e.");
+        toast.success("Photo téléchargée.");
       } else {
         const results = await Promise.all(
           selectedPhotos.map(async (p) => {
-            const blob = await fetchPhotoBlob(p.fileUrl);
+            const blob = await fetchPhotoBlob(sessionId, token, p._id);
             return { photo: p, blob };
           })
         );
@@ -147,7 +163,7 @@ const RememberPhotosClient = ({ sessionId, token }: RememberPhotosClientProps) =
       downloadBusyRef.current = false;
       setDownloading(false);
     }
-  }, [selectedPhotos]);
+  }, [selectedPhotos, sessionId, token]);
 
   if (isPending) {
     return (
