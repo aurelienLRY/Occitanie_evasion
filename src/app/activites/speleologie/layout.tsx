@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ActivityProductSchemaServer } from "@/components/layout/ActivityProductSchemaServer";
 import { businessInformation } from "@/config/business-information";
 
 export const metadata: Metadata = { 
@@ -93,6 +94,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <>{children}</>
+        <>
+            <ActivityProductSchemaServer activityName="Spéléologie" />
+            {children}
+        </>
     );
 }

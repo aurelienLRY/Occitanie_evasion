@@ -35,7 +35,7 @@ export const faqData: FAQCategory[] = [
       {
         id: "reservation-4",
         question: "Puis-je annuler ma réservation ?",
-        answer: "Les annulations sont possibles jusqu'à 24h avant l'activité. En cas de météo défavorable, je propose un report gratuit. Contactez-moi directement pour toute modification."
+        answer: "Les conditions d'annulation et de remboursement sont détaillées dans nos conditions générales de vente (CGV). Annulation dans les 48 h avant la prestation : montant dû. Force majeure sur justificatif : remboursement possible. Annulation météo par le guide : report ou remboursement. Contactez-moi pour toute modification."
       },
       {
         id: "reservation-5",

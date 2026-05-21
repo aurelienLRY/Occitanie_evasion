@@ -1,5 +1,7 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import CustomSection from "@/components/layout/Section";
+import { FaqSchema } from "@/components/layout/FaqSchema";
 import { FAQ } from "@/components/ui/FAQ";
 import ContactForm from "@/components/form/contact";
 import { ProfileCard } from "@/components/ui/card";
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <>
+      <FaqSchema />
       {/* Hero Section */}
       <CustomSection className="pt-32 pb-16 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 dark:from-primary/10 dark:via-secondary/10 dark:to-primary/10">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -25,6 +28,16 @@ export default function FAQPage() {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Trouvez rapidement les réponses à toutes vos questions sur nos activités de plein air.
             De la réservation à la sécurité, nous avons tout prévu pour vous accompagner.
+          </p>
+          <p className="mt-4 text-gray-600 dark:text-gray-300">
+            <Link
+              href="/cgv"
+              className="text-secondary hover:underline font-medium"
+            >
+              Conditions générales de vente (CGV)
+            </Link>
+            {" "}
+            — annulation, assurance et responsabilité.
           </p>
         </div>
       </CustomSection>
