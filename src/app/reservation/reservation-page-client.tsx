@@ -84,7 +84,7 @@ const Reservation = () => {
                         <div className='w-full lg:w-1/3 lg:hover:w-2/3 transition-all duration-300 bg-primary/20 shadow-lg rounded-lg p-4 text-center text-text flex flex-col gap-4'>
                             <div>
                                 <h2 className='mb-1'>
-                                    Rejoinds-nous<span className='text-secondary'>!</span>
+                                    Rejoins-nous<span className='text-secondary'>!</span>
                                 </h2>
                                 <p className='text-gray-600'>
                                     Je suis déjà de sortie , l&apos;occasion de rejoindre une de ces sessions.
