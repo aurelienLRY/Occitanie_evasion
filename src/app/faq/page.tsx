@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import CustomSection from "@/components/layout/Section";
+import { FaqSchema } from "@/components/layout/FaqSchema";
 import { FAQ } from "@/components/ui/FAQ";
 import ContactForm from "@/components/form/contact";
 import { ProfileCard } from "@/components/ui/card";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <>
+      <FaqSchema />
       {/* Hero Section */}
       <CustomSection className="pt-32 pb-16 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 dark:from-primary/10 dark:via-secondary/10 dark:to-primary/10">
         <div className="max-w-4xl mx-auto px-4 text-center">
