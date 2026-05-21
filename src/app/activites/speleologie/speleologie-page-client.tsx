@@ -96,10 +96,10 @@ const SpeleoPage = () => {
             <section className="flex flex-col gap-8 items-center">
                 <aside className="relative w-full h-full min-h-[800px] overflow-x-clip mb-16">
                     <Image src="/images/speleologie/speleologie-hero.webp" alt="Spéléologie" fill className="object-cover" />
-                    <div className="max-w-[500px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
-                        <h1>Spéléologie dans l&apos;Aude</h1>
-                        <h2 className="!text-3xl lg:!text-4xl">Explorez les grottes de la Montagne Noire !</h2>
-                        <h3 className="!text-lg font-paragraphe">Découvrez les merveilles souterraines de Cabrespine et des cavités sauvages d&apos;Occitanie.</h3>
+                    <div className="max-w-[600px] w-90% min-w-[350px]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/40">
+                        <h1 >Spéléologie dans l&apos;Aude</h1>
+                        <h2 className="!text-3xl lg:!text-4xl">Vivez une aventure souterraine encadrée, accessible et inoubliable.</h2>
+                        <h3 className="!text-lg font-paragraphe">Explorez, dès 5 ans, les grottes de la Montagne Noire, de la Haute Vallée de l&apos;Aude et des Gorges de Galamus.</h3>
                     </div>
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
                 </aside>
