@@ -1,8 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FAQCategory, FAQItem, faqData } from "@/data/faq";
+
+const cgvLink = (anchor: string, label: string) => (
+  <Link
+    href={`/cgv#${anchor}`}
+    className="text-secondary hover:underline font-medium"
+  >
+    {label}
+  </Link>
+);
+
+const faqAnswersWithLinks: Partial<Record<string, ReactNode>> = {
+  "reservation-4": (
+    <>
+      Les conditions d&apos;annulation et de remboursement sont détaillées dans nos{" "}
+      {cgvLink("annulation", "conditions générales de vente")}. En résumé : annulation signalée
+      dans les 48 h avant le début de la prestation — montant dû ; force majeure sur justificatif
+      — remboursement possible ; annulation météo par le guide — report ou remboursement intégral.
+      Contactez-moi pour toute modification de réservation.
+    </>
+  ),
+  "securite-3": (
+    <>
+      La sécurité est ma priorité. En cas de conditions météorologiques ou niveaux d&apos;eau
+      dangereux, le guide peut annuler la prestation (voir{" "}
+      {cgvLink("annulation", "annulation et remboursement")}). Je propose un report ou un
+      remboursement intégral selon les cas définis dans nos CGV. Je surveille les conditions et
+      vous contacte si nécessaire.
+    </>
+  ),
+  "securite-4": (
+    <>
+      Oui, je suis entièrement assuré en Responsabilité Civile Professionnelle. Chaque participant
+      doit disposer d&apos;une assurance responsabilité civile individuelle couvrant le canyoning —
+      voir la section{" "}
+      {cgvLink("assurances", "assurances")} de nos conditions. En cas de réservation avec un
+      moniteur partenaire, c&apos;est son assurance qui s&apos;applique.
+    </>
+  ),
+  "securite-5": (
+    <>
+      Consultez les{" "}
+      {cgvLink("contre-indications", "contre-indications")} dans nos CGV : pas de contre-indication
+      médicale, poids maximum 115 kg, pas d&apos;alcool ni de drogue, femmes enceintes informées
+      des risques. Pour le canyoning, être à l&apos;aise dans l&apos;eau (sorties famille) et
+      signaler les enfants les moins à l&apos;aise au guide.
+    </>
+  ),
+  "saison-3": (
+    <>
+      Non, j&apos;adapte les activités aux conditions météo. La décision d&apos;annuler pour
+      danger météo ou niveaux d&apos;eau appartient au guide et ne peut être contestée (
+      {cgvLink("annulation", "voir CGV")}). Report ou remboursement selon les conditions prévues.
+    </>
+  ),
+  "activites-1": (
+    <>
+      Le canyoning est accessible à partir de 10 ans. La nage est obligatoire (savoir nager 25 m et
+      s&apos;immerger). Les sauts sont optionnels. Bonne forme physique requise. Voir aussi les{" "}
+      {cgvLink("contre-indications", "contre-indications")} et la gestion des{" "}
+      {cgvLink("risques", "risques")}.
+    </>
+  ),
+};
 
 interface FAQProps {
   className?: string;
@@ -49,9 +113,9 @@ const FAQItemComponent = ({ item, isOpen, onToggle }: FAQItemProps) => {
         )}
       >
         <div className="pb-4 px-0">
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            {item.answer}
-          </p>
+          <div className="text-gray-600 dark:text-gray-300 leading-relaxed">
+            {faqAnswersWithLinks[item.id] ?? item.answer}
+          </div>
         </div>
       </div>
     </div>

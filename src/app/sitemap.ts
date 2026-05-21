@@ -12,6 +12,12 @@ const extraRoutes: {
   { path: '/reservation', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/mention-legal', priority: 0.3, changeFrequency: 'monthly' },
   { path: '/politique-de-confidentialite', priority: 0.3, changeFrequency: 'monthly' },
+  { path: '/cgv', priority: 0.3, changeFrequency: 'monthly' },
+  {
+    path: '/randonnee-aquatique-mazamet-tarn',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+  },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

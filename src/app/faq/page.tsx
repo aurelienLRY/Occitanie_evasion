@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import CustomSection from "@/components/layout/Section";
 import { FaqSchema } from "@/components/layout/FaqSchema";
 import { FAQ } from "@/components/ui/FAQ";
@@ -27,6 +28,16 @@ export default function FAQPage() {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Trouvez rapidement les réponses à toutes vos questions sur nos activités de plein air.
             De la réservation à la sécurité, nous avons tout prévu pour vous accompagner.
+          </p>
+          <p className="mt-4 text-gray-600 dark:text-gray-300">
+            <Link
+              href="/cgv"
+              className="text-secondary hover:underline font-medium"
+            >
+              Conditions générales de vente (CGV)
+            </Link>
+            {" "}
+            — annulation, assurance et responsabilité.
           </p>
         </div>
       </CustomSection>

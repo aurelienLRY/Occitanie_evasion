@@ -127,6 +127,13 @@ const Footer = () => {
                         >
                             Politique de confidentialité
                         </Link>
+                        <Link 
+                            href="/cgv" 
+                            className={cn(FooterLinkClassName)}
+                            aria-label="Consulter les conditions générales de vente"
+                        >
+                            CGV
+                        </Link>
                     </nav>
                 </div>
             </div>

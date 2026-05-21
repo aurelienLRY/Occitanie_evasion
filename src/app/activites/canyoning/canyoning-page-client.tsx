@@ -100,9 +100,9 @@ const CanyoningPage = () => {
                     <Image src="/images/Canyoning/canyoning-hero-mobile.webp" alt="Personne qui pratique le canyoning" fill className=" object-cover md:hidden" priority/>
 
 
-                    <div className=" max-w-[500px] w-[95%]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
+                    <div className=" max-w-[600px] w-[95%]  flex flex-col gap-4 absolute top-1/2 left-1/2 lg:left-1/3 -translate-x-1/2 -translate-y-1/2 text-white  px-6 py-2 rounded-lg bg-black/20">
                         <h1>Canyoning à Mazamet</h1>
-                        <h2 className="!text-3xl lg:!text-4xl">Fun et fraîcheur au cœur du Tarn</h2>
+                        <h2 className="!text-3xl lg:!text-4xl">Fun et fraîcheur au cœur du Tarn.</h2>
                         <h3 className="!text-lg font-paragraphe">Une randonnée aquatique dans les gorges sauvages du Banquet, à 10 min de Mazamet.</h3>
                     </div>
                     <MarkerLineSvg className="absolute -bottom-13 left-1/2 -translate-x-1/2 w-[135vw] h-24 text-white rotate-180" preserveAspectRatio="none" />
